@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="TrackVideoWidget" name="videoStream" native="true"/>
+       <widget class="TrackVideoWidget" name="trackVideoWidget" native="true"/>
       </item>
       <item>
        <widget class="QSlider" name="frameSlider">
@@ -44,13 +44,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="quitButton">
-        <property name="text">
-         <string>Quit</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
    </layout>
@@ -64,7 +57,7 @@
      <x>0</x>
      <y>0</y>
      <width>455</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">

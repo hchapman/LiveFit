@@ -12,6 +12,7 @@
 class TrackingStream : public QObject
 {
     Q_OBJECT
+
     QBasicTimer mTimer;
     QScopedPointer<cv::VideoCapture> mVideoHandle;
     int mFov;
@@ -34,6 +35,7 @@ public slots:
 
 public:
     TrackingStream(QObject *parent = 0);
+    ~TrackingStream();
 
     void startProcess();
 

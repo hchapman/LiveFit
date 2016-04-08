@@ -17,6 +17,11 @@ TrackingStream::TrackingStream(QObject* parent) :
     setFov(56);
 }
 
+TrackingStream::~TrackingStream()
+{
+
+}
+
 void TrackingStream::setFov(int fov) {
     double focalW, focalH;
     mFov = fov;

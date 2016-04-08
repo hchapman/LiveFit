@@ -13,7 +13,7 @@
 class LiveFitWindow : public QMainWindow {
     Q_OBJECT
 private:
-    QSize videoSize;
+    QSize mVideoSize;
 
     void createMenus();
     void chooseVideoFile();
@@ -29,15 +29,14 @@ public:
 protected:
     void closeEvent(QCloseEvent* ev);
 private slots:
-    void on_quitButton_clicked();
 
 private:
     Ui::liveFitWindow ui;
 
-    TrackingStream stream;
-    FrameConverter converter;
+    TrackingStream mTrackingStream;
+    FrameConverter mFrameConverter;
 
-    QThread captureThread, converterThread;
+    QThread mStreamThread, mConverterThread;
 
 };
 

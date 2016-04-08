@@ -1,4 +1,5 @@
 #include <QImage>
+#include <QTimer>
 #include <QTimerEvent>
 
 #include <opencv2/core.hpp>
@@ -8,6 +9,10 @@
 
 FrameConverter::FrameConverter(QObject *parent) : QObject(parent)
 {
+
+}
+
+FrameConverter::~FrameConverter() {
 
 }
 
@@ -28,8 +33,8 @@ void FrameConverter::setFrameSize(QSize size)
 void FrameConverter::queue(const cv::Mat &frame)
 {
     currentFrame = frame;
-    if (!timer.isActive()) {
-        timer.start(0, this);
+    if (!mTimer.isActive()) {
+        mTimer.start(0, this);
     }
 }
 
@@ -47,11 +52,11 @@ void FrameConverter::process(cv::Mat frame)
 
 void FrameConverter::timerEvent(QTimerEvent* ev)
 {
-    if (ev->timerId() != timer.timerId()) {
+    if (ev->timerId() != mTimer.timerId()) {
         return;
     }
     process(currentFrame);
     currentFrame.release();
-    timer.stop();
+    mTimer.stop();
 }
 

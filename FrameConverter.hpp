@@ -11,7 +11,7 @@ class FrameConverter : public QObject
 {
     Q_OBJECT
 
-    QBasicTimer timer;
+    QBasicTimer mTimer;
     cv::Mat currentFrame;
     bool processAll;
     QSize frameSize;
@@ -23,6 +23,7 @@ public:
 
     void setProcessAll(bool all) { processAll = all; }
 
+    ~FrameConverter();
 signals:
     void imageReady(const QImage &);
 
