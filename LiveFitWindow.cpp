@@ -1,6 +1,7 @@
 #include <Qt>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QFileDialog>
 
 #include "LiveFitWindow.hpp"
 
@@ -25,8 +26,12 @@ void LiveFitWindow::setupCamera()
     mTrackingStream.connect(ui.trackVideoWidget,
                    SIGNAL(cornersChanged(std::vector<cv::Point2f>)),
                    SLOT(changeProjectorCorners(std::vector<cv::Point2f>)));
+    ui.trackVideoWidget->connect(&mTrackingStream,
+                                 SIGNAL(ballSpotted(TrackingBall)),
+                                 SLOT(pushBall(TrackingBall)));
 
-    QMetaObject::invokeMethod(&mTrackingStream, "start");
+    QMetaObject::invokeMethod(&mTrackingStream, "start",
+                              Q_ARG(QString, "/home/harrison/Dropbox/interception project/classroom-red-light.webm"));
 }
 
 LiveFitWindow::LiveFitWindow(QWidget *parent)
@@ -48,8 +53,25 @@ LiveFitWindow::LiveFitWindow(QWidget *parent)
 }
 
 void LiveFitWindow::closeEvent(QCloseEvent *ev) {
+    QMetaObject::invokeMethod(&mTrackingStream, "stop",
+                              Qt::BlockingQueuedConnection);
+    QMetaObject::invokeMethod(&mFrameConverter, "stop",
+                              Qt::BlockingQueuedConnection);
     mStreamThread.quit();
     mConverterThread.quit();
     mStreamThread.wait();
     mConverterThread.wait();
+}
+
+void LiveFitWindow::on_pauseButton_clicked()
+{
+    QMetaObject::invokeMethod(&mTrackingStream, "stop");
+}
+
+void LiveFitWindow::on_action_Open_triggered()
+{
+    QString fname = QFileDialog::getOpenFileName(
+                this, "Open video", "", "Video Files (*.mov *.avi *.webm *.mkv)");
+    QMetaObject::invokeMethod(&mTrackingStream, "start",
+                              Q_ARG(QString, fname));
 }

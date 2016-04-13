@@ -22,14 +22,18 @@ class TrackingStream : public QObject
     cv::Mat mRMatrix;
     cv::Mat mTVector;
 
+    int mFps = 0;
+
     KFBallTracker mTracker;
 
 signals:
     void frameReady(const cv::Mat &);
+    void ballSpotted(TrackingBall ball);
     void started();
 
 public slots:
     void start(int cam = 0);
+    void start(QString fname);
     void stop();
     void changeProjectorCorners(std::vector<cv::Point2f> corners);
 
@@ -43,6 +47,7 @@ public:
 
     cv::Point2f imageToProjector(cv::Point2f imP, double z=0);
     void updateProjectorCoordinates(std::vector<cv::Point2f> corners);
+
 private:
     void timerEvent(QTimerEvent *);
 };

@@ -25,10 +25,18 @@ TrackVideoWidget::TrackVideoWidget(QWidget *parent) :
 
 void TrackVideoWidget::paintEvent(QPaintEvent *event) {
     QPainter painter;
+    QPen ballPen = QPen((QColor(0, 0, 255)));
 
     painter.begin(this);
 
     painter.drawImage(0, 0, currentFrame);
+
+    painter.setPen(ballPen);
+    QList<TrackingBall>::const_iterator iter;
+    for (iter = mBalls.begin(); iter != mBalls.end(); ++iter) {
+        painter.drawEllipse(
+                    (QPoint)(*iter).center()*2, (int)(*iter).r()*2, (int)(*iter).r()*2);
+    }
 
     painter.end();
 }
@@ -42,6 +50,14 @@ void TrackVideoWidget::setImage(const QImage& img)
 {
     currentFrame = img;
     update();
+}
+
+void TrackVideoWidget::pushBall(TrackingBall ball)
+{
+    mBalls.append(ball);
+    if (mBalls.size() > 10) {
+        mBalls.removeFirst();
+    }
 }
 
 void TrackVideoWidget::ulCornerDropped(QPoint point)

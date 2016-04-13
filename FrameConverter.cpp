@@ -60,3 +60,6 @@ void FrameConverter::timerEvent(QTimerEvent* ev)
     mTimer.stop();
 }
 
+void FrameConverter::stop() {
+    mTimer.stop();
+}

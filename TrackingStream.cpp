@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <iostream>
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -7,6 +8,8 @@
 #include <opencv2/calib3d.hpp>
 
 #include <QTimerEvent>
+
+#include <opencv2/core/cvstd.hpp>
 
 #include "TrackVideoWidget.hpp"
 #include "TrackingStream.hpp"
@@ -82,11 +85,22 @@ cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)
 
 void TrackingStream::start(int cam)
 {
-    if (!mVideoHandle) {
-        mVideoHandle.reset(new cv::VideoCapture(cam));
-    }
+    mVideoHandle.reset(new cv::VideoCapture(cam));
+    mFps = 0;
+
     if (mVideoHandle->isOpened()) {
         mTimer.start(0, this);
+        emit started();
+    }
+}
+
+void TrackingStream::start(QString fname)
+{
+    mVideoHandle.reset(new cv::VideoCapture(fname.toStdString()));
+    mFps = mVideoHandle->get(cv::CAP_PROP_FPS);
+
+    if (mVideoHandle->isOpened()) {
+        mTimer.start(1000/mFps, this);
         emit started();
     }
 }
@@ -114,8 +128,15 @@ void TrackingStream::timerEvent(QTimerEvent* ev)
     }
 
     int ticks = cv::getTickCount();
+    mTracker.updateTimeState(ticks);
 
-    // ball = mTracker.processFrame(frame, ticks);
+    QMap<double, TrackingBall> balls = mTracker.processNextFrame(frame, ticks);
+    if (!balls.isEmpty()) {
+        std::cout << balls.first().x() << ", " << balls.first().y() << "\n";
+        std::cout << "-----\n";
+
+        emit ballSpotted(balls.first());
+    }
 
     emit frameReady(frame);
 }

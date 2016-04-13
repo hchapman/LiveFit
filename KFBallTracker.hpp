@@ -1,7 +1,10 @@
 #ifndef KFBALLTRACKER_HPP
 #define KFBALLTRACKER_HPP
 
+#include "TrackingBall.hpp"
+
 #include <QObject>
+#include <QVector>
 
 #include <opencv2/core.hpp>
 #include <opencv2/video/tracking.hpp>
@@ -18,8 +21,6 @@ class KFBallTracker : public QObject
     Q_OBJECT
     int mBlobRad;
     int mLatency;
-    int mTstart;
-    int mTlast;
     int mNotFoundCount;
 
     int mKfStateLen;
@@ -35,24 +36,38 @@ class KFBallTracker : public QObject
 
     cv::KalmanFilter mKf;
 
+    QVector<cv::Mat> mFrameHistory;
+    cv::Mat mOldDiff;
+
+    int mTstart;
+    int mTstop;
+
 public:
     explicit KFBallTracker(QObject *parent = 0);
 
-    void processNextFrame(cv::Mat *frame, int t);
-    void flushKalman();
+    QMap<double, TrackingBall> processNextFrame(cv::Mat &frame, int t);
 
+    void updateTimeState(int t);
+    void flushKalman();
+    double kalmanDistance(cv::Mat measurement);
 signals:
 
 public slots:
 
-private:
-    int dT() { return mTlast - mTstart; }
+protected:
+    int dT() { return mTstop - mTstart; }
+
+    QMap<double, TrackingBall> findBalls(cv::Mat &frame);
+    QMap<double, TrackingBall> findMovementThresh(cv::Mat threshDiff);
 
     void updateTrackFailure();
-    void updateTrackSuccess();
+    void updateTrackSuccess(TrackingBall ball);
 
-    void updateTimeState(int t);
+    bool ballIsLost();
+    bool ballFound();
+
     void updateFrameState(cv::Mat *frame);
+    double scoreContour(TrackingBall ball, cv::Mat &threshDiff);
 };
 
 #endif // KFBALLTRACKER_HPP

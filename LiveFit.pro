@@ -4,7 +4,8 @@ SOURCES += main.cpp \
     ProjectorDragCorner.cpp \
     FrameConverter.cpp \
     ProjectorWindow.cpp \
-    KFBallTracker.cpp
+    KFBallTracker.cpp \
+    TrackingBall.cpp
 SOURCES += LiveFitWindow.cpp
 
 HEADERS += LiveFitWindow.hpp \
@@ -13,13 +14,13 @@ HEADERS += LiveFitWindow.hpp \
     ProjectorDragCorner.hpp \
     FrameConverter.hpp \
     ProjectorWindow.hpp \
-    KFBallTracker.hpp
+    KFBallTracker.hpp \
+    TrackingBall.hpp
 
 CONFIG += qt5
 QT += \
     widgets \
     gui \
-
 
 FORMS += \
     LiveFitWindow.ui \

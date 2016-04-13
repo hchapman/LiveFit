@@ -30,7 +30,7 @@ signals:
 public slots:
     void processFrame(const cv::Mat &frame);
     void setFrameSize(QSize size);
-
+    void stop();
 private:
     void queue(const cv::Mat & frame);
     void process(cv::Mat frame);

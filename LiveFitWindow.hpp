@@ -30,6 +30,10 @@ protected:
     void closeEvent(QCloseEvent* ev);
 private slots:
 
+    void on_pauseButton_clicked();
+
+    void on_action_Open_triggered();
+
 private:
     Ui::liveFitWindow ui;
 
