@@ -8,6 +8,7 @@ TrackVideoWidget::TrackVideoWidget(QWidget *parent) :
 {
     ui.setupUi(this);
     setAttribute(Qt::WA_OpaquePaintEvent);
+    updateCorners();
 
     connect(ui.ulCorner,
             SIGNAL(moveCompleted(QPoint)),
@@ -26,16 +27,33 @@ TrackVideoWidget::TrackVideoWidget(QWidget *parent) :
 void TrackVideoWidget::paintEvent(QPaintEvent *event) {
     QPainter painter;
     QPen ballPen = QPen((QColor(0, 0, 255)));
+    QPen kfSeenPen = QPen((QColor(255,0,0)));
+    QPen kfMissPen = QPen((QColor(255,255,0)));
 
     painter.begin(this);
 
     painter.drawImage(0, 0, currentFrame);
 
     painter.setPen(ballPen);
-    QList<TrackingBall>::const_iterator iter;
-    for (iter = mBalls.begin(); iter != mBalls.end(); ++iter) {
+    QList<TrackingBall>::const_iterator ballsIter;
+    for (ballsIter = mBalls.begin(); ballsIter != mBalls.end(); ++ballsIter) {
         painter.drawEllipse(
-                    (QPoint)(*iter).center()*2, (int)(*iter).r()*2, (int)(*iter).r()*2);
+                    (QPoint)(*ballsIter).center()*2, (int)(*ballsIter).r()*2, (int)(*ballsIter).r()*2);
+    }
+
+    QList<KFPrediction>::const_iterator predsIter;
+    for (predsIter = mPreds.begin(); predsIter != mPreds.end(); ++predsIter) {
+        if ((*predsIter).seen()) {
+            painter.setPen(kfSeenPen);
+        } else {
+            painter.setPen(kfMissPen);
+        }
+        painter.drawRect(QRect((*predsIter).bbox().topLeft()*2,
+                               (*predsIter).bbox().bottomRight()*2));
+        painter.drawLine(
+                    (*predsIter).bbox().center()*2,
+                    ((*predsIter).bbox().center()*2+
+                     (QPoint)(*predsIter).jet()*(*predsIter).dt()*2));
     }
 
     painter.end();
@@ -57,6 +75,13 @@ void TrackVideoWidget::pushBall(TrackingBall ball)
     mBalls.append(ball);
     if (mBalls.size() > 10) {
         mBalls.removeFirst();
+    }
+}
+
+void TrackVideoWidget::pushPred(KFPrediction pred) {
+    mPreds.append(pred);
+    if (mPreds.size() > 10) {
+        mPreds.removeFirst();
     }
 }
 

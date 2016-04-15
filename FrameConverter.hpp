@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QSize>
 
+#include "ColorSpace.hpp"
+
 #include <opencv2/core/mat.hpp>
 
 class FrameConverter : public QObject
@@ -13,6 +15,7 @@ class FrameConverter : public QObject
 
     QBasicTimer mTimer;
     cv::Mat currentFrame;
+    ColorSpace currentCS;
     bool processAll;
     QSize frameSize;
 
@@ -28,12 +31,12 @@ signals:
     void imageReady(const QImage &);
 
 public slots:
-    void processFrame(const cv::Mat &frame);
+    void processFrame(const cv::Mat &frame, enum ColorSpace);
     void setFrameSize(QSize size);
     void stop();
 private:
-    void queue(const cv::Mat & frame);
-    void process(cv::Mat frame);
+    void queue(const cv::Mat & frame, ColorSpace cs);
+    void process(cv::Mat frame, ColorSpace cs);
     void timerEvent(QTimerEvent *ev);
 };
 

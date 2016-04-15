@@ -17,18 +17,11 @@
    <string>Live Fit</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="TrackVideoWidget" name="trackVideoWidget" native="true"/>
-      </item>
-      <item>
-       <widget class="QSlider" name="frameSlider">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pauseButton">
@@ -57,7 +50,7 @@
      <x>0</x>
      <y>0</y>
      <width>455</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -72,12 +65,272 @@
    <addaction name="menu_File"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="basicTab">
+        <attribute name="title">
+         <string>Basic</string>
+        </attribute>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="blurSizeLabel">
+           <property name="text">
+            <string>BlurSize</string>
+           </property>
+           <property name="buddy">
+            <cstring>blurSizeSpin</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QDoubleSpinBox" name="blurSizeSpin">
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="suffix">
+            <string>px</string>
+           </property>
+           <property name="minimum">
+            <double>1.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="gravityLabel">
+           <property name="text">
+            <string>GravConstant</string>
+           </property>
+           <property name="buddy">
+            <cstring>gravitySpin</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QDoubleSpinBox" name="gravitySpin">
+           <property name="suffix">
+            <string>px/s²</string>
+           </property>
+           <property name="maximum">
+            <double>600.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>300.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="frameLabel">
+           <property name="text">
+            <string>Frame</string>
+           </property>
+           <property name="buddy">
+            <cstring>frameComboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QComboBox" name="frameComboBox">
+           <item>
+            <property name="text">
+             <string>Video</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ThreshDiff</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Contour</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="minRadiusLabel">
+           <property name="text">
+            <string>MinRadius</string>
+           </property>
+           <property name="buddy">
+            <cstring>minRadiusDoubleSpinBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QDoubleSpinBox" name="minRadiusDoubleSpinBox">
+           <property name="suffix">
+            <string>px</string>
+           </property>
+           <property name="minimum">
+            <double>0.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="maxRadiusLabel">
+           <property name="text">
+            <string>MaxRadius</string>
+           </property>
+           <property name="buddy">
+            <cstring>maxRadiusDoubleSpinBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QDoubleSpinBox" name="maxRadiusDoubleSpinBox">
+           <property name="suffix">
+            <string>px</string>
+           </property>
+           <property name="minimum">
+            <double>0.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="threshValLabel">
+           <property name="text">
+            <string>ThreshVal</string>
+           </property>
+           <property name="buddy">
+            <cstring>threshValDoubleSpinBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="threshValDoubleSpinBox">
+           <property name="maximum">
+            <double>255.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="xYCovarianceLabel">
+           <property name="text">
+            <string>XYCovariance</string>
+           </property>
+           <property name="buddy">
+            <cstring>xYCovarianceDoubleSpinBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QDoubleSpinBox" name="xYCovarianceDoubleSpinBox">
+           <property name="prefix">
+            <string>exp(</string>
+           </property>
+           <property name="suffix">
+            <string>)</string>
+           </property>
+           <property name="minimum">
+            <double>-100.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>100.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="projTab">
+        <attribute name="title">
+         <string>World</string>
+        </attribute>
+        <layout class="QFormLayout" name="formLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="projWLabel">
+           <property name="text">
+            <string>ProjW</string>
+           </property>
+           <property name="buddy">
+            <cstring>projWDoubleSpinBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QDoubleSpinBox" name="projWDoubleSpinBox">
+           <property name="suffix">
+            <string>in</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="projHLabel">
+           <property name="text">
+            <string>ProjH</string>
+           </property>
+           <property name="buddy">
+            <cstring>projHDoubleSpinBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="projHDoubleSpinBox">
+           <property name="suffix">
+            <string>in</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="ballZLabel">
+           <property name="text">
+            <string>BallZ</string>
+           </property>
+           <property name="buddy">
+            <cstring>ballZDoubleSpinBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QDoubleSpinBox" name="ballZDoubleSpinBox">
+           <property name="suffix">
+            <string>in</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_2">
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="ProjectorWindow" name="projectorWindow" native="true"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="action_Open">
    <property name="text">
     <string>&amp;Open</string>
    </property>
    <property name="shortcut">
-    <string>Meta+O, Ctrl+O</string>
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="action_Camera">
@@ -90,7 +343,7 @@
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Q</string>
+    <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>
@@ -99,6 +352,12 @@
    <class>TrackVideoWidget</class>
    <extends>QWidget</extends>
    <header>TrackVideoWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProjectorWindow</class>
+   <extends>QWidget</extends>
+   <header location="global">ProjectorWindow.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

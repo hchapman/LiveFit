@@ -18,6 +18,22 @@ TrackingStream::TrackingStream(QObject* parent) :
     QObject(parent)
 {
     setFov(56);
+    connect(&mTracker,
+            SIGNAL(ballPredicted(KFPrediction)),
+            SIGNAL(ballPredicted(KFPrediction)));
+    connect(&mTracker,
+            SIGNAL(ballPredicted(KFPrediction)),
+            SLOT(predictionBall(KFPrediction)));
+    connect(&mTracker,
+            SIGNAL(threshReady(cv::Mat,ColorSpace)),
+            SLOT(processThresh(cv::Mat,ColorSpace)));
+    connect(&mTracker,
+            SIGNAL(contourReady(cv::Mat,ColorSpace)),
+            SLOT(processContour(cv::Mat,ColorSpace)));
+
+    mDisplayVideo = false;
+    mProjReady = false;
+    mEmitFrameType = DF_THRESH;
 }
 
 TrackingStream::~TrackingStream()
@@ -56,6 +72,8 @@ void TrackingStream::updateProjectorCoordinates(
     cv::solvePnP(projCornersCamera, corners,
                  mCameraMatrix, distCoeffs, rvec, mTVector);
     cv::Rodrigues(rvec, mRMatrix);
+
+    mProjReady = true;
 }
 
 cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)
@@ -81,6 +99,12 @@ cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)
     y = wcMat.at<double>(1,0);
 
     return cv::Point2f(x,y);
+}
+
+QPoint TrackingStream::imageToProjector(QPoint imP, double z)
+{
+    cv::Point2f pP = imageToProjector(cv::Point2f(imP.x(), imP.y()), z);
+    return QPoint((int)pP.x, (int)pP.y);
 }
 
 void TrackingStream::start(int cam)
@@ -115,6 +139,86 @@ void TrackingStream::changeProjectorCorners(std::vector<cv::Point2f> corners)
     updateProjectorCoordinates(corners);
 }
 
+void TrackingStream::predictionBall(KFPrediction pred)
+{
+    if (!mProjReady) {
+        return;
+    }
+
+    // Convert the prediction to projector coordinates
+    KFPrediction projPred = KFPrediction(pred);
+    projPred.setCenter(imageToProjector(pred.bbox().center()));
+    emit ballProjPredicted(projPred);
+}
+
+void TrackingStream::changeBlurSize(double blurSize)
+{
+    mTracker.setBlurSize(blurSize);
+}
+
+void TrackingStream::changeThreshVal(double thresh)
+{
+    mTracker.setThreshVal(thresh);
+}
+
+void TrackingStream::changeMinRadius(double radius)
+{
+    mTracker.setMinRadius(radius);
+}
+
+void TrackingStream::changeMaxRadius(double radius)
+{
+    mTracker.setMaxRadius(radius);
+}
+
+void TrackingStream::changeGravConstant(double g)
+{
+    mTracker.setGravConstant(g);
+}
+
+void TrackingStream::changeXYCovariance(double sigma)
+{
+    mTracker.setXYCovariance(sigma);
+}
+
+void TrackingStream::changeDisplayFrameType(QString s) {
+    if (s == "Video") {
+        mEmitFrameType = DF_VIDEO;
+    } else if (s == "ThreshDiff") {
+        mEmitFrameType = DF_THRESH;
+    } else if (s == "Contour") {
+        mEmitFrameType = DF_CONTOUR;
+    }
+}
+
+void TrackingStream::processVideoFrame(const cv::Mat& mat, ColorSpace cs)
+{
+    if (mEmitFrameType == DF_VIDEO) {
+        emit frameReady(mat, cs);
+    }
+}
+
+void TrackingStream::processThresh(const cv::Mat& mat, ColorSpace cs)
+{
+    if (mEmitFrameType == DF_THRESH) {
+        emit frameReady(mat, cs);
+    }
+}
+
+void TrackingStream::processBlur(const cv::Mat& mat, ColorSpace cs)
+{
+    if (mEmitFrameType == DF_BLUR) {
+        emit frameReady(mat, cs);
+    }
+}
+
+void TrackingStream::processContour(const cv::Mat& mat, ColorSpace cs)
+{
+    if (mEmitFrameType == DF_CONTOUR) {
+        emit frameReady(mat, cs);
+    }
+}
+
 void TrackingStream::timerEvent(QTimerEvent* ev)
 {
     if (ev->timerId() != mTimer.timerId()) {
@@ -127,17 +231,17 @@ void TrackingStream::timerEvent(QTimerEvent* ev)
         return;
     }
 
-    int ticks = cv::getTickCount();
-    mTracker.updateTimeState(ticks);
+    double t = cv::getTickCount()/cv::getTickFrequency();
+    mTracker.updateTimeState(t);
 
-    QMap<double, TrackingBall> balls = mTracker.processNextFrame(frame, ticks);
+    QMap<double, TrackingBall> balls = mTracker.processNextFrame(frame, t);
     if (!balls.isEmpty()) {
-        std::cout << balls.first().x() << ", " << balls.first().y() << "\n";
-        std::cout << "-----\n";
+        //std::cout << balls.first().x() << ", " << balls.first().y() << "\n";
+        //std::cout << "-----\n";
 
         emit ballSpotted(balls.first());
     }
 
-    emit frameReady(frame);
+    processVideoFrame(frame);
 }
 

@@ -5,7 +5,8 @@ SOURCES += main.cpp \
     FrameConverter.cpp \
     ProjectorWindow.cpp \
     KFBallTracker.cpp \
-    TrackingBall.cpp
+    TrackingBall.cpp \
+    KFPrediction.cpp
 SOURCES += LiveFitWindow.cpp
 
 HEADERS += LiveFitWindow.hpp \
@@ -15,7 +16,10 @@ HEADERS += LiveFitWindow.hpp \
     FrameConverter.hpp \
     ProjectorWindow.hpp \
     KFBallTracker.hpp \
-    TrackingBall.hpp
+    TrackingBall.hpp \
+    KFPrediction.hpp \
+    ColorSpace.hpp \
+    DisplayFrameType.hpp
 
 CONFIG += qt5
 QT += \

@@ -13,8 +13,8 @@ void LiveFitWindow::setupCamera()
     mTrackingStream.moveToThread(&mStreamThread);
     mFrameConverter.moveToThread(&mConverterThread);
     mFrameConverter.connect(&mTrackingStream,
-                      SIGNAL(frameReady(cv::Mat)),
-                      SLOT(processFrame(cv::Mat)));
+                      SIGNAL(frameReady(cv::Mat, enum ColorSpace)),
+                      SLOT(processFrame(cv::Mat, enum ColorSpace)));
 
     ui.trackVideoWidget->connect(&mFrameConverter,
                             SIGNAL(imageReady(QImage)),
@@ -29,9 +29,36 @@ void LiveFitWindow::setupCamera()
     ui.trackVideoWidget->connect(&mTrackingStream,
                                  SIGNAL(ballSpotted(TrackingBall)),
                                  SLOT(pushBall(TrackingBall)));
+    ui.trackVideoWidget->connect(&mTrackingStream,
+                                 SIGNAL(ballPredicted(KFPrediction)),
+                                 SLOT(pushPred(KFPrediction)));
+
+    mTrackingStream.connect(ui.blurSizeSpin,
+                            SIGNAL(valueChanged(double)),
+                            SLOT(changeBlurSize(double)));
+    mTrackingStream.connect(ui.minRadiusDoubleSpinBox,
+                            SIGNAL(valueChanged(double)),
+                            SLOT(changeMinRadius(double)));
+    mTrackingStream.connect(ui.maxRadiusDoubleSpinBox,
+                            SIGNAL(valueChanged(double)),
+                            SLOT(changeMaxRadius(double)));
+    mTrackingStream.connect(ui.threshValDoubleSpinBox,
+                            SIGNAL(valueChanged(double)),
+                            SLOT(changeThreshVal(double)));
+    mTrackingStream.connect(ui.gravitySpin,
+                            SIGNAL(valueChanged(double)),
+                            SLOT(changeGravConstant(double)));
+    mTrackingStream.connect(ui.xYCovarianceDoubleSpinBox,
+                            SIGNAL(valueChanged(double)),
+                            SLOT(changeXYCovariance(double)));
+
+    mTrackingStream.connect(ui.frameComboBox,
+                            SIGNAL(currentTextChanged(QString)),
+                            SLOT(changeDisplayFrameType(QString)));
 
     QMetaObject::invokeMethod(&mTrackingStream, "start",
                               Q_ARG(QString, "/home/harrison/Dropbox/interception project/classroom-red-light.webm"));
+    //                          Q_ARG(QString, "/Users/hchapman/Dropbox/interception project/classroom-red-light.webm"));
 }
 
 LiveFitWindow::LiveFitWindow(QWidget *parent)
@@ -72,6 +99,8 @@ void LiveFitWindow::on_action_Open_triggered()
 {
     QString fname = QFileDialog::getOpenFileName(
                 this, "Open video", "", "Video Files (*.mov *.avi *.webm *.mkv)");
-    QMetaObject::invokeMethod(&mTrackingStream, "start",
-                              Q_ARG(QString, fname));
+    if (fname != NULL) {
+        QMetaObject::invokeMethod(&mTrackingStream, "start",
+                                  Q_ARG(QString, fname));
+    }
 }

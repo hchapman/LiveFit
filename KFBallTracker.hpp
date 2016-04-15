@@ -1,6 +1,8 @@
 #ifndef KFBALLTRACKER_HPP
 #define KFBALLTRACKER_HPP
 
+#include "ColorSpace.hpp"
+#include "KFPrediction.hpp"
 #include "TrackingBall.hpp"
 
 #include <QObject>
@@ -39,23 +41,47 @@ class KFBallTracker : public QObject
     QVector<cv::Mat> mFrameHistory;
     cv::Mat mOldDiff;
 
-    int mTstart;
-    int mTstop;
+    double mTstart;
+    double mTstop;
+
+    double mBlurSize;
+    double mThreshVal;
+
+    double mMinRadius;
+    double mMaxRadius;
+
+    double mGravConstant;
 
 public:
     explicit KFBallTracker(QObject *parent = 0);
 
     QMap<double, TrackingBall> processNextFrame(cv::Mat &frame, int t);
 
-    void updateTimeState(int t);
+    void updateTimeState(double t);
     void flushKalman();
     double kalmanDistance(cv::Mat measurement);
+
+    void setBlurSize(double blurSize) { mBlurSize = blurSize; }
+    void setThreshVal(double thresh) { mThreshVal = thresh; }
+
+    void setMinRadius(double radius) { mMinRadius = radius; }
+    void setMaxRadius(double radius) { mMaxRadius = radius; }
+
+    void setXYCovariance(double sigma);
+
+    void setGravConstant(double g) { mGravConstant = g; }
 signals:
+    void ballSpotted(TrackingBall);
+    void ballPredicted(KFPrediction);
+
+    void threshReady(const cv::Mat &, enum ColorSpace);
+    void contourReady(const cv::Mat &, enum ColorSpace);
+    void blurReady(const cv::Mat &, enum ColorSpace);
 
 public slots:
 
 protected:
-    int dT() { return mTstop - mTstart; }
+    double dT() { return mTstop - mTstart; }
 
     QMap<double, TrackingBall> findBalls(cv::Mat &frame);
     QMap<double, TrackingBall> findMovementThresh(cv::Mat threshDiff);

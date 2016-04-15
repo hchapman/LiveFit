@@ -6,6 +6,7 @@
 #define BR_CORNER 2
 #define UR_CORNER 3
 
+#include "KFPrediction.hpp"
 #include "TrackingBall.hpp"
 #include "ui_TrackVideoWidget.h"
 #include <opencv2/core.hpp>
@@ -15,6 +16,7 @@ class TrackVideoWidget : public QWidget
 {
     Q_OBJECT
     QList<TrackingBall> mBalls;
+    QList<KFPrediction> mPreds;
 
 public:
     explicit TrackVideoWidget(QWidget *parent = 0);
@@ -32,6 +34,7 @@ public slots:
     void brCornerDropped(QPoint point);
     void urCornerDropped(QPoint point);
 
+    void pushPred(KFPrediction pred);
 protected:
     void updateCorners();
 
