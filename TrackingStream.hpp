@@ -86,6 +86,8 @@ public:
 
     void updateProjectorCoordinates(std::vector<cv::Point2f> corners);
 
+    void setProjSize(const QSize& projSize);
+
 private:
     void timerEvent(QTimerEvent *);
 };

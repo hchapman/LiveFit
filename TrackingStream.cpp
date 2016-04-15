@@ -18,6 +18,7 @@ TrackingStream::TrackingStream(QObject* parent) :
     QObject(parent)
 {
     setFov(56);
+    setProjSize(QSize(50, 50));
     connect(&mTracker,
             SIGNAL(ballPredicted(KFPrediction)),
             SIGNAL(ballPredicted(KFPrediction)));
@@ -107,6 +108,11 @@ QPoint TrackingStream::imageToProjector(QPoint imP, double z)
     return QPoint((int)pP.x, (int)pP.y);
 }
 
+
+void TrackingStream::setProjSize(const QSize& projSize)
+{
+    mProjSize = projSize;
+}
 void TrackingStream::start(int cam)
 {
     mVideoHandle.reset(new cv::VideoCapture(cam));
@@ -141,6 +147,7 @@ void TrackingStream::changeProjectorCorners(std::vector<cv::Point2f> corners)
 
 void TrackingStream::predictionBall(KFPrediction pred)
 {
+    return;
     if (!mProjReady) {
         return;
     }

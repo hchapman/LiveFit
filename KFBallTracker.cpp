@@ -68,15 +68,12 @@ void KFBallTracker::flushKalman()
     mKf.measurementNoiseCov.at<double>(BallKFMeas::w, BallKFMeas::w) = 1e5;
     mKf.measurementNoiseCov.at<double>(BallKFMeas::h, BallKFMeas::h) = 1e5;
 
-    mKf.processNoiseCov = cv::Mat::eye(mKfStateLen, mKfStateLen, CV_64F)*1e-4;
+    mKf.processNoiseCov = cv::Mat::eye(mKfStateLen, mKfStateLen, CV_64F)*1e-7;
 
     mKfState = cv::Mat::zeros(mKfStateLen, 1, CV_64F);
     mKfState.at<double>(BallKFState::w) = 10;
     mKfState.at<double>(BallKFState::h) = 10;
 }
-
-#define SENSITIVITY 20
-#define BLUR_SIZE 5
 
 double KFBallTracker::scoreContour(TrackingBall ball,
                                    cv::Mat &threshDiff) {

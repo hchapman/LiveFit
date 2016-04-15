@@ -1,6 +1,8 @@
 #include "KFPrediction.hpp"
 #include "KFBallTracker.hpp"
 
+#include <QDebug>
+
 #include <iostream>
 
 
@@ -32,4 +34,5 @@ KFPrediction::KFPrediction(cv::Mat kfStatePre, double dt, bool seen)
     //std::cout << seen << "\n";
     mBbox = QRect(QPoint(x-w/2, y-h/2), QSize(w, h));
     mJet = QPoint(dx, dy);
+    qDebug() << mJet;
 }
