@@ -3,6 +3,7 @@
 
 #include "ColorSpace.hpp"
 #include "KFPrediction.hpp"
+#include "KalmanFilterPlus.hpp"
 #include "TrackingBall.hpp"
 
 #include <QObject>
@@ -36,7 +37,7 @@ class KFBallTracker : public QObject
     int mKfMeasLen;
     cv::Mat mKfMeas;
 
-    cv::KalmanFilter mKf;
+    KalmanFilterPlus mKf;
 
     QVector<cv::Mat> mFrameHistory;
     cv::Mat mOldDiff;
@@ -73,6 +74,7 @@ public:
 signals:
     void ballSpotted(TrackingBall);
     void ballPredicted(KFPrediction);
+    void personSpotted(QRect);
 
     void threshReady(const cv::Mat &, enum ColorSpace);
     void contourReady(const cv::Mat &, enum ColorSpace);
@@ -83,8 +85,9 @@ public slots:
 protected:
     double dT() { return mTstop - mTstart; }
 
-    QMap<double, TrackingBall> findBalls(cv::Mat &frame);
-    QMap<double, TrackingBall> findMovementThresh(cv::Mat threshDiff);
+    QList<cv::Rect> findPeople(cv::Mat &frame);
+    QMap<double, TrackingBall> findBalls(cv::Mat &frame, QList<cv::Rect> ignores);
+    QMap<double, TrackingBall> findMovementThresh(cv::Mat threshDiff, QList<cv::Rect> ignores);
 
     void updateTrackFailure();
     void updateTrackSuccess(TrackingBall ball);

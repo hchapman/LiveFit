@@ -32,6 +32,9 @@ void LiveFitWindow::setupCamera()
     ui.trackVideoWidget->connect(&mTrackingStream,
                                  SIGNAL(ballPredicted(KFPrediction)),
                                  SLOT(pushPred(KFPrediction)));
+    ui.projectorWindow->connect(&mTrackingStream,
+                                SIGNAL(ballProjPredicted(KFPrediction)),
+                                SLOT(pushPred(KFPrediction)));
 
     mTrackingStream.connect(ui.blurSizeSpin,
                             SIGNAL(valueChanged(double)),
@@ -55,6 +58,8 @@ void LiveFitWindow::setupCamera()
     mTrackingStream.connect(ui.frameComboBox,
                             SIGNAL(currentTextChanged(QString)),
                             SLOT(changeDisplayFrameType(QString)));
+
+    ui.trackVideoWidget->updateCorners();
 
     QMetaObject::invokeMethod(&mTrackingStream, "start",
                               Q_ARG(QString, "/home/harrison/Dropbox/interception project/classroom-red-light.webm"));
@@ -92,7 +97,7 @@ void LiveFitWindow::closeEvent(QCloseEvent *ev) {
 
 void LiveFitWindow::on_pauseButton_clicked()
 {
-    QMetaObject::invokeMethod(&mTrackingStream, "stop");
+    QMetaObject::invokeMethod(&mTrackingStream, "pauseStream");
 }
 
 void LiveFitWindow::on_action_Open_triggered()

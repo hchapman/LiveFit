@@ -64,11 +64,13 @@ void TrackingStream::updateProjectorCoordinates(
     cv::Mat distCoeffs;
     mTVector = cv::Mat(3,1,CV_64F);
 
+    //std::cout << corners << "~\n";
+
     cv::Mat projCornersCamera = cv::Mat::zeros(4, 3, CV_64F);
-    projCornersCamera.at<double>(UL_CORNER,0) = mProjSize.width();
-    projCornersCamera.at<double>(BL_CORNER,1) = mProjSize.height();
-    projCornersCamera.at<double>(UR_CORNER,0) = mProjSize.width();
-    projCornersCamera.at<double>(BR_CORNER,1) = mProjSize.height();
+    projCornersCamera.at<double>(3,0) = mProjSize.width();
+    projCornersCamera.at<double>(1,1) = mProjSize.height();
+    projCornersCamera.at<double>(2,0) = mProjSize.width();
+    projCornersCamera.at<double>(2,1) = mProjSize.height();
 
     cv::solvePnP(projCornersCamera, corners,
                  mCameraMatrix, distCoeffs, rvec, mTVector);
@@ -85,10 +87,15 @@ cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)
     cv::Mat rinv = mRMatrix.inv();
     cv::Mat cinv = mCameraMatrix.inv();
 
+    //std::cout << "\n\n";
+    //std::cout << rinv << "\n";
+
     // Matrix (u, v, 1)
     cv::Mat uvmat = cv::Mat::ones(3,1,CV_64F);
     uvmat.at<double>(0,0) = imP.x;
     uvmat.at<double>(1,0) = imP.y;
+
+    //std::cout << uvmat << "\n";
 
     s = z + ((cv::Mat)(rinv*mTVector)).at<double>(2,0);
     s /= ((cv::Mat)(rinv*cinv*uvmat)).at<double>(2,0);
@@ -99,13 +106,15 @@ cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)
     x = wcMat.at<double>(0,0);
     y = wcMat.at<double>(1,0);
 
+    //std::cout << x << ", " << y << "\n";
+
     return cv::Point2f(x,y);
 }
 
-QPoint TrackingStream::imageToProjector(QPoint imP, double z)
+QPointF TrackingStream::imageToProjector(QPointF imP, double z)
 {
     cv::Point2f pP = imageToProjector(cv::Point2f(imP.x(), imP.y()), z);
-    return QPoint((int)pP.x, (int)pP.y);
+    return QPointF(pP.x, pP.y);
 }
 
 
@@ -140,6 +149,11 @@ void TrackingStream::stop()
     mTimer.stop();
 }
 
+void TrackingStream::pauseStream()
+{
+    mStreamPaused = !mStreamPaused;
+}
+
 void TrackingStream::changeProjectorCorners(std::vector<cv::Point2f> corners)
 {
     updateProjectorCoordinates(corners);
@@ -147,14 +161,15 @@ void TrackingStream::changeProjectorCorners(std::vector<cv::Point2f> corners)
 
 void TrackingStream::predictionBall(KFPrediction pred)
 {
-    return;
     if (!mProjReady) {
         return;
     }
 
     // Convert the prediction to projector coordinates
     KFPrediction projPred = KFPrediction(pred);
-    projPred.setCenter(imageToProjector(pred.bbox().center()));
+    //projPred.setCenter(imageToProjector(pred.bbox().center()));
+    projPred.setTopLeft(imageToProjector(pred.bbox().topLeft(), 0));
+    projPred.setBottomRight(imageToProjector(pred.bbox().bottomRight(), 0));
     emit ballProjPredicted(projPred);
 }
 
@@ -232,23 +247,25 @@ void TrackingStream::timerEvent(QTimerEvent* ev)
         return;
     }
 
-    cv::Mat frame;
-    if (!mVideoHandle->read(frame)) {
-        mTimer.stop();
-        return;
+    if (!mStreamPaused) {
+
+        if (!mVideoHandle->read(mFrame)) {
+            mTimer.stop();
+            return;
+        }
+
+        double t = cv::getTickCount()/cv::getTickFrequency();
+        mTracker.updateTimeState(t);
+
+        QMap<double, TrackingBall> balls = mTracker.processNextFrame(mFrame, t);
+        if (!balls.isEmpty()) {
+            //std::cout << balls.first().x() << ", " << balls.first().y() << "\n";
+            //std::cout << "-----\n";
+
+            emit ballSpotted(balls.first());
+        }
     }
 
-    double t = cv::getTickCount()/cv::getTickFrequency();
-    mTracker.updateTimeState(t);
-
-    QMap<double, TrackingBall> balls = mTracker.processNextFrame(frame, t);
-    if (!balls.isEmpty()) {
-        //std::cout << balls.first().x() << ", " << balls.first().y() << "\n";
-        //std::cout << "-----\n";
-
-        emit ballSpotted(balls.first());
-    }
-
-    processVideoFrame(frame);
+    processVideoFrame(mFrame);
 }
 

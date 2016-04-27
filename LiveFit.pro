@@ -6,7 +6,9 @@ SOURCES += main.cpp \
     ProjectorWindow.cpp \
     KFBallTracker.cpp \
     TrackingBall.cpp \
-    KFPrediction.cpp
+    KFPrediction.cpp \
+    Util.cpp \
+    KalmanFilterPlus.cpp
 SOURCES += LiveFitWindow.cpp
 
 HEADERS += LiveFitWindow.hpp \
@@ -19,7 +21,9 @@ HEADERS += LiveFitWindow.hpp \
     TrackingBall.hpp \
     KFPrediction.hpp \
     ColorSpace.hpp \
-    DisplayFrameType.hpp
+    DisplayFrameType.hpp \
+    Util.hpp \
+    KalmanFilterPlus.hpp
 
 CONFIG += qt5
 QT += \
@@ -32,4 +36,4 @@ FORMS += \
 
 QT_CONFIG -= no-pkg-config
 unix: CONFIG += link_pkgconfig
-unix: PKGCONFIG += opencv
+unix: PKGCONFIG += opencv gsl

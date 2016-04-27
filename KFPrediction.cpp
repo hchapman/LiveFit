@@ -13,13 +13,18 @@ KFPrediction::KFPrediction()
 
 KFPrediction::KFPrediction(const KFPrediction& k)
 {
-    mBbox = QRect(k.bbox());
-    mJet = QPoint(k.jet());
+    mBbox = QRectF(k.mBbox);
+    mJet = QPointF(k.mJet);
+    mSeen = k.mSeen;
+    mDt = k.mDt;
 }
 
 KFPrediction::KFPrediction(cv::Mat kfStatePre, double dt, bool seen)
 {
     double x, y, w, h, dx, dy;
+
+    mDt = dt;
+
     x = kfStatePre.at<double>(BallKFState::x);
     y = kfStatePre.at<double>(BallKFState::y);
     w = kfStatePre.at<double>(BallKFState::w);
@@ -29,10 +34,9 @@ KFPrediction::KFPrediction(cv::Mat kfStatePre, double dt, bool seen)
 
     //std::cout << "dxdy" << dx << " " << dy << "\n";
 
-    mDt = dt;
     mSeen = seen;
     //std::cout << seen << "\n";
-    mBbox = QRect(QPoint(x-w/2, y-h/2), QSize(w, h));
-    mJet = QPoint(dx, dy);
-    qDebug() << mJet;
+    mBbox = QRectF(QPointF(x-w/2, y-h/2), QSizeF(w, h));
+    mJet = QPointF(dx, dy);
+    //qDebug() << mJet;
 }

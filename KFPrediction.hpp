@@ -8,22 +8,26 @@
 
 class KFPrediction
 {
-    QRect mBbox;
-    QPoint mJet;
+    QRectF mBbox;
+    QPointF mJet;
+
     double mDt;
     bool mSeen;
 
 public:
     KFPrediction();
+    explicit KFPrediction(cv::Mat kfStatePre, double dt, bool seen);
     KFPrediction(const KFPrediction &k);
-    KFPrediction(cv::Mat kfStatePre, double dt, bool seen);
 
-    QRect bbox() const { return mBbox; }
-    QPoint jet() const { return mJet; }
+    QRectF bbox() const { return mBbox; }
+    QPointF jet() const { return mJet; }
     double dt() const { return mDt; }
     bool seen() const { return mSeen; }
 
-    void setCenter(QPoint pos) { mBbox.moveCenter(pos); }
+    void setCenter(QPointF pos) { mBbox.moveCenter(pos); }
+
+    void setTopLeft(QPointF pos) { mBbox.setTopLeft(pos); }
+    void setBottomRight(QPointF pos) { mBbox.setBottomRight(pos); }
 };
 
 #endif // KFPREDICTION_HPP

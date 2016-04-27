@@ -8,7 +8,6 @@ TrackVideoWidget::TrackVideoWidget(QWidget *parent) :
 {
     ui.setupUi(this);
     setAttribute(Qt::WA_OpaquePaintEvent);
-    updateCorners();
 
     connect(ui.ulCorner,
             SIGNAL(moveCompleted(QPoint)),
@@ -48,12 +47,12 @@ void TrackVideoWidget::paintEvent(QPaintEvent *event) {
         } else {
             painter.setPen(kfMissPen);
         }
-        painter.drawRect(QRect((*predsIter).bbox().topLeft()*2,
+        painter.drawRect(QRectF((*predsIter).bbox().topLeft()*2,
                                (*predsIter).bbox().bottomRight()*2));
         painter.drawLine(
                     (*predsIter).bbox().center()*2,
                     ((*predsIter).bbox().center()*2+
-                     (QPoint)(*predsIter).jet()*(*predsIter).dt()*2));
+                     (QPointF)(*predsIter).jet()*(*predsIter).dt()*2));
     }
 
     painter.end();
@@ -87,32 +86,43 @@ void TrackVideoWidget::pushPred(KFPrediction pred) {
 
 void TrackVideoWidget::ulCornerDropped(QPoint point)
 {
-
+    updateCorners();
 }
 
 void TrackVideoWidget::blCornerDropped(QPoint point)
 {
-
+    updateCorners();
 }
 
 void TrackVideoWidget::brCornerDropped(QPoint point)
 {
-
+    updateCorners();
 }
 
 void TrackVideoWidget::urCornerDropped(QPoint point)
 {
-
+    updateCorners();
 }
-
+#include <iostream>
+#include <QDebug>
 void TrackVideoWidget::updateCorners()
 {
     std::vector<cv::Point2f> corners;
 
-    corners.push_back(cv::Point2f(ui.ulCorner->x(),ui.ulCorner->y()));
-    corners.push_back(cv::Point2f(ui.blCorner->x(),ui.blCorner->y()));
-    corners.push_back(cv::Point2f(ui.brCorner->x(),ui.brCorner->y()));
-    corners.push_back(cv::Point2f(ui.urCorner->x(),ui.urCorner->y()));
+    //corners.push_back(cv::Point2f(0,0));
+    //corners.push_back(cv::Point2f(0,240));
+    //corners.push_back(cv::Point2f(320,240));
+    //corners.push_back(cv::Point2f(320,0));
+
+    corners.push_back(cv::Point2f(ui.ulCorner->geometry().center().x()/2,
+                                  ui.ulCorner->geometry().center().y()/2));
+    corners.push_back(cv::Point2f(ui.blCorner->geometry().center().x()/2,
+                                  ui.blCorner->geometry().center().y()/2));
+    corners.push_back(cv::Point2f(ui.brCorner->geometry().center().x()/2,
+                                  ui.brCorner->geometry().center().y()/2));
+    corners.push_back(cv::Point2f(ui.urCorner->geometry().center().x()/2,
+                                  ui.urCorner->geometry().center().y()/2));
+    qDebug() << ui.brCorner->geometry();
 
     emit cornersChanged(corners);
 }

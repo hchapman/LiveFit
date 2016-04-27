@@ -20,6 +20,7 @@ class TrackVideoWidget : public QWidget
 
 public:
     explicit TrackVideoWidget(QWidget *parent = 0);
+    void updateCorners();
 
 signals:
     void resized(QSize size);
@@ -36,7 +37,6 @@ public slots:
 
     void pushPred(KFPrediction pred);
 protected:
-    void updateCorners();
 
     void paintEvent(QPaintEvent* event);
     void resizeEvent(QResizeEvent *event);

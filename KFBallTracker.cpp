@@ -1,4 +1,5 @@
 #include "KFBallTracker.hpp"
+#include "KalmanFilterPlus.hpp"
 #include "TrackingBall.hpp"
 
 #include <QMap>
@@ -33,13 +34,28 @@ KFBallTracker::KFBallTracker(QObject *parent) : QObject(parent)
     mKfMeasLen = 4;
     mKfMeas = cv::Mat::zeros(mKfMeasLen, 1, CV_64F);
 
-    mKf = cv::KalmanFilter(mKfStateLen, mKfMeasLen, mKfControlLen, CV_64F);
+    mKf = KalmanFilterPlus(mKfStateLen, mKfMeasLen, mKfControlLen, CV_64F);
+    mKf.setAlphaSq(1.01);
     flushKalman();
 }
 
 QMap<double, TrackingBall> KFBallTracker::processNextFrame(cv::Mat &frame, int t)
 {
-    return findBalls(frame);
+    mFrameHistory.append(frame.clone());
+
+    if (mFrameHistory.size() < 2) {
+        return QMap<double, TrackingBall>();
+    } else if (mFrameHistory.size() < 3) {
+        return QMap<double, TrackingBall>();
+    }
+
+    QList<cv::Rect> ignore = findPeople(frame);
+
+    QMap<double, TrackingBall> res = findBalls(frame, ignore);
+
+    mFrameHistory.removeFirst();
+
+    return res;
 }
 
 void KFBallTracker::flushKalman()
@@ -77,6 +93,10 @@ void KFBallTracker::flushKalman()
 
 double KFBallTracker::scoreContour(TrackingBall ball,
                                    cv::Mat &threshDiff) {
+    if (mFoundCount < 2) {
+
+    }
+
     return pow(2., kalmanDistance(ball.getMeas()));
 }
 
@@ -95,7 +115,39 @@ void KFBallTracker::setXYCovariance(double sigma)
     mKf.measurementNoiseCov.at<double>(BallKFMeas::y, BallKFMeas::y) = exp(sigma);
 }
 
-QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff) {
+QList<cv::Rect> KFBallTracker::findPeople(cv::Mat& nxtFrame)
+{
+    cv::Mat preFrame = mFrameHistory[0];
+    cv::Mat curFrame = mFrameHistory[1];
+
+    cv::Mat preGrayFrame, curGrayFrame, nxtGrayFrame;
+
+    cv::cvtColor(preFrame, preGrayFrame, cv::COLOR_BGR2GRAY);
+    cv::cvtColor(curFrame, curGrayFrame, cv::COLOR_BGR2GRAY);
+    cv::cvtColor(nxtFrame, nxtGrayFrame, cv::COLOR_BGR2GRAY);
+
+    cv::Mat oldThreshDiff, newThreshDiff;
+
+    cv::absdiff(preGrayFrame, curGrayFrame, mOldDiff);
+    //cv::threshold(mOldDiff, oldThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
+    cv::blur(mOldDiff, oldThreshDiff, cv::Size(mBlurSize, mBlurSize));
+    cv::threshold(oldThreshDiff, oldThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
+
+    cv::Mat newDiff;
+    cv::absdiff(curGrayFrame, nxtGrayFrame, newDiff);
+    //cv::threshold(newDiff, newThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
+    cv::blur(newDiff, newThreshDiff, cv::Size(mBlurSize, mBlurSize));
+    cv::threshold(newThreshDiff, newThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
+
+    cv::Mat threshDiff;
+    cv::bitwise_and(oldThreshDiff, newThreshDiff, threshDiff);
+
+    emit threshReady(threshDiff.clone(), TS_GRAY);
+
+    return QList<cv::Rect>();
+}
+
+QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff, QList<cv::Rect> ignores) {
     std::vector<std::vector<cv::Point> > contours;
     QMap<double, TrackingBall> balls;
 
@@ -108,6 +160,23 @@ QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff)
 
         if (ball.r() > mMaxRadius || ball.r() < mMinRadius) {
             // We don't want HUGE blobs
+            continue;
+        }
+
+        if (ball.center().x() < 20 || ball.center().x() > 300) {
+            qDebug() << ball.center();
+            continue;
+        }
+
+        QList<cv::Rect>::const_iterator ignore;
+        bool ignoreBall = false;
+        for (ignore = ignores.begin(); ignore != ignores.end(); ++ignore) {
+            if (((*ignore) & ball.rect()).area()) {
+                ignoreBall = true;
+                break;
+            }
+        }
+        if (ignoreBall) {
             continue;
         }
 
@@ -155,6 +224,7 @@ void KFBallTracker::updateTrackSuccess(TrackingBall ball)
 
     emit ballPredicted(KFPrediction(mKf.statePost, dT(), true));
 
+    mNotFoundCount = 0;
     mFoundCount++;
 }
 
@@ -182,23 +252,14 @@ void KFBallTracker::updateTimeState(double t)
     // << "\n" << mKf.transitionMatrix;
     //std::cout << mKf.controlMatrix << "\n";
     //std::cout << mKf.transitionMatrix << "\n----\n";
-    std::cout << mKfState << "\n";
+    //std::cout << mKfState << "\n";
 }
 
-QMap<double, TrackingBall> KFBallTracker::findBalls(cv::Mat &nxtFrame)
+QMap<double, TrackingBall> KFBallTracker::findBalls(cv::Mat &nxtFrame, QList<cv::Rect> ignores)
 {
 
-    mFrameHistory.append(nxtFrame);
-
-    if (mFrameHistory.size() < 2) {
-        return QMap<double, TrackingBall>();
-    } else if (mFrameHistory.size() < 3) {
-        return QMap<double, TrackingBall>();
-    }
-
     cv::Mat preFrame = mFrameHistory[0];
-    mFrameHistory.removeFirst();
-    cv::Mat curFrame = mFrameHistory[0];
+    cv::Mat curFrame = mFrameHistory[1];
 
     cv::Mat preGrayFrame, curGrayFrame, nxtGrayFrame;
 
@@ -224,7 +285,8 @@ QMap<double, TrackingBall> KFBallTracker::findBalls(cv::Mat &nxtFrame)
 
     emit threshReady(threshDiff.clone(), TS_GRAY);
 
-    QMap<double, TrackingBall> balls = findMovementThresh(threshDiff);
+    QMap<double, TrackingBall> balls = findMovementThresh(threshDiff, ignores);
+
     if (!balls.isEmpty()) {
         updateTrackSuccess(balls.first());
     } else {

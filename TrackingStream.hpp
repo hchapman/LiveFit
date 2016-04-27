@@ -24,10 +24,13 @@ class TrackingStream : public QObject
     cv::Mat mRMatrix;
     cv::Mat mTVector;
 
+    cv::Mat mFrame;
+
     DisplayFrameType mEmitFrameType;
 
     bool mStarted;
     bool mProjReady;
+    bool mStreamPaused;
 
     int mFps;
 
@@ -52,6 +55,7 @@ public slots:
     void start(int cam = 0);
     void start(QString fname);
     void stop();
+    void pauseStream();
 
     // Slots for responding to projector settings
     void changeProjectorCorners(std::vector<cv::Point2f> corners);
@@ -82,7 +86,7 @@ public:
     void setFov(int fov);
 
     cv::Point2f imageToProjector(cv::Point2f imP, double z=0);
-    QPoint imageToProjector(QPoint, double z=0);
+    QPointF imageToProjector(QPointF, double z=0);
 
     void updateProjectorCoordinates(std::vector<cv::Point2f> corners);
 

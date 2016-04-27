@@ -6,16 +6,21 @@ TrackingBall::TrackingBall() {
     mMeasVec = cv::Mat(1, 4, CV_64F);
 }
 
+cv::Rect TrackingBall::rect() const
+{
+    return mRect;
+}
+
 TrackingBall::TrackingBall(std::vector<cv::Point> contour)
 {
-    cv::Rect rect = cv::boundingRect(contour);
+    mRect = cv::boundingRect(contour);
 
     mMeasVec = cv::Mat(1, 4, CV_64F);
 
-    mMeasVec.at<double>(0) = rect.x+rect.width/2;
-    mMeasVec.at<double>(1) = rect.y+rect.height/2;
-    mMeasVec.at<double>(2) = rect.width;
-    mMeasVec.at<double>(3) = rect.height;
+    mMeasVec.at<double>(0) = mRect.x+mRect.width/2;
+    mMeasVec.at<double>(1) = mRect.y+mRect.height/2;
+    mMeasVec.at<double>(2) = mRect.width;
+    mMeasVec.at<double>(3) = mRect.height;
 
     cv::minEnclosingCircle(contour, mCenter, mRadius);
 }

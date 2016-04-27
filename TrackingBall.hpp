@@ -10,6 +10,7 @@ class TrackingBall
     cv::Mat mMeasVec;
     cv::Point2f mCenter;
     float mRadius;
+    cv::Rect mRect;
 
 public:
     TrackingBall(std::vector<cv::Point> contour);
@@ -25,6 +26,7 @@ public:
     QPoint tl() const;
 
     TrackingBall();
+    cv::Rect rect() const;
 };
 
 #endif // TRACKINGBALL_HPP
