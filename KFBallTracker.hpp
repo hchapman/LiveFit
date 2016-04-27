@@ -12,32 +12,25 @@
 #include <opencv2/core.hpp>
 #include <opencv2/video/tracking.hpp>
 
-namespace BallKFState {
-enum BallKFState {x, y, dx, dy, w, h};
-}
-namespace BallKFMeas {
-enum BallKFMeas {x, y, w, h};
-}
-
 class KFBallTracker : public QObject
 {
     Q_OBJECT
     int mBlobRad;
     int mLatency;
-    int mNotFoundCount;
+    int mBNotFoundCount;
 
-    int mKfStateLen;
-    cv::Mat mKfState;
-    int mFoundCount;
+    int mBKfStateLen;
+    cv::Mat mBKfState;
+    int mBFoundCount;
 
-    int mKfControlLen;
-    cv::Mat mKfControl;
-    cv::Mat mKfControlVec;
+    int mBKfControlLen;
+    cv::Mat mBKfControl;
+    cv::Mat mBKfControlVec;
 
-    int mKfMeasLen;
-    cv::Mat mKfMeas;
+    int mBKfMeasLen;
+    cv::Mat mBKfMeas;
 
-    KalmanFilterPlus mKf;
+    KalmanFilterPlus mBKf;
 
     QVector<cv::Mat> mFrameHistory;
     cv::Mat mOldDiff;
@@ -59,7 +52,7 @@ public:
     QMap<double, TrackingBall> processNextFrame(cv::Mat &frame, int t);
 
     void updateTimeState(double t);
-    void flushKalman();
+    void flushBallKalman();
     double kalmanDistance(cv::Mat measurement);
 
     void setBlurSize(double blurSize) { mBlurSize = blurSize; }

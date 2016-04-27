@@ -12,9 +12,9 @@
 
 KFBallTracker::KFBallTracker(QObject *parent) : QObject(parent)
 {
-    mKfStateLen = 6;
-    mKfState = cv::Mat::zeros(mKfStateLen, 1, CV_64F);
-    mFoundCount = 0;
+    mBKfStateLen = 6;
+    mBKfState = cv::Mat::zeros(mBKfStateLen, 1, CV_64F);
+    mBFoundCount = 0;
 
     mBlurSize = 5;
     mThreshVal = 30;
@@ -25,18 +25,18 @@ KFBallTracker::KFBallTracker(QObject *parent) : QObject(parent)
     mGravConstant = 5;
 
     // Control matrix shows how p/v/a interact for y
-    mKfControlLen = 1;
-    mKfControl = cv::Mat::zeros(mKfStateLen, 1, CV_64F);
-    mKfControl.at<double>(BallKFState::y) = .5;
-    mKfControl.at<double>(BallKFState::dy) = 1;
-    mKfControlVec = cv::Mat::eye(1, 1, CV_64F)*2;
+    mBKfControlLen = 1;
+    mBKfControl = cv::Mat::zeros(mBKfStateLen, 1, CV_64F);
+    mBKfControl.at<double>(BallKFState::y) = .5;
+    mBKfControl.at<double>(BallKFState::dy) = 1;
+    mBKfControlVec = cv::Mat::eye(1, 1, CV_64F)*2;
 
-    mKfMeasLen = 4;
-    mKfMeas = cv::Mat::zeros(mKfMeasLen, 1, CV_64F);
+    mBKfMeasLen = 4;
+    mBKfMeas = cv::Mat::zeros(mBKfMeasLen, 1, CV_64F);
 
-    mKf = KalmanFilterPlus(mKfStateLen, mKfMeasLen, mKfControlLen, CV_64F);
-    mKf.setAlphaSq(1.01);
-    flushKalman();
+    mBKf = KalmanFilterPlus(mBKfStateLen, mBKfMeasLen, mBKfControlLen, CV_64F);
+    mBKf.setAlphaSq(1.02);
+    flushBallKalman();
 }
 
 QMap<double, TrackingBall> KFBallTracker::processNextFrame(cv::Mat &frame, int t)
@@ -58,42 +58,42 @@ QMap<double, TrackingBall> KFBallTracker::processNextFrame(cv::Mat &frame, int t
     return res;
 }
 
-void KFBallTracker::flushKalman()
+void KFBallTracker::flushBallKalman()
 {
     // Start with A = I
-    mKf.transitionMatrix = cv::Mat::eye(mKfStateLen, mKfStateLen, CV_64F);
+    mBKf.transitionMatrix = cv::Mat::eye(mBKfStateLen, mBKfStateLen, CV_64F);
 
     // We measure x, y, w, h of ball blob
-    mKf.measurementMatrix = cv::Mat::zeros(mKfMeasLen, mKfStateLen, CV_64F);
-    mKf.measurementMatrix.at<double>(BallKFMeas::x, BallKFState::x) = 1;
-    mKf.measurementMatrix.at<double>(BallKFMeas::y, BallKFState::y) = 1;
-    mKf.measurementMatrix.at<double>(BallKFMeas::w, BallKFState::w) = 1;
-    mKf.measurementMatrix.at<double>(BallKFMeas::h, BallKFState::h) = 1;
+    mBKf.measurementMatrix = cv::Mat::zeros(mBKfMeasLen, mBKfStateLen, CV_64F);
+    mBKf.measurementMatrix.at<double>(BallKFMeas::x, BallKFState::x) = 1;
+    mBKf.measurementMatrix.at<double>(BallKFMeas::y, BallKFState::y) = 1;
+    mBKf.measurementMatrix.at<double>(BallKFMeas::w, BallKFState::w) = 1;
+    mBKf.measurementMatrix.at<double>(BallKFMeas::h, BallKFState::h) = 1;
 
-    mKf.controlMatrix = mKfControl.clone();
+    mBKf.controlMatrix = mBKfControl.clone();
 
-    mKf.errorCovPre = cv::Mat::eye(mKfStateLen, mKfStateLen, CV_64F)*1000;
-    mKf.errorCovPost = cv::Mat::eye(mKfStateLen, mKfStateLen, CV_64F)*1000;
+    mBKf.errorCovPre = cv::Mat::eye(mBKfStateLen, mBKfStateLen, CV_64F)*1000;
+    mBKf.errorCovPost = cv::Mat::eye(mBKfStateLen, mBKfStateLen, CV_64F)*1000;
 
-    mKf.errorCovPre.at<double>(BallKFState::w, BallKFState::w) = 0;
-    mKf.errorCovPre.at<double>(BallKFState::h, BallKFState::h) = 0;
-    mKf.errorCovPost.at<double>(BallKFState::w, BallKFState::w) = 0;
-    mKf.errorCovPost.at<double>(BallKFState::h, BallKFState::h) = 0;
+    mBKf.errorCovPre.at<double>(BallKFState::w, BallKFState::w) = 0;
+    mBKf.errorCovPre.at<double>(BallKFState::h, BallKFState::h) = 0;
+    mBKf.errorCovPost.at<double>(BallKFState::w, BallKFState::w) = 0;
+    mBKf.errorCovPost.at<double>(BallKFState::h, BallKFState::h) = 0;
 
-    mKf.measurementNoiseCov = cv::Mat::eye(mKfMeasLen, mKfMeasLen, CV_64F)*1;
-    mKf.measurementNoiseCov.at<double>(BallKFMeas::w, BallKFMeas::w) = 1e5;
-    mKf.measurementNoiseCov.at<double>(BallKFMeas::h, BallKFMeas::h) = 1e5;
+    mBKf.measurementNoiseCov = cv::Mat::eye(mBKfMeasLen, mBKfMeasLen, CV_64F)*1;
+    mBKf.measurementNoiseCov.at<double>(BallKFMeas::w, BallKFMeas::w) = 1e5;
+    mBKf.measurementNoiseCov.at<double>(BallKFMeas::h, BallKFMeas::h) = 1e5;
 
-    mKf.processNoiseCov = cv::Mat::eye(mKfStateLen, mKfStateLen, CV_64F)*1e-7;
+    mBKf.processNoiseCov = cv::Mat::eye(mBKfStateLen, mBKfStateLen, CV_64F)*1e-7;
 
-    mKfState = cv::Mat::zeros(mKfStateLen, 1, CV_64F);
-    mKfState.at<double>(BallKFState::w) = 10;
-    mKfState.at<double>(BallKFState::h) = 10;
+    mBKfState = cv::Mat::zeros(mBKfStateLen, 1, CV_64F);
+    mBKfState.at<double>(BallKFState::w) = 10;
+    mBKfState.at<double>(BallKFState::h) = 10;
 }
 
 double KFBallTracker::scoreContour(TrackingBall ball,
                                    cv::Mat &threshDiff) {
-    if (mFoundCount < 2) {
+    if (mBFoundCount < 2) {
 
     }
 
@@ -101,18 +101,18 @@ double KFBallTracker::scoreContour(TrackingBall ball,
 }
 
 double KFBallTracker::kalmanDistance(cv::Mat measurement) {
-    cv::Mat M = (measurement - (mKf.measurementMatrix*mKf.statePre).t());
-    cv::Mat Sigma = (mKf.measurementMatrix
-                     *mKf.errorCovPre
-                     *mKf.measurementMatrix.t() +
-                     mKf.measurementNoiseCov);
+    cv::Mat M = (measurement - (mBKf.measurementMatrix*mBKf.statePre).t());
+    cv::Mat Sigma = (mBKf.measurementMatrix
+                     *mBKf.errorCovPre
+                     *mBKf.measurementMatrix.t() +
+                     mBKf.measurementNoiseCov);
     return ((cv::Mat)(M*(Sigma.inv()*M.t()))).at<double>(0,0) + log(cv::determinant(Sigma));
 }
 
 void KFBallTracker::setXYCovariance(double sigma)
 {
-    mKf.measurementNoiseCov.at<double>(BallKFMeas::x, BallKFMeas::x) = exp(sigma);
-    mKf.measurementNoiseCov.at<double>(BallKFMeas::y, BallKFMeas::y) = exp(sigma);
+    mBKf.measurementNoiseCov.at<double>(BallKFMeas::x, BallKFMeas::x) = exp(sigma);
+    mBKf.measurementNoiseCov.at<double>(BallKFMeas::y, BallKFMeas::y) = exp(sigma);
 }
 
 QList<cv::Rect> KFBallTracker::findPeople(cv::Mat& nxtFrame)
@@ -142,7 +142,7 @@ QList<cv::Rect> KFBallTracker::findPeople(cv::Mat& nxtFrame)
     cv::Mat threshDiff;
     cv::bitwise_and(oldThreshDiff, newThreshDiff, threshDiff);
 
-    emit threshReady(threshDiff.clone(), TS_GRAY);
+    //emit threshReady(threshDiff.clone(), TS_GRAY);
 
     return QList<cv::Rect>();
 }
@@ -192,50 +192,50 @@ QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff,
 
 void KFBallTracker::updateTrackFailure()
 {
-    mNotFoundCount++;
+    mBNotFoundCount++;
 
     if (ballIsLost()) {
-        mFoundCount = 0;
+        mBFoundCount = 0;
     } else {
-        mKf.statePost = mKfState;
+        mBKf.statePost = mBKfState;
     }
-    emit ballPredicted(KFPrediction(mKf.statePost, dT(), false));
+    emit ballPredicted(KFPrediction(mBKf.statePost, dT(), false));
 
 }
 
 void KFBallTracker::updateTrackSuccess(TrackingBall ball)
 {
-    mKfMeas = ball.getMeas();
+    mBKfMeas = ball.getMeas();
 
     if (!ballFound()) {
-        mKf.errorCovPost = cv::Mat::eye(mKfStateLen, mKfStateLen, CV_64F)*1000;
+        mBKf.errorCovPost = cv::Mat::eye(mBKfStateLen, mBKfStateLen, CV_64F)*1000;
 
-        mKfState.at<double>(BallKFState::x) = mKfMeas.at<double>(BallKFMeas::x);
-        mKfState.at<double>(BallKFState::y) = mKfMeas.at<double>(BallKFMeas::y);
-        mKfState.at<double>(BallKFState::w) = mKfMeas.at<double>(BallKFMeas::w);
-        mKfState.at<double>(BallKFState::h) = mKfMeas.at<double>(BallKFMeas::h);
-        mKfState.at<double>(BallKFState::dx) = 0;
-        mKfState.at<double>(BallKFState::dy) = 0;
+        mBKfState.at<double>(BallKFState::x) = mBKfMeas.at<double>(BallKFMeas::x);
+        mBKfState.at<double>(BallKFState::y) = mBKfMeas.at<double>(BallKFMeas::y);
+        mBKfState.at<double>(BallKFState::w) = mBKfMeas.at<double>(BallKFMeas::w);
+        mBKfState.at<double>(BallKFState::h) = mBKfMeas.at<double>(BallKFMeas::h);
+        mBKfState.at<double>(BallKFState::dx) = 0;
+        mBKfState.at<double>(BallKFState::dy) = 0;
 
-        mKf.statePost = mKfState;
+        mBKf.statePost = mBKfState;
     } else {
-        mKf.correct(mKfMeas.t());
+        mBKf.correct(mBKfMeas.t());
     }
 
-    emit ballPredicted(KFPrediction(mKf.statePost, dT(), true));
+    emit ballPredicted(KFPrediction(mBKf.statePost, dT(), true));
 
-    mNotFoundCount = 0;
-    mFoundCount++;
+    mBNotFoundCount = 0;
+    mBFoundCount++;
 }
 
 bool KFBallTracker::ballIsLost()
 {
-    return mNotFoundCount >= 4;
+    return mBNotFoundCount >= 4;
 }
 
 bool KFBallTracker::ballFound()
 {
-    return mFoundCount > 0;
+    return mBFoundCount > 0;
 }
 
 void KFBallTracker::updateTimeState(double t)
@@ -244,10 +244,10 @@ void KFBallTracker::updateTimeState(double t)
     mTstop = t;
     //std::cout << "t " << mTstop << " " << mTstart;
 
-    mKf.transitionMatrix.at<double>(BallKFState::x, BallKFState::dx) = dT();
-    mKf.transitionMatrix.at<double>(BallKFState::y, BallKFState::dy) = dT();
+    mBKf.transitionMatrix.at<double>(BallKFState::x, BallKFState::dx) = dT();
+    mBKf.transitionMatrix.at<double>(BallKFState::y, BallKFState::dy) = dT();
 
-    mKfState = mKf.predict(mKfControlVec*mGravConstant*dT());
+    mBKfState = mBKf.predict(mBKfControlVec*mGravConstant*dT());
 
     // << "\n" << mKf.transitionMatrix;
     //std::cout << mKf.controlMatrix << "\n";
@@ -271,17 +271,23 @@ QMap<double, TrackingBall> KFBallTracker::findBalls(cv::Mat &nxtFrame, QList<cv:
 
     cv::absdiff(preGrayFrame, curGrayFrame, mOldDiff);
     //cv::threshold(mOldDiff, oldThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
-    cv::blur(mOldDiff, oldThreshDiff, cv::Size(mBlurSize, mBlurSize));
-    cv::threshold(oldThreshDiff, oldThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
+
+    //cv::blur(mOldDiff, oldThreshDiff, cv::Size(mBlurSize, mBlurSize));
+    cv::threshold(mOldDiff, oldThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
 
     cv::Mat newDiff;
     cv::absdiff(curGrayFrame, nxtGrayFrame, newDiff);
     //cv::threshold(newDiff, newThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
-    cv::blur(newDiff, newThreshDiff, cv::Size(mBlurSize, mBlurSize));
-    cv::threshold(newThreshDiff, newThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
+
+    //cv::blur(newDiff, newThreshDiff, cv::Size(mBlurSize, mBlurSize));
+    cv::threshold(newDiff, newThreshDiff, mThreshVal, 255, cv::THRESH_BINARY);
 
     cv::Mat threshDiff;
     cv::bitwise_and(oldThreshDiff, newThreshDiff, threshDiff);
+
+    //cv::erode(threshDiff, threshDiff, cv::Mat::ones(1,1,CV_32F));
+    cv::morphologyEx(threshDiff, threshDiff, cv::MORPH_CLOSE, cv::Mat::ones(15,15,CV_32F));
+    //cv::dilate(threshDiff, threshDiff, cv::Mat::ones(10,10,CV_32F));
 
     emit threshReady(threshDiff.clone(), TS_GRAY);
 

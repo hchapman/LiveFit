@@ -8,7 +8,10 @@ SOURCES += main.cpp \
     TrackingBall.cpp \
     KFPrediction.cpp \
     Util.cpp \
-    KalmanFilterPlus.cpp
+    KalmanFilterPlus.cpp \
+    BallTrackingFilter.cpp \
+    TrackingFilter.cpp \
+    PersonTrackingFilter.cpp
 SOURCES += LiveFitWindow.cpp
 
 HEADERS += LiveFitWindow.hpp \
@@ -23,7 +26,10 @@ HEADERS += LiveFitWindow.hpp \
     ColorSpace.hpp \
     DisplayFrameType.hpp \
     Util.hpp \
-    KalmanFilterPlus.hpp
+    KalmanFilterPlus.hpp \
+    BallTrackingFilter.hpp \
+    TrackingFilter.hpp \
+    PersonTrackingFilter.hpp
 
 CONFIG += qt5
 QT += \
