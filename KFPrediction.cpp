@@ -17,12 +17,14 @@ KFPrediction::KFPrediction(const KFPrediction& k)
     mJet = QPointF(k.mJet);
     mSeen = k.mSeen;
     mDt = k.mDt;
+    mT = k.mT;
 }
 
-KFPrediction::KFPrediction(cv::Mat kfStatePre, double dt, bool seen)
+KFPrediction::KFPrediction(cv::Mat kfStatePre, cv::Mat kfCov, double t, double dt, bool seen)
 {
     double x, y, w, h, dx, dy;
 
+    mT = t;
     mDt = dt;
 
     x = kfStatePre.at<double>(BallKFState::x);
@@ -33,6 +35,8 @@ KFPrediction::KFPrediction(cv::Mat kfStatePre, double dt, bool seen)
     dy = kfStatePre.at<double>(BallKFState::dy);
 
     //std::cout << "dxdy" << dx << " " << dy << "\n";
+
+    mConfidence = cv::trace(kfCov)[0]/kfCov.size[0];
 
     mSeen = seen;
     //std::cout << seen << "\n";

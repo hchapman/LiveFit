@@ -1,15 +1,14 @@
 #ifndef PERSONTRACKINGFILTER_HPP
 #define PERSONTRACKINGFILTER_HPP
 
+#include "TrackingFilter.hpp"
+
+
 
 class PersonTrackingFilter : public TrackingFilter
 {
 public:
     PersonTrackingFilter();
-
-signals:
-
-public slots:
 };
 
 #endif // PERSONTRACKINGFILTER_HPP

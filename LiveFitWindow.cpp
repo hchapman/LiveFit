@@ -62,6 +62,7 @@ void LiveFitWindow::setupCamera()
     ui.trackVideoWidget->updateCorners();
 
     QMetaObject::invokeMethod(&mTrackingStream, "start",
+    //                          Q_ARG(int, 0));
                               Q_ARG(QString, "/home/harrison/Dropbox/interception project/classroom-red-light.webm"));
     //                          Q_ARG(QString, "/Users/hchapman/Dropbox/interception project/classroom-red-light.webm"));
 }

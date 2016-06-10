@@ -9,7 +9,9 @@
 #include <QList>
 #include <QPoint>
 
-bool polynomialFitKF(int degree,
+bool polynomialFitKFX(int degree, double tStart,
+                     QList<KFPrediction> preds, double *store);
+bool polynomialFitKFY(int degree, double tStart,
                      QList<KFPrediction> preds, double *store);
 
 #endif // UTIL_HPP

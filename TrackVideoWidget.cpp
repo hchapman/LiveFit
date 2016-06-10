@@ -22,7 +22,7 @@ TrackVideoWidget::TrackVideoWidget(QWidget *parent) :
             SIGNAL(moveCompleted(QPoint)),
             SLOT(urCornerDropped(QPoint)));
 }
-
+#include <QDebug>
 void TrackVideoWidget::paintEvent(QPaintEvent *event) {
     QPainter painter;
     QPen ballPen = QPen((QColor(0, 0, 255)));
@@ -43,7 +43,9 @@ void TrackVideoWidget::paintEvent(QPaintEvent *event) {
     QList<KFPrediction>::const_iterator predsIter;
     for (predsIter = mPreds.begin(); predsIter != mPreds.end(); ++predsIter) {
         if ((*predsIter).seen()) {
-            painter.setPen(kfSeenPen);
+            qDebug() << sqrt((*predsIter).confidence());
+            painter.setPen(QPen(QColor(255*fmin(1,0.3+sqrt((*predsIter).confidence())),0,0)));
+            //painter.setPen(kfSeenPen);
         } else {
             painter.setPen(kfMissPen);
         }

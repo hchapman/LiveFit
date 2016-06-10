@@ -2,7 +2,7 @@
 #define TRACKINGFILTER_HPP
 
 #include "KalmanFilterPlus.hpp"
-
+#include <QDebug>
 
 
 class TrackingFilter
@@ -11,15 +11,25 @@ public:
     TrackingFilter();
 
     void flushKalman();
+    double kalmanDistance(cv::Mat measurement);
 
-signals:
+    void updateTrackFailure();
 
-public slots:
+    cv::Mat prediction();
+    cv::Mat covariance();
+
+    void updateTimeState(double t);
+
+    double dT() { return mTstop - mTstart; }
+    double time() { return mTstop; }
+
+    bool isFound();
+    bool isLost();
 
 protected:
     int mBlobRad;
     int mLatency;
-    int mBNotFoundCount;
+    int mNotFoundCount;
 
     int mKfStateLen;
     cv::Mat mKfState;
@@ -31,6 +41,8 @@ protected:
 
     int mKfMeasLen;
     cv::Mat mKfMeas;
+
+    double mTstart, mTstop;
 
     KalmanFilterPlus mKf;
 };

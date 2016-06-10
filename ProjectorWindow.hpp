@@ -15,7 +15,8 @@ class ProjectorWindow : public QOpenGLWidget
     QList<TrackingBall> mBalls;
     QList<KFPrediction> mPreds;
 
-    double mFitParabola[3];
+    double mFitLineX[2];
+    double mFitParabolaY[3];
 public:
     explicit ProjectorWindow(QWidget* parent = 0);
     QRectF relRectToWindow(QRectF rect);

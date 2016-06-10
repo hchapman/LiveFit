@@ -1,9 +1,11 @@
 #ifndef KFBALLTRACKER_HPP
 #define KFBALLTRACKER_HPP
 
+#include "BallTrackingFilter.hpp"
 #include "ColorSpace.hpp"
 #include "KFPrediction.hpp"
 #include "KalmanFilterPlus.hpp"
+#include "PersonTrackingFilter.hpp"
 #include "TrackingBall.hpp"
 
 #include <QObject>
@@ -17,26 +19,12 @@ class KFBallTracker : public QObject
     Q_OBJECT
     int mBlobRad;
     int mLatency;
-    int mBNotFoundCount;
 
-    int mBKfStateLen;
-    cv::Mat mBKfState;
-    int mBFoundCount;
-
-    int mBKfControlLen;
-    cv::Mat mBKfControl;
-    cv::Mat mBKfControlVec;
-
-    int mBKfMeasLen;
-    cv::Mat mBKfMeas;
-
-    KalmanFilterPlus mBKf;
+    BallTrackingFilter mBallFilter;
+    PersonTrackingFilter mPersonFilter;
 
     QVector<cv::Mat> mFrameHistory;
     cv::Mat mOldDiff;
-
-    double mTstart;
-    double mTstop;
 
     double mBlurSize;
     double mThreshVal;
@@ -44,15 +32,12 @@ class KFBallTracker : public QObject
     double mMinRadius;
     double mMaxRadius;
 
-    double mGravConstant;
-
 public:
     explicit KFBallTracker(QObject *parent = 0);
 
     QMap<double, TrackingBall> processNextFrame(cv::Mat &frame, int t);
 
     void updateTimeState(double t);
-    void flushBallKalman();
     double kalmanDistance(cv::Mat measurement);
 
     void setBlurSize(double blurSize) { mBlurSize = blurSize; }
@@ -63,7 +48,8 @@ public:
 
     void setXYCovariance(double sigma);
 
-    void setGravConstant(double g) { mGravConstant = g; }
+    void setGravConstant(double g) { mBallFilter.setGravConstant(g); }
+
 signals:
     void ballSpotted(TrackingBall);
     void ballPredicted(KFPrediction);
@@ -76,8 +62,6 @@ signals:
 public slots:
 
 protected:
-    double dT() { return mTstop - mTstart; }
-
     QList<cv::Rect> findPeople(cv::Mat &frame);
     QMap<double, TrackingBall> findBalls(cv::Mat &frame, QList<cv::Rect> ignores);
     QMap<double, TrackingBall> findMovementThresh(cv::Mat threshDiff, QList<cv::Rect> ignores);

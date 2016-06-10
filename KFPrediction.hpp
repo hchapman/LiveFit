@@ -11,18 +11,23 @@ class KFPrediction
     QRectF mBbox;
     QPointF mJet;
 
+    double mT;
     double mDt;
     bool mSeen;
 
+    double mConfidence;
+
 public:
     KFPrediction();
-    explicit KFPrediction(cv::Mat kfStatePre, double dt, bool seen);
+    explicit KFPrediction(cv::Mat kfStatePre, cv::Mat kfCov, double t, double dt, bool seen);
     KFPrediction(const KFPrediction &k);
 
     QRectF bbox() const { return mBbox; }
     QPointF jet() const { return mJet; }
     double dt() const { return mDt; }
+    double t() const {return mT; }
     bool seen() const { return mSeen; }
+    double confidence() const { return mConfidence; }
 
     void setCenter(QPointF pos) { mBbox.moveCenter(pos); }
 

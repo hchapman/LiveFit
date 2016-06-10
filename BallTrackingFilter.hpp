@@ -1,6 +1,7 @@
 #ifndef BALLTRACKINGFILTER_HPP
 #define BALLTRACKINGFILTER_HPP
 
+#include "TrackingBall.hpp"
 #include "TrackingFilter.hpp"
 
 namespace BallKFState {
@@ -12,12 +13,21 @@ enum BallKFMeas {x, y, w, h};
 
 class BallTrackingFilter : public TrackingFilter
 {
+    double mGravConstant;
+
 public:
     BallTrackingFilter();
 
-signals:
+    void flushKalman();
+    void setXYCovariance(double sigma);
 
-public slots:
+    void updateTrackFailure();
+    void updateTrackSuccess(TrackingBall ball);
+
+    void updateTimeState(double t);
+
+    void setGravConstant(double gravConstant);
+
 };
 
 #endif // BALLTRACKINGFILTER_HPP
