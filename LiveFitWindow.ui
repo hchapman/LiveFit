@@ -9,19 +9,38 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>535</width>
-    <height>467</height>
+    <width>776</width>
+    <height>575</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Live Fit</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="TrackVideoWidget" name="trackVideoWidget" native="true"/>
+       <widget class="TrackVideoWidget" name="trackVideoWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pauseButton">
@@ -49,16 +68,24 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>535</width>
-     <height>22</height>
+     <width>776</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <widget class="QMenu" name="menu_Camera">
+     <property name="title">
+      <string>&amp;Camera</string>
+     </property>
+     <addaction name="action0"/>
+     <addaction name="action1"/>
+     <addaction name="action2"/>
+    </widget>
     <addaction name="action_Open"/>
-    <addaction name="action_Camera"/>
+    <addaction name="menu_Camera"/>
     <addaction name="separator"/>
     <addaction name="action_Quit"/>
    </widget>
@@ -83,17 +110,250 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
+       <widget class="QWidget" name="dataTab">
+        <attribute name="title">
+         <string>Data</string>
+        </attribute>
+        <layout class="QFormLayout" name="formLayout_6">
+         <property name="rowWrapPolicy">
+          <enum>QFormLayout::WrapAllRows</enum>
+         </property>
+         <property name="labelAlignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="formAlignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="verticalSpacing">
+          <number>3</number>
+         </property>
+         <item row="1" column="1">
+          <widget class="QCheckBox" name="lockFitBox">
+           <property name="text">
+            <string>Lock fit until clear</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="fitAfterLabel">
+           <property name="text">
+            <string>Fit after</string>
+           </property>
+           <property name="buddy">
+            <cstring>fitAfterSpin</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="fitAfterSpin">
+           <property name="suffix">
+            <string> points</string>
+           </property>
+           <property name="minimum">
+            <number>3</number>
+           </property>
+           <property name="maximum">
+            <number>20</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="pointFitBox">
+           <property name="text">
+            <string>3 point fit (off: regression)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QCheckBox" name="clipTrackBox">
+           <property name="text">
+            <string>Clip track to projector</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QCheckBox" name="showYtBox">
+           <property name="text">
+            <string>Show y(t), x(t)</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QCheckBox" name="showJetBox">
+           <property name="text">
+            <string>Show dx/dt, dy/dt</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Projector Tracking Display</string>
+           </property>
+           <layout class="QFormLayout" name="formLayout_3">
+            <property name="verticalSpacing">
+             <number>0</number>
+            </property>
+            <item row="0" column="0" colspan="2">
+             <widget class="QCheckBox" name="colorMissBox">
+              <property name="text">
+               <string>Color track miss</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QCheckBox" name="verboseKFBox">
+              <property name="text">
+               <string>Verbose KF track points</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="projPointRadiusLabel">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string>Poi&amp;nt radius</string>
+              </property>
+              <property name="buddy">
+               <cstring>projPointRadius</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="projPointRadius">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="value">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="pointThicknessLabel">
+              <property name="text">
+               <string>Point thic&amp;kness</string>
+              </property>
+              <property name="buddy">
+               <cstring>pointThickness</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="fitThicknessLabel">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Fit thickness</string>
+              </property>
+              <property name="buddy">
+               <cstring>fitThickness</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QDoubleSpinBox" name="pointThickness">
+              <property name="prefix">
+               <string/>
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="maximum">
+               <double>10.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QDoubleSpinBox" name="fitThickness">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="maximum">
+               <double>10.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="showFit">
+              <property name="text">
+               <string>Show fit parabola</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="fallLockBox">
+              <property name="text">
+               <string>Only lock after falling?</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="minFallSpeedLabel">
+              <property name="text">
+               <string>&amp;Min fall speed</string>
+              </property>
+              <property name="buddy">
+               <cstring>minFallSpeed</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QSpinBox" name="minFallSpeed">
+              <property name="suffix">
+               <string> px/s</string>
+              </property>
+              <property name="maximum">
+               <number>300</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="basicTab">
         <attribute name="title">
-         <string>Basic</string>
+         <string>Video</string>
         </attribute>
         <layout class="QFormLayout" name="formLayout">
+         <property name="labelAlignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
          <item row="0" column="0">
           <widget class="QLabel" name="blurSizeLabel">
            <property name="text">
-            <string>BlurSize</string>
+            <string>BlurSi&amp;ze</string>
            </property>
            <property name="buddy">
             <cstring>blurSizeSpin</cstring>
@@ -116,7 +376,7 @@
          <item row="4" column="0">
           <widget class="QLabel" name="gravityLabel">
            <property name="text">
-            <string>GravConstant</string>
+            <string>&amp;GravConstant</string>
            </property>
            <property name="buddy">
             <cstring>gravitySpin</cstring>
@@ -140,6 +400,9 @@
           <widget class="QLabel" name="frameLabel">
            <property name="text">
             <string>Frame</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
            <property name="buddy">
             <cstring>frameComboBox</cstring>
@@ -168,7 +431,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="minRadiusLabel">
            <property name="text">
-            <string>MinRadius</string>
+            <string>&amp;MinRadius</string>
            </property>
            <property name="buddy">
             <cstring>minRadiusDoubleSpinBox</cstring>
@@ -208,7 +471,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="threshValLabel">
            <property name="text">
-            <string>ThreshVal</string>
+            <string>Thresh&amp;Val</string>
            </property>
            <property name="buddy">
             <cstring>threshValDoubleSpinBox</cstring>
@@ -225,7 +488,7 @@
          <item row="6" column="0">
           <widget class="QLabel" name="xYCovarianceLabel">
            <property name="text">
-            <string>XYCovariance</string>
+            <string>&amp;XYCovariance</string>
            </property>
            <property name="buddy">
             <cstring>xYCovarianceDoubleSpinBox</cstring>
@@ -255,10 +518,16 @@
          <string>World</string>
         </attribute>
         <layout class="QFormLayout" name="formLayout_2">
+         <property name="labelAlignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
          <item row="0" column="0">
           <widget class="QLabel" name="projWLabel">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of the projector screen (i.e. the physical measurement between green corners horizontally, in the world) in inches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
-            <string>ProjW</string>
+            <string>Pro&amp;jW</string>
            </property>
            <property name="buddy">
             <cstring>projWDoubleSpinBox</cstring>
@@ -267,6 +536,9 @@
          </item>
          <item row="0" column="1">
           <widget class="QDoubleSpinBox" name="projWDoubleSpinBox">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of the projector screen (i.e. the physical measurement between green corners horizontally, in the world) in inches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="suffix">
             <string>in</string>
            </property>
@@ -274,6 +546,9 @@
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="projHLabel">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The height of the projector screen (i.e. the physical measurement between green corners vertically, in the world) in inches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>ProjH</string>
            </property>
@@ -284,6 +559,9 @@
          </item>
          <item row="1" column="1">
           <widget class="QDoubleSpinBox" name="projHDoubleSpinBox">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The height of the projector screen (i.e. the physical measurement between green corners vertically, in the world) in inches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="suffix">
             <string>in</string>
            </property>
@@ -291,8 +569,11 @@
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="ballZLabel">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The distance of the thrown ball plane from the projector plane, in inches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
-            <string>BallZ</string>
+            <string>Ball&amp;Z</string>
            </property>
            <property name="buddy">
             <cstring>ballZDoubleSpinBox</cstring>
@@ -301,8 +582,17 @@
          </item>
          <item row="2" column="1">
           <widget class="QDoubleSpinBox" name="ballZDoubleSpinBox">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The distance of the thrown ball plane from the projector plane, in inches.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="suffix">
             <string>in</string>
+           </property>
+           <property name="minimum">
+            <double>-99.989999999999995</double>
+           </property>
+           <property name="singleStep">
+            <double>0.500000000000000</double>
            </property>
           </widget>
          </item>
@@ -313,20 +603,29 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockWidget_2">
+  <widget class="QDockWidget" name="projectorDock">
    <property name="minimumSize">
     <size>
      <width>400</width>
      <height>400</height>
     </size>
    </property>
+   <property name="floating">
+    <bool>true</bool>
+   </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::NoDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Pro&amp;jector</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_2">
+   <widget class="QWidget" name="projectorFrame">
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <widget class="ProjectorWindow" name="projectorWindow" native="true"/>
@@ -342,17 +641,47 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="action_Camera">
-   <property name="text">
-    <string>&amp;Camera</string>
-   </property>
-  </action>
   <action name="action_Quit">
    <property name="text">
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="action0">
+   <property name="text">
+    <string>&amp;0</string>
+   </property>
+  </action>
+  <action name="action1">
+   <property name="text">
+    <string>&amp;1</string>
+   </property>
+  </action>
+  <action name="action2">
+   <property name="text">
+    <string>&amp;2</string>
+   </property>
+  </action>
+  <action name="action3">
+   <property name="text">
+    <string>3</string>
+   </property>
+  </action>
+  <action name="action4">
+   <property name="text">
+    <string>4</string>
+   </property>
+  </action>
+  <action name="action5">
+   <property name="text">
+    <string>5</string>
+   </property>
+  </action>
+  <action name="action6">
+   <property name="text">
+    <string>6</string>
    </property>
   </action>
  </widget>
@@ -368,8 +697,263 @@
    <extends>QWidget</extends>
    <header location="global">ProjectorWindow.hpp</header>
    <container>1</container>
+   <slots>
+    <slot>setPointRadius(int)</slot>
+    <slot>setPointThickness(double)</slot>
+    <slot>setFitThickness(double)</slot>
+    <slot>toggleShowParabola(bool)</slot>
+    <slot>toggleWaitTilFall(bool)</slot>
+    <slot>setMinFallSpeed(int)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>verboseKFBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>projPointRadius</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>374</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>743</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verboseKFBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>projPointRadiusLabel</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>374</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>634</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showFit</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>fitThicknessLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>636</x>
+     <y>471</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showFit</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>fitThickness</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>743</x>
+     <y>471</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fallLockBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>minFallSpeed</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>743</x>
+     <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showFit</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>toggleShowParabola(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>372</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pointThickness</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setPointThickness(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>424</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fallLockBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>toggleWaitTilFall(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>93</x>
+     <y>430</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>minFallSpeed</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setMinFallSpeed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>518</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>432</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>projPointRadius</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setPointRadius(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>399</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>255</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fitThickness</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setFitThickness(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>471</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fallLockBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>minFallSpeedLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>646</x>
+     <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action0</sender>
+   <signal>triggered()</signal>
+   <receiver>liveFitWindow</receiver>
+   <slot>startCamera0()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action1</sender>
+   <signal>triggered()</signal>
+   <receiver>liveFitWindow</receiver>
+   <slot>startCamera1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action2</sender>
+   <signal>triggered()</signal>
+   <receiver>liveFitWindow</receiver>
+   <slot>startCamera2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>startStream(int)</slot>
+  <slot>startCamera0()</slot>
+  <slot>startCamera1()</slot>
+  <slot>startCamera2()</slot>
+ </slots>
 </ui>

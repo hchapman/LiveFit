@@ -4,7 +4,11 @@
 #include "KalmanFilterPlus.hpp"
 #include <QDebug>
 
-
+/**
+ * @brief The TrackingFilter class
+ * A wrapper around a KalmanFilter type object; additional logic
+ * can be provided through extension
+ */
 class TrackingFilter
 {
 public:

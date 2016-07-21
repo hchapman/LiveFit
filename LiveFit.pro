@@ -31,6 +31,8 @@ HEADERS += LiveFitWindow.hpp \
     TrackingFilter.hpp \
     PersonTrackingFilter.hpp
 
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+
 CONFIG += qt5
 QT += \
     widgets \

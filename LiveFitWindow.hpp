@@ -10,6 +10,10 @@
 
 #include <ui_LiveFitWindow.h>
 
+/**
+ * @brief The LiveFitWindow class
+ * The window which manages all logic for the LiveFit application
+ */
 class LiveFitWindow : public QMainWindow {
     Q_OBJECT
 private:
@@ -26,7 +30,17 @@ public:
     LiveFitWindow(char* videoFile);
     LiveFitWindow(int cameraId);
 
+public slots:
+    void startStream(char *videoFile);
+    void startStream(int cameraId);
+
+    void startCamera0();
+    void startCamera1();
+    void startCamera2();
+
 protected:
+    void writeSettings();
+    void readSettings();
     void closeEvent(QCloseEvent* ev);
 private slots:
 

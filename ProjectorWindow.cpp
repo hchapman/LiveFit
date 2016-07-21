@@ -7,6 +7,36 @@
 
 #include "Util.hpp"
 
+void ProjectorWindow::toggleShowParabola(bool showParabola)
+{
+    mShowParabola = showParabola;
+}
+
+void ProjectorWindow::setPointRadius(int pointRadius)
+{
+    mPointRadius = pointRadius;
+}
+
+void ProjectorWindow::setPointThickness(double pointThickness)
+{
+    mPointThickness = pointThickness;
+}
+
+void ProjectorWindow::setFitThickness(double fitThickness)
+{
+    mFitThickness = fitThickness;
+}
+
+void ProjectorWindow::setMinFallSpeed(int minFallSpeed)
+{
+    mMinFallSpeed = minFallSpeed;
+}
+
+void ProjectorWindow::toggleWaitTilFall(bool waitTilFall)
+{
+    mWaitTilFall = waitTilFall;
+}
+
 ProjectorWindow::ProjectorWindow(QWidget* parent)
     : QOpenGLWidget(parent)
 {
@@ -15,6 +45,20 @@ ProjectorWindow::ProjectorWindow(QWidget* parent)
 
     // Set the size of the projector screen, in inches
     mProjSize = QSize(50, 50);
+
+    // Lock to the fit after 10 points, until next sight
+    mNumPointFit = 10;
+    mFitPoints = true;
+
+    mPointRadius = 1;
+    mPointThickness = 0.;
+    mFitThickness = 0.;
+    mShowJet = true;
+    mShowParabola = true;
+    mShowParam = true;
+
+    mWaitTilFall = true;
+    mMinFallSpeed = 5;
 }
 
 void ProjectorWindow::pushBall(TrackingBall ball)
@@ -29,22 +73,131 @@ void ProjectorWindow::pushBall(TrackingBall ball)
 
 }
 
+static bool comparePredY(KFPrediction a, KFPrediction b) {
+    return (a.bbox().center().y() < b.bbox().center().y());
+}
+
+void fitYTPoints(QList<KFPrediction> pts, double f[3]) {
+    double t,y1,t1,y2,t2,y3,t3;
+    double a,b,c;
+    t = pts.at(0).t();
+    t1 = 0;
+    y1 = pts.at(0).bbox().center().y();
+    t2 = pts.at(1).t()-t;
+    y2 = pts.at(1).bbox().center().y();
+    t3 = pts.at(2).t()-t;
+    y3 = pts.at(2).bbox().center().y();
+
+
+    if (t1 == t2 || t2 == t3 || t1 == t3) {
+        f[0] = 0; f[1] = 0; f[2] = 0; return;
+    }
+
+    f[2] = ((y1 - y2)/(t1 - t2) - (y2 - y3)/(t2 - t3))/(t1 - t3);
+    f[1] = (y1 - y2)/(t1 - t2) - f[2]*(t1 + t2);
+    f[0] = y2 - f[2]*t2*t2 - f[1]*t2;
+}
+
+void fitXTPoints(QList<KFPrediction> pts, double f[2]) {
+    double t,y1,t1,y2,t2,y3,t3;
+    double a,b,c;
+    t = pts.at(0).t();
+    t1 = 0;
+    y1 = pts.at(0).bbox().center().x();
+    t3 = pts.at(2).t()-t;
+    y3 = pts.at(2).bbox().center().x();
+
+    f[1] = (y1 - y3)/(t1 - t3);
+    f[0] = y1 - f[1]*t1;
+}
+
 void ProjectorWindow::pushPred(KFPrediction pred)
 {
+    if(mDataStale) {
+        mPreds.clear();
+        mFitPreds.clear();
+        mDataStale = false;
+        mMarkedPoints.clear();
+        mFitLocked = false;
+    }
     // Add the prediction to the list of predictions
     mPreds.append(KFPrediction(pred));
 
-    // If the history is too large, remove old predictions
-    if (mPreds.size() > 10) {
+    // Trim the viewer points if it's too long
+    if (mPreds.size() > 20) {
         mPreds.removeFirst();
     }
 
+    if (!mNumPointFit) {
+        // We fit to all predictions...
+        mFitPreds.append(KFPrediction(pred));
+
+        // If the history is too large, remove old predictions
+        if (mPreds.size() > 20) {
+            mFitPreds.removeFirst();
+        }
+
+    } else {
+
+        if ((mWaitTilFall && pred.jet().y()*pred.dt() < mMinFallSpeed) ||
+                (mFitPreds.size() < mNumPointFit)) {
+            mFitPreds.append(KFPrediction(pred));
+            mFitLocked = false;
+        }
+
+        if ((!mWaitTilFall || pred.jet().y()*pred.dt() >= mMinFallSpeed) &&
+                (mFitPreds.size() >= mNumPointFit)){
+            mFitLocked = true;
+        }
+
+    }
+
     // We fit our parabola to the predictions
-    polynomialFitKFX(2, mPreds.at(0).t(), mPreds, mFitLineX);
-    polynomialFitKFY(3, mPreds.at(0).t(), mPreds, mFitParabolaY);
+    if (!mFitPoints) {
+        polynomialFitKFX(2, mFitPreds.at(0).t(), mFitPreds, mFitLineX);
+        polynomialFitKFY(3, mFitPreds.at(0).t(), mFitPreds, mFitParabolaY);
+    } else if (mFitLocked && mFitPreds.size() > 3 && mMarkedPoints.empty()) {
+        mMarkedPoints.append(mFitPreds.at(0));
+        mMarkedPoints.append(*std::min_element(++mFitPreds.begin(), --mFitPreds.end(),
+                                               comparePredY));
+        mMarkedPoints.append(mFitPreds.at(mFitPreds.size()-1));
+        fitYTPoints(mMarkedPoints, mFitParabolaY);
+        fitXTPoints(mMarkedPoints, mFitLineX);
+    }
+
 
     // Update the window. Hopefully, we can make this more efficient...
     update();//(pred.bbox());
+}
+
+void ProjectorWindow::markDataStale() {
+    // Indicate that the data we have is stale, and to be dropped.
+    mDataStale = true;
+}
+
+void ProjectorWindow::toggleShowFit(bool showFit)
+{
+    mShowFit = showFit;
+}
+
+void ProjectorWindow::toggleShowParam(bool showParam)
+{
+    mShowParam = showParam;
+}
+
+void ProjectorWindow::toggleShowJet(bool showJet)
+{
+    mShowJet = showJet;
+}
+
+void ProjectorWindow::toggleColorMiss(bool colorMiss)
+{
+    mColorMiss = colorMiss;
+}
+
+void ProjectorWindow::toggleVerboseKF(bool verboseKF)
+{
+    mVerboseKF = verboseKF;
 }
 
 QRectF ProjectorWindow::relRectToWindow(QRectF rect) {
@@ -69,10 +222,23 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
     // Painter to paint the window
     QPainter painter;
 
+    double size = 10;
+
     // Pens (i.e. line drawing settings for the painter)
     QPen ballPen = QPen((QColor(0, 0, 255)));
+    ballPen.setWidthF(mPointThickness);
     QPen kfSeenPen = QPen((QColor(255,0,0)));
+    kfSeenPen.setWidthF(mPointThickness);
     QPen kfMissPen = QPen((QColor(255,255,0)));
+    kfMissPen.setWidthF(mPointThickness);
+
+    QPen markPen = QPen((QColor(255,255,255)));
+    markPen.setWidthF(mPointThickness);
+
+    QPen fitPen = QPen((QColor(255,0,255)));
+    fitPen.setWidthF(mFitThickness);
+    QPen fitLockPen = QPen((QColor(255,255,255)));
+    fitLockPen.setWidthF(mFitThickness);
 
     // We have to begin painting. Remember to end.
     painter.begin(this);
@@ -96,65 +262,111 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
     for (predsIter = mPreds.begin(); predsIter != mPreds.end(); ++predsIter) {
 
         // The color of the indicator depends on if the ball was actually seen on this frame or not
-        if ((*predsIter).seen()) {
+        if (((*predsIter).seen() || !mColorMiss)) {
             painter.setPen(kfSeenPen);
         } else {
             painter.setPen(kfMissPen);
         }
 
         // Draw the bounding box of the predicted ball
-        painter.drawRect(relRectToWindow((*predsIter).bbox()));
+        if (mVerboseKF) {
+            painter.drawRect(relRectToWindow((*predsIter).bbox()));
+        } else {
+            painter.drawEllipse(QRectF(relPointToWindow(
+                                    (*predsIter).bbox().center())-QPointF(mPointRadius/2,mPointRadius/2),
+                                QSizeF(mPointRadius,mPointRadius)));
+        }
 
-        // Draw the predicted velocities of the predicted ball
-        painter.drawLine(relPointToWindow((*predsIter).bbox().center()),
-                         relPointToWindow(
-                             (*predsIter).bbox().center()+
-                             (QPointF)(*predsIter).jet()*(*predsIter).dt()));
+        if (mShowJet) {
+            // Draw the predicted velocities of the predicted ball
+            painter.drawLine(relPointToWindow((*predsIter).bbox().center()),
+                             relPointToWindow(
+                                 (*predsIter).bbox().center()+
+                                 (QPointF)(*predsIter).jet()*(*predsIter).dt()));
+        }
+    }
+
+    int PX, PY;
+    int j; double t0;
+    j = 0;
+    if (!mMarkedPoints.empty()) {
+        t0 = mMarkedPoints.at(0).t();
+    }
+    for (predsIter = mMarkedPoints.begin(); predsIter != mMarkedPoints.end();
+         ++predsIter) {
+        painter.setPen(markPen);
+        PX = .30*this->size().width();
+        PY = .13 *this->size().height() +
+                j*QFontMetrics(painter.font()).height();
+        painter.drawText(PX, PY, 0, 0,
+                         Qt::AlignBottom|Qt::AlignRight|Qt::TextDontClip,
+                         QString("(%1, %2, %3)")
+                         .arg(predsIter->t()-t0, 0, 'f', 3)
+                         .arg(predsIter->bbox().center().x(), 0, 'f', 3)
+                         .arg(predsIter->bbox().center().y(), 0, 'f', 3));
+        painter.drawLine(relPointToWindow(predsIter->bbox().center()),
+                         QPointF(PX, PY));
+        painter.drawEllipse(QRectF(relPointToWindow(
+                                (*predsIter).bbox().center())-QPointF(mPointRadius/4,mPointRadius/4),
+                            QSizeF(mPointRadius/2,mPointRadius/2)));
+        j++;
     }
 
     // Draw the predicted flight trajectory of the ball
+    if (mShowParam || mShowFit) {
+        double a, b, A, B, C, U, V, W;
 
-    double a, b, A, B, C, U, V, W;
+        // x(t) = at + b
+        a = mFitLineX[1];
+        b = mFitLineX[0];
 
-    // x(t) = at + b
-    a = mFitLineX[1];
-    b = mFitLineX[0];
+        // y(t) = At^2 + Bt + C
+        A = mFitParabolaY[2];
+        B = mFitParabolaY[1];
+        C = mFitParabolaY[0];
 
-    // y(t) = At^2 + Bt + C
-    A = mFitParabolaY[2];
-    B = mFitParabolaY[1];
-    C = mFitParabolaY[0];
+        // y(x) = Ux^2 + Vx + W
+        U = A/a/a;
+        V = B/a - 2*A*b/a/a;
+        W = A*b*b/a/a - B*b/a + C;
 
-    // y(x) = Ux^2 + Vx + W
-    U = A/a/a;
-    V = B/a - 2*A*b/a/a;
-    W = A*b*b/a/a - B*b/a + C;
+        // Show the fit parabola
+        if (mShowParabola) {
+            if (mFitLocked) {
+                painter.setPen(fitLockPen);
+            } else
+            {
+                painter.setPen(fitPen);
+            }
+            QPointF p1(0, W);
+            QPointF p2(mProjSize.width(),
+                       U*mProjSize.width()*mProjSize.width() +
+                       V*mProjSize.width() + W);
+            QPointF c(0.5*mProjSize.width(), W + .5*mProjSize.width()*V);
+            QPainterPath fitPath(relPointToWindow(p1));
+            fitPath.quadTo(relPointToWindow(c), relPointToWindow(p2));
+            painter.drawPath(fitPath);
+        }
 
-    QPointF p1(0, W);
-    QPointF p2(mProjSize.width(),
-               U*mProjSize.width()*mProjSize.width() +
-            V*mProjSize.width() + W);
-    QPointF c(0.5*mProjSize.width(), W + .5*mProjSize.width()*V);
-    QPainterPath fitPath(relPointToWindow(p1));
-    fitPath.quadTo(relPointToWindow(c), relPointToWindow(p2));
-    painter.drawPath(fitPath);
 
-    // Draw the predicted y(x) equation
-    // TODO: Decouple x, y and show x(t) and y(t)
-    QTextDocument td;
+        // Draw the predicted y(t) and x(t) equation
+        if (mShowParam) {
+            QTextDocument td;
 
-    td.setDefaultStyleSheet("body {color: rgb(255,255,255); font-size: 15px;}");
-    td.setHtml(QString("<body>"
-                       "y(t) = %1 t<sup>2</sup> + %2 t + %3<br>"
-                       "x(t) = %4 t + %5"
-                       "</body>")
-               .arg(A, 0, 'f', 3)
-               .arg(B, 0, 'f', 3)
-               .arg(C, 0, 'f', 3)
-               .arg(a, 0, 'f', 3)
-               .arg(b, 0, 'f', 3)
-            );
-    td.drawContents(&painter);
+            td.setDefaultStyleSheet("body {color: rgb(255,255,255); font-size: 15px;}");
+            td.setHtml(QString("<body>"
+                               "y(t) = %1 t<sup>2</sup> + %2 t + %3<br>"
+                               "x(t) = %4 t + %5"
+                               "</body>")
+                       .arg(A, 0, 'f', 3)
+                       .arg(B, 0, 'f', 3)
+                       .arg(C, 0, 'f', 3)
+                       .arg(a, 0, 'f', 3)
+                       .arg(b, 0, 'f', 3)
+                       );
+            td.drawContents(&painter);
+        }
+    }
 
     painter.end();
 }

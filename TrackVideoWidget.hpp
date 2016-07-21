@@ -12,6 +12,11 @@
 #include <opencv2/core.hpp>
 #include <QWidget>
 
+/**
+ * @brief The TrackVideoWidget class
+ * Displays a video stream and tracking data. Allows manipulation of
+ * projector corners (where they should be in frame)
+ */
 class TrackVideoWidget : public QWidget
 {
     Q_OBJECT
@@ -21,6 +26,7 @@ class TrackVideoWidget : public QWidget
 public:
     explicit TrackVideoWidget(QWidget *parent = 0);
     void updateCorners();
+    QList<QPoint> getCorners();
 
 signals:
     void resized(QSize size);
@@ -29,6 +35,8 @@ signals:
 public slots:
     void setImage(const QImage &image);
     void pushBall(TrackingBall ball);
+
+    void setCorners(QList<QPoint> corners);
 
     void ulCornerDropped(QPoint point);
     void blCornerDropped(QPoint point);

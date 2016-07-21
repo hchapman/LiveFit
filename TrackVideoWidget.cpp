@@ -43,7 +43,7 @@ void TrackVideoWidget::paintEvent(QPaintEvent *event) {
     QList<KFPrediction>::const_iterator predsIter;
     for (predsIter = mPreds.begin(); predsIter != mPreds.end(); ++predsIter) {
         if ((*predsIter).seen()) {
-            qDebug() << sqrt((*predsIter).confidence());
+            //qDebug() << sqrt((*predsIter).confidence());
             painter.setPen(QPen(QColor(255*fmin(1,0.3+sqrt((*predsIter).confidence())),0,0)));
             //painter.setPen(kfSeenPen);
         } else {
@@ -77,6 +77,19 @@ void TrackVideoWidget::pushBall(TrackingBall ball)
     if (mBalls.size() > 10) {
         mBalls.removeFirst();
     }
+}
+
+void TrackVideoWidget::setCorners(QList<QPoint> corners)
+{
+    if (corners.size() < 4) {
+        return;
+    }
+
+    ui.ulCorner->move(corners[0]);
+    ui.urCorner->move(corners[1]);
+    ui.brCorner->move(corners[2]);
+    ui.blCorner->move(corners[3]);
+    updateCorners();
 }
 
 void TrackVideoWidget::pushPred(KFPrediction pred) {
@@ -124,8 +137,18 @@ void TrackVideoWidget::updateCorners()
                                   ui.brCorner->geometry().center().y()/2));
     corners.push_back(cv::Point2f(ui.urCorner->geometry().center().x()/2,
                                   ui.urCorner->geometry().center().y()/2));
-    qDebug() << ui.brCorner->geometry();
+    //qDebug() << ui.brCorner->geometry();
 
     emit cornersChanged(corners);
+}
+
+QList<QPoint> TrackVideoWidget::getCorners()
+{
+    QList<QPoint> c;
+    c.append(ui.ulCorner->geometry().topLeft());
+    c.append(ui.urCorner->geometry().topLeft());
+    c.append(ui.brCorner->geometry().topLeft());
+    c.append(ui.blCorner->geometry().topLeft());
+    return c;
 }
 

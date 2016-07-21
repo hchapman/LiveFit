@@ -3,6 +3,11 @@
 
 #include <QWidget>
 
+/**
+ * @brief The ProjectorDragCorner class
+ * A draggable widget for managing where the projector corners
+ * lie in the video frame
+ */
 class ProjectorDragCorner : public QWidget
 {
     Q_OBJECT

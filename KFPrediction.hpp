@@ -6,6 +6,12 @@
 #include <QPoint>
 #include <QRect>
 
+/**
+ * @brief The KFPrediction class
+ * Object which represents a prediction from the Kalman filter.
+ * Essentially decorates state data, but also holds onto the dT
+ * from the previous timestep
+ */
 class KFPrediction
 {
     QRectF mBbox;

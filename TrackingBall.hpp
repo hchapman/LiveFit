@@ -5,6 +5,10 @@
 
 #include <QPoint>
 
+/**
+ * @brief The TrackingBall class
+ * A ball which has been tracked
+ */
 class TrackingBall
 {
     cv::Mat mMeasVec;

@@ -50,6 +50,16 @@ void KFBallTracker::setXYCovariance(double sigma)
     mBallFilter.setXYCovariance(sigma);
 }
 
+void KFBallTracker::setClipShape(QPolygonF shape)
+{
+    mClipShape = shape;
+}
+
+void KFBallTracker::toggleClip(bool clip)
+{
+    mClipTrack = clip;
+}
+
 QList<cv::Rect> KFBallTracker::findPeople(cv::Mat& nxtFrame)
 {
     cv::Mat preFrame = mFrameHistory[0];
@@ -98,8 +108,12 @@ QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff,
             continue;
         }
 
+        if (mClipTrack && !mClipShape.containsPoint((QPointF)ball.center(), Qt::OddEvenFill)) {
+            continue;
+        }
+
         if (ball.center().x() < 20 || ball.center().x() > 300) {
-            qDebug() << ball.center();
+            //qDebug() << ball.center();
             continue;
         }
 
@@ -127,10 +141,16 @@ QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff,
 
 void KFBallTracker::updateTrackFailure()
 {
-    mBallFilter.updateTrackFailure();
+    if (!mBallFilter.isLost()) {
+        mBallFilter.updateTrackFailure();
 
-    emit ballPredicted(KFPrediction(mBallFilter.prediction(), mBallFilter.covariance(),
-                                    mBallFilter.time(), mBallFilter.dT(), false));
+        emit ballPredicted(KFPrediction(mBallFilter.prediction(), mBallFilter.covariance(),
+                                        mBallFilter.time(), mBallFilter.dT(), false));
+
+        if (mBallFilter.isLost()) {
+            emit ballLost();
+        }
+    }
 }
 
 void KFBallTracker::updateTrackSuccess(TrackingBall ball)

@@ -5,6 +5,10 @@
 
 #include <opencv2/core.hpp>
 
+/**
+ * @brief The KalmanFilterPlus class
+ * A cv::KalmanFilter which also supports some 'forgetful' functionality
+ */
 class KalmanFilterPlus : public cv::KalmanFilter
 {
     double mAlphaSq;

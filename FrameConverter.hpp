@@ -9,6 +9,11 @@
 
 #include <opencv2/core/mat.hpp>
 
+/**
+ * @brief The FrameConverter class
+ * Recieves frames (as cv::Mat), processes them (ideally asynchronously)
+ * and emits them as a QImage (i.e. for use in a QWidget)
+ */
 class FrameConverter : public QObject
 {
     Q_OBJECT

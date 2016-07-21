@@ -16,7 +16,7 @@ BallTrackingFilter::BallTrackingFilter() :
     // Control matrix shows how p/v/a interact for y
     mKfControlLen = 1;
     mKfControl = cv::Mat::zeros(mKfStateLen, 1, CV_64F);
-    mKfControl.at<double>(BallKFState::y) = .5;
+    //mKfControl.at<double>(BallKFState::y) = .5;
     mKfControl.at<double>(BallKFState::dy) = 1;
     mKfControlVec = cv::Mat::eye(1, 1, CV_64F)*2;
 
@@ -112,8 +112,8 @@ void BallTrackingFilter::updateTimeState(double t)
 
     mKfState = mKf.predict(mKfControlVec*mGravConstant*dT());
 
-    qDebug() << mTstart << " " << t;
-    qDebug() << dT();
+    //qDebug() << mTstart << " " << t;
+    //qDebug() << dT();
 
     // << "\n" << mKf.transitionMatrix;
     //std::cout << mKf.controlMatrix << "\n";

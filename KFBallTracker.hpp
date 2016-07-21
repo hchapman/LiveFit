@@ -9,11 +9,19 @@
 #include "TrackingBall.hpp"
 
 #include <QObject>
+#include <QPolygonF>
 #include <QVector>
 
 #include <opencv2/core.hpp>
 #include <opencv2/video/tracking.hpp>
 
+/**
+ * @brief The KFBallTracker class
+ * Contains most of the logic for live-tracking objects. Recieves
+ * a frame (as cv::Mat) and uses it (and its own internal state)
+ * to identify a moving projectile ball and emit them (as TrackingBall
+ * and as KFPrediction)
+ */
 class KFBallTracker : public QObject
 {
     Q_OBJECT
@@ -31,6 +39,9 @@ class KFBallTracker : public QObject
 
     double mMinRadius;
     double mMaxRadius;
+
+    QPolygonF mClipShape;
+    bool mClipTrack;
 
 public:
     explicit KFBallTracker(QObject *parent = 0);
@@ -53,6 +64,7 @@ public:
 signals:
     void ballSpotted(TrackingBall);
     void ballPredicted(KFPrediction);
+    void ballLost();
     void personSpotted(QRect);
 
     void threshReady(const cv::Mat &, enum ColorSpace);
@@ -60,6 +72,8 @@ signals:
     void blurReady(const cv::Mat &, enum ColorSpace);
 
 public slots:
+    void setClipShape(QPolygonF shape);
+    void toggleClip(bool clip);
 
 protected:
     QList<cv::Rect> findPeople(cv::Mat &frame);
