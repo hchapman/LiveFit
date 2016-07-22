@@ -1,0 +1,4 @@
+*\.o
+moc_*
+ui_*\.h
+LiveFit\.pro\.user\*

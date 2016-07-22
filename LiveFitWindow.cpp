@@ -61,6 +61,12 @@ void LiveFitWindow::setupCamera()
     mTrackingStream.connect(ui.xYCovarianceDoubleSpinBox,
                             SIGNAL(valueChanged(double)),
                             SLOT(changeXYCovariance(double)));
+    mTrackingStream.connect(ui.projWSpinBox,
+                            SIGNAL(valueChanged(int)),
+                            SLOT(changeProjWidth(int)));
+    mTrackingStream.connect(ui.projHSpinBox,
+                            SIGNAL(valueChanged(int)),
+                            SLOT(changeProjHeight(int)));
     mTrackingStream.connect(ui.ballZDoubleSpinBox,
                             SIGNAL(valueChanged(double)),
                             SLOT(changeBallZ(double)));
