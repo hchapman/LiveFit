@@ -33,7 +33,9 @@ HEADERS += LiveFitWindow.hpp \
 
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
 
-CONFIG += qt5
+CONFIG += \
+    qt5 \
+    c++11
 QT += \
     widgets \
     gui \
@@ -45,3 +47,6 @@ FORMS += \
 QT_CONFIG -= no-pkg-config
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += opencv gsl
+
+DISTFILES += \
+    Doxyfile

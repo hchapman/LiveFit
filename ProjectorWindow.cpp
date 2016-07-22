@@ -10,21 +10,25 @@
 void ProjectorWindow::toggleShowParabola(bool showParabola)
 {
     mShowParabola = showParabola;
+    update();
 }
 
 void ProjectorWindow::setPointRadius(int pointRadius)
 {
     mPointRadius = pointRadius;
+    update();
 }
 
 void ProjectorWindow::setPointThickness(double pointThickness)
 {
     mPointThickness = pointThickness;
+    update();
 }
 
 void ProjectorWindow::setFitThickness(double fitThickness)
 {
     mFitThickness = fitThickness;
+    update();
 }
 
 void ProjectorWindow::setMinFallSpeed(int minFallSpeed)
@@ -35,6 +39,12 @@ void ProjectorWindow::setMinFallSpeed(int minFallSpeed)
 void ProjectorWindow::toggleWaitTilFall(bool waitTilFall)
 {
     mWaitTilFall = waitTilFall;
+}
+
+void ProjectorWindow::setFontSize(int fontSize)
+{
+    mFontSize = fontSize;
+    update();
 }
 
 ProjectorWindow::ProjectorWindow(QWidget* parent)
@@ -178,26 +188,31 @@ void ProjectorWindow::markDataStale() {
 void ProjectorWindow::toggleShowFit(bool showFit)
 {
     mShowFit = showFit;
+    update();
 }
 
 void ProjectorWindow::toggleShowParam(bool showParam)
 {
     mShowParam = showParam;
+    update();
 }
 
 void ProjectorWindow::toggleShowJet(bool showJet)
 {
     mShowJet = showJet;
+    update();
 }
 
 void ProjectorWindow::toggleColorMiss(bool colorMiss)
 {
     mColorMiss = colorMiss;
+    update();
 }
 
 void ProjectorWindow::toggleVerboseKF(bool verboseKF)
 {
     mVerboseKF = verboseKF;
+    update();
 }
 
 QRectF ProjectorWindow::relRectToWindow(QRectF rect) {
@@ -222,6 +237,12 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
     // Painter to paint the window
     QPainter painter;
 
+    // Hold on to the normal (transparent) brush
+    QBrush normalBrush;
+
+    // List of data HTMLs
+    QStringList dataHtml;
+
     double size = 10;
 
     // Pens (i.e. line drawing settings for the painter)
@@ -242,6 +263,7 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
 
     // We have to begin painting. Remember to end.
     painter.begin(this);
+    normalBrush = painter.brush();
 
     // This brush is the background color of the widget. Fill the window in case.
     QBrush background = QBrush(QColor(0,0,0));
@@ -289,28 +311,6 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
     int PX, PY;
     int j; double t0;
     j = 0;
-    if (!mMarkedPoints.empty()) {
-        t0 = mMarkedPoints.at(0).t();
-    }
-    for (predsIter = mMarkedPoints.begin(); predsIter != mMarkedPoints.end();
-         ++predsIter) {
-        painter.setPen(markPen);
-        PX = .30*this->size().width();
-        PY = .13 *this->size().height() +
-                j*QFontMetrics(painter.font()).height();
-        painter.drawText(PX, PY, 0, 0,
-                         Qt::AlignBottom|Qt::AlignRight|Qt::TextDontClip,
-                         QString("(%1, %2, %3)")
-                         .arg(predsIter->t()-t0, 0, 'f', 3)
-                         .arg(predsIter->bbox().center().x(), 0, 'f', 3)
-                         .arg(predsIter->bbox().center().y(), 0, 'f', 3));
-        painter.drawLine(relPointToWindow(predsIter->bbox().center()),
-                         QPointF(PX, PY));
-        painter.drawEllipse(QRectF(relPointToWindow(
-                                (*predsIter).bbox().center())-QPointF(mPointRadius/4,mPointRadius/4),
-                            QSizeF(mPointRadius/2,mPointRadius/2)));
-        j++;
-    }
 
     // Draw the predicted flight trajectory of the ball
     if (mShowParam || mShowFit) {
@@ -351,21 +351,66 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
 
         // Draw the predicted y(t) and x(t) equation
         if (mShowParam) {
-            QTextDocument td;
-
-            td.setDefaultStyleSheet("body {color: rgb(255,255,255); font-size: 15px;}");
-            td.setHtml(QString("<body>"
-                               "y(t) = %1 t<sup>2</sup> + %2 t + %3<br>"
-                               "x(t) = %4 t + %5"
-                               "</body>")
-                       .arg(A, 0, 'f', 3)
-                       .arg(B, 0, 'f', 3)
-                       .arg(C, 0, 'f', 3)
-                       .arg(a, 0, 'f', 3)
-                       .arg(b, 0, 'f', 3)
-                       );
-            td.drawContents(&painter);
+            dataHtml << QString("y(t) = %1 t<sup>2</sup> + %2 t + %3")
+                        .arg(A, 0, 'f', 3)
+                        .arg(B, 0, 'f', 3)
+                        .arg(C, 0, 'f', 3)
+                     << QString("x(t) = %1 t + %2")
+                        .arg(a, 0, 'f', 3)
+                        .arg(b, 0, 'f', 3);
         }
+    }
+
+    if (!mMarkedPoints.empty()) {
+        t0 = mMarkedPoints.at(0).t();
+    }
+
+    //QStringList markHtml;
+    QRectF markRect;
+    QFont markFont = painter.font();
+    markFont.setPointSize(mFontSize);
+    int mMarkRadius = mPointRadius*0.8;
+
+    // Draw marked points
+    painter.setFont(markFont);
+    for (predsIter = mMarkedPoints.begin(); predsIter != mMarkedPoints.end();
+         ++predsIter) {
+        painter.setPen(markPen);
+
+        dataHtml << QString("%1: (%2, %3, %4)")
+                    .arg(j)
+                    .arg(predsIter->t()-t0, 0, 'f', 3)
+                    .arg(predsIter->bbox().center().x(), 0, 'f', 3)
+                    .arg(predsIter->bbox().center().y(), 0, 'f', 3);
+
+        markRect = QRectF(relPointToWindow(
+                              (*predsIter).bbox().center())-QPointF(mMarkRadius/2,mMarkRadius/2),
+                          QSizeF(mMarkRadius,mMarkRadius));
+
+        painter.setBrush(background);
+        painter.drawEllipse(markRect);
+        painter.setBrush(normalBrush);
+
+        painter.drawText(markRect,
+                         Qt::AlignCenter|Qt::TextDontClip,
+                         QString("%1").arg(j));
+        j++;
+    }
+
+    if (!dataHtml.empty()) {
+        QTextDocument td;
+
+        td.setDefaultStyleSheet(
+                    QString("body {"
+                            " color: rgb(255,255,255);"
+                            " font-size: %1pt;"
+                            "}")
+                    .arg(mFontSize));
+        td.setHtml(QString(
+                       "<body>%1</body>")
+                   .arg(dataHtml.join("<br>"))
+                   );
+        td.drawContents(&painter);
     }
 
     painter.end();

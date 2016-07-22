@@ -235,10 +235,10 @@ public:
      * This is the inverse of projectorToImage
      *
      * The players:
-     * - R = mRMatrix, the camera rotation matrix
-     * - C = mCameraMatrix, the intrinsic camera matrix
-     * - T = mTVector, the camera translation vector
-     * - p = [imP, 1], the image point in homogeneous coordinates
+     * - R = #mRMatrix, the camera rotation matrix
+     * - C = #mCameraMatrix, the intrinsic camera matrix
+     * - T = #mTVector, the camera translation vector
+     * - p = [\p imP, 1], the image point in homogeneous coordinates
      * - z = the (a priori known) z-coordinate of the point in world coords
      * - q = [X, Y, z] the world coordinates of the point p
      * - s = Scaling factor that comes from transformation... picks appropriate point
@@ -249,8 +249,8 @@ public:
      * \f[q = R^{-1}*(s*C^{-1}*p - T)\f]
      *
      *
-     * @param imP
-     * @param z
+     * @param imP image point (x,y) to translate to world coordinates
+     * @param z a priori known world z-coordinate of the point to find
      * @return
      *
      */
