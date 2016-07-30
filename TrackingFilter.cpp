@@ -12,6 +12,8 @@ void TrackingFilter::flushKalman()
 
 double TrackingFilter::kalmanDistance(cv::Mat measurement)
 {
+  // Sigma = HPH^T + R
+  // (z - Hx)^T * Sigma^{-1} * (z - Hx) + ln det(Sigma)
     cv::Mat M = (measurement - (mKf.measurementMatrix*mKf.statePre).t());
     cv::Mat Sigma = (mKf.measurementMatrix
                      *mKf.errorCovPre

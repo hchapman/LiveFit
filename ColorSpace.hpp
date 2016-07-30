@@ -2,8 +2,7 @@
 #define COLORSPACE_HPP
 
 /**
- * @brief The ColorSpace enum
- * Options for the types of frame colorspaces which TrackingStream can emit
+ * @brief Options for the types of frame colorspaces which TrackingStream can emit
  */
 enum ColorSpace {
     TS_GRAY, TS_BGR
