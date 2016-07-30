@@ -7,30 +7,46 @@
 
 /**
  * @brief The TrackingBall class
- * A ball which has been tracked
+ * A ball which has been tracked by the software
  */
 class TrackingBall
 {
-    cv::Mat mMeasVec;
-    cv::Point2f mCenter;
-    float mRadius;
-    cv::Rect mRect;
+  /** The measurement vector (KF spotting input) */
+  cv::Mat mMeasVec;
+  /** The center of the ball mass */
+  cv::Point2f mCenter;
+  /** The radius of the ball mass */
+  float mRadius;
+  /** A Rect which encompasses the ball mass */
+  cv::Rect mRect;
 
 public:
-    TrackingBall(std::vector<cv::Point> contour);
-    cv::Mat getMeas() const;
+  /** Construct an empty TrackingBall */
+  TrackingBall();
+  /** Construct a TrackingBall from a measurement vector (usual method) */
+  TrackingBall(std::vector<cv::Point> contour);
 
-    double x() const;
-    double y() const;
-    double width() const;
-    double height() const;
-    double r() const;
+  /** Get the measurement vector */
+  cv::Mat getMeas() const;
 
-    QPoint center() const;
-    QPoint tl() const;
+  /** Get the x coordinate of the center */
+  double x() const;
+  /** Get the y coordinate of the center */
+  double y() const;
+  /** Get the width of the bounding rect */
+  double width() const;
+  /** Get the height of the bounding rect */
+  double height() const;
+  /** Get the radius of the bounding circle */
+  double r() const;
 
-    TrackingBall();
-    cv::Rect rect() const;
+  /** Get the center of the ball mass */
+  QPoint center() const;
+  /** Top left corner of the bounding rect */
+  QPoint tl() const;
+
+  /** Get the bounding rect for the ball */
+  cv::Rect rect() const;
 };
 
 #endif // TRACKINGBALL_HPP
