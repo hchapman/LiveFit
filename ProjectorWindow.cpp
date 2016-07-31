@@ -83,10 +83,15 @@ void ProjectorWindow::pushBall(TrackingBall ball)
 
 }
 
+/** Whether a has lesser center y value than b
+ * @return a.y < b.y */
 static bool comparePredY(KFPrediction a, KFPrediction b) {
     return (a.bbox().center().y() < b.bbox().center().y());
 }
 
+/** Solve 3 points (y,t) for a quadratic equation y(t) = At^2 + Bt + c
+ * @param pts A list of 3 points
+ * @param f An array of 3 doubles; <C,B,A> */
 void fitYTPoints(QList<KFPrediction> pts, double f[3]) {
     double t,y1,t1,y2,t2,y3,t3;
     double a,b,c;
@@ -108,6 +113,9 @@ void fitYTPoints(QList<KFPrediction> pts, double f[3]) {
     f[0] = y2 - f[2]*t2*t2 - f[1]*t2;
 }
 
+/** Solve 3 points (x,t) [really first, last] for a linear equation x(t) = mt + b
+ * @param pts A list of 3 points
+ * @param f An array of 2 doubles; <b, m> */
 void fitXTPoints(QList<KFPrediction> pts, double f[2]) {
     double t,y1,t1,y2,t2,y3,t3;
     double a,b,c;

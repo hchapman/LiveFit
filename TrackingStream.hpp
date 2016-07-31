@@ -34,7 +34,7 @@ class TrackingStream : public QObject
    * - Red dot: 56deg, close up
    * - Blue dot: 75deg, wide view
    *
-   * The smaller FOV is expected to cause less distoration, although
+   * The smaller FOV is expected to cause less distortion, although
    * it is likely to have less in the frame.
    */
   int mFov;
@@ -245,9 +245,9 @@ public:
    * - s = Scaling factor that comes from transformation... picks appropriate point
    * on the line projecting to p with the input z coordinate
    *
-   * \f[s = (z + (R^{-1}*T)_{2,0}) / (R^{-1}*C^{-1}*p)_{2,0}\f]
+   * \f[s = (z + (R^{-1}T)_{2,0}) / (R^{-1}C^{-1}p)_{2,0}\f]
    *
-   * \f[q = R^{-1}*(s*C^{-1}*p - T)\f]
+   * \f[q = R^{-1}(sC^{-1}p - T)\f]
    *
    *
    * @param imP image point (x,y) to translate to world coordinates
