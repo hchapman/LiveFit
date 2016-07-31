@@ -6,8 +6,7 @@
 #include <QPoint>
 
 /**
- * @brief The TrackingBall class
- * A ball which has been tracked by the software
+ * @brief A ball which has been tracked by the software
  */
 class TrackingBall
 {

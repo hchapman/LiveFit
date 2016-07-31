@@ -98,20 +98,20 @@ class TrackingStream : public QObject
    */
   DisplayFrameType mEmitFrameType;
 
-  bool mStarted; /** Whether the video stream is started */
-  bool mProjReady; /** Whether there is enough projector data for transform */
-  bool mStreamPaused; /** Whether the stream is currently paused */
+  bool mStarted; /**< Whether the video stream is started */
+  bool mProjReady; /**< Whether there is enough projector data for transform */
+  bool mStreamPaused; /**< Whether the stream is currently paused */
 
-  int mFps; /** The FPS of the video stream (=0 for webcam stream) */
+  int mFps; /**< The FPS of the video stream (=0 for webcam stream) */
 
   /**
    * @brief The ball tracker; we give it frames, it gives us ball predictions
    */
   KFBallTracker mTracker;
-  bool mDisplayVideo; /** Whether we should display video or not */
+  bool mDisplayVideo; /**< Whether we should display video or not */
 
-  QPolygonF mProjScreen; /** Region to crop to if mClipTrack is on */
-  bool mClipTrack; /** Whether we should clip tracking to the proj screen */
+  QPolygonF mProjScreen; /**< Region to crop to if mClipTrack is on */
+  bool mClipTrack; /**< Whether we should clip tracking to the proj screen */
 
 signals:
   // Signals for emitting frames for display
@@ -262,10 +262,11 @@ public:
    *
    * A wrapper that works with Qt objects instead of opencv objects
    *
-   * @param z
+   * @param imP image point (x,y) to translate to world coordinates
+   * @param z a priori known world z-coordinate of the point to find
    * @return
    */
-  QPointF imageToProjector(QPointF, double z=0);
+  QPointF imageToProjector(QPointF imP, double z=0);
 
   /**
    * @brief projectorToImage converts projector (world) coords to image coords

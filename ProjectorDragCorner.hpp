@@ -4,33 +4,45 @@
 #include <QWidget>
 
 /**
- * @brief The ProjectorDragCorner class
- * A draggable widget for managing where the projector corners
- * lie in the video frame
+ * @brief A draggable widget for managing where the projector corners lie in the
+ * video frame
  */
 class ProjectorDragCorner : public QWidget
 {
-    Q_OBJECT
-    int cornerIndex;
+  Q_OBJECT
+
+  /** The (extrinsic) index of this corner in [UL,BL,BR,UL] */
+  int cornerIndex;
 public:
-    explicit ProjectorDragCorner(QWidget *parent = 0);
+  /** Default constructor */
+  explicit ProjectorDragCorner(QWidget *parent = 0);
 
 signals:
-    void moveCompleted(QPoint loc);
+  /** Sent when a "move" action of this drag corner is finished */
+  void moveCompleted(QPoint loc);
 
 public slots:
 
 protected:
-    void paintEvent(QPaintEvent* event);
+  /** Paint this drag corner */
+  void paintEvent(QPaintEvent* event);
 
-    void mousePressEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
-    void mouseReleaseEvent(QMouseEvent* event);
+  /** Called when a mouse press happens; "select" and consider drag */
+  void mousePressEvent(QMouseEvent* event);
+  /** Called when a mouse move happens; consider drag if selected and moved */
+  void mouseMoveEvent(QMouseEvent* event);
+  /** Called when a mouse release happens; consider drop after drag */
+  void mouseReleaseEvent(QMouseEvent* event);
 private:
-    QPoint dragStartPos;
-    bool selected;
-    bool dragging;
-    int radius;
+
+  /** Where this drag was initiated */
+  QPoint dragStartPos;
+  /** Whether this corner is selected */
+  bool selected;
+  /** Whether this corner is being dragged */
+  bool dragging;
+  /** Display/click radius of this widget */
+  int radius;
 };
 
 #endif // PROJECTORDRAGCORNER_HPP

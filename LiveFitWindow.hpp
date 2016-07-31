@@ -11,50 +11,79 @@
 #include <ui_LiveFitWindow.h>
 
 /**
- * @brief The LiveFitWindow class
- * The window which manages all logic for the LiveFit application
+ * @brief The window which manages all logic for the LiveFit application
  */
 class LiveFitWindow : public QMainWindow {
-    Q_OBJECT
+  Q_OBJECT
 private:
-    QSize mVideoSize;
+  /** Pixel size of the video stream*/
+  QSize mVideoSize;
 
-    void createMenus();
-    void chooseVideoFile();
-    void setupUi();
-    void setupCamera();
-    void displayVideoStream();
+  /* TODO: I'm not actually sure if any of these are called */
+  void createMenus();
+  void chooseVideoFile();
+  void setupUi();
+  void displayVideoStream();
+  /* ~~~~ */
+
+  /** Set up the video stream and the converter, as well as requisite signals.
+   *
+   * We currently also set up a bunch of auxiliary signals here which should be
+   * moved out to their own respective method */
+  void setupCamera();
 
 public:
-    explicit LiveFitWindow(QWidget* parent = 0);
-    LiveFitWindow(char* videoFile);
-    LiveFitWindow(int cameraId);
+  /** Default constructor; default to webcam 0 */
+  explicit LiveFitWindow(QWidget* parent = 0);
+  /** Create a LiveFitWindow with video stream at videoFile */
+  LiveFitWindow(char* videoFile);
+  /** Create a LiveFitWindow with video stream from camera at index cameraId */
+  LiveFitWindow(int cameraId);
 
 public slots:
-    void startStream(char *videoFile);
-    void startStream(int cameraId);
+  /** Start a new stream with video from videoFile */
+  void startStream(char *videoFile);
+  /** Start a new stream with video from camera at index cameraId */
+  void startStream(int cameraId);
 
-    void startCamera0();
-    void startCamera1();
-    void startCamera2();
+  /** Equivalent to startStream(0) */
+  void startCamera0();
+  /** Equivalent to startStream(1) */
+  void startCamera1();
+  /** Equivalent to startStream(2) */
+  void startCamera2();
 
 protected:
-    void writeSettings();
-    void readSettings();
-    void closeEvent(QCloseEvent* ev);
+  /** Write this application's QSettings */
+  void writeSettings();
+  /** Read in this application's QSettings */
+  void readSettings();
+
+  /** Called when this window is closed; destruct all necessary objects and
+      close streams, etc cleanly */
+  void closeEvent(QCloseEvent* ev);
 private slots:
 
-    void on_pauseButton_clicked();
-
-    void on_action_Open_triggered();
+  /** Called when the pauseButton is clicked */
+  void on_pauseButton_clicked();
+  /** Called when the Open action is triggered (ie file>open)*/
+  void on_action_Open_triggered();
 
 private:
-    Ui::liveFitWindow ui;
+  /** This window's QDesigner ui, LiveFitWindow.ui */
+  Ui::liveFitWindow ui;
 
-    TrackingStream mTrackingStream;
-    FrameConverter mFrameConverter;
+  /** The TrackingStream object which manages the current video stream and
+      tracking */
+  TrackingStream mTrackingStream;
+  /** The FrameConverter which takes incoming frames from the stream and
+      converts them into QImages to be sent to appropriate display widgets */
+  FrameConverter mFrameConverter;
 
-    QThread mStreamThread, mConverterThread;
+  /** A QThread for the video stream */
+  QThread mStreamThread;
+  /** A QThread for the video converter */
+  QThread mConverterThread;
 
 };
 
