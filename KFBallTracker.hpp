@@ -15,6 +15,12 @@
 #include <opencv2/core.hpp>
 #include <opencv2/video/tracking.hpp>
 
+#define SETT_DEF_BLOB_BLUR 3.0
+#define SETT_DEF_BLOB_THRESH 4.0
+#define SETT_DEF_BLOB_MINRAD 2.0
+#define SETT_DEF_BLOB_MAXRAD 20.0
+#define SETT_DEF_BLOB_GRAV 470.0
+
 /**
  * @brief Contains most of the logic for live-tracking objects.
  *
@@ -54,7 +60,7 @@ class KFBallTracker : public QObject
   /** If mClipTrack, only consider blobs within this polygon */
   QPolygonF mClipShape;
   /** Whether to only consider blobs in mClipShape */
-  bool mClipTrack;
+  bool mClipTrack = false;
 
 public:
   /** Default constructor */

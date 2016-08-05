@@ -32,6 +32,14 @@ private:
    * moved out to their own respective method */
   void setupCamera();
 
+  /** Set up the ProjectorWindow which displays information to the class
+   */
+  void setupSignalConnections();
+
+  /**
+   * @brief Populate the file>camera menu
+   */
+  void populateCameraMenu();
 public:
   /** Default constructor; default to webcam 0 */
   explicit LiveFitWindow(QWidget* parent = 0);
@@ -52,6 +60,9 @@ public slots:
   void startCamera1();
   /** Equivalent to startStream(2) */
   void startCamera2();
+
+  /** Handle a camera-related QAction, like those in file>camera */
+  void sendCameraAction(QAction *);
 
 protected:
   /** Write this application's QSettings */

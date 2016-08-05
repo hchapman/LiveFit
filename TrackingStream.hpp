@@ -11,6 +11,15 @@
 
 #include <opencv2/videoio.hpp>
 
+// Default settings pertaining to the TrackingStream. Ensure that
+// settings in the .ui file default to these!
+#define SETT_DEF_DISPLAYTYPE 0
+#define SETT_DEF_XYCOVAR 1.0
+#define SETT_DEF_FOV 56
+#define SETT_DEF_PROJW 50
+#define SETT_DEF_PROJH 50
+#define SETT_DEF_BALLZ 0
+
 /**
  * @brief An object which owns some sort of input video stream, manages
  * running it (and any tracking, etc) and emits cv::Mat frames and
@@ -98,9 +107,9 @@ class TrackingStream : public QObject
    */
   DisplayFrameType mEmitFrameType;
 
-  bool mStarted; /**< Whether the video stream is started */
-  bool mProjReady; /**< Whether there is enough projector data for transform */
-  bool mStreamPaused; /**< Whether the stream is currently paused */
+  bool mStarted = false; /**< Whether the video stream is started */
+  bool mProjReady = false; /**< Whether there is enough projector data for transform */
+  bool mStreamPaused = false; /**< Whether the stream is currently paused */
 
   int mFps; /**< The FPS of the video stream (=0 for webcam stream) */
 
@@ -108,10 +117,10 @@ class TrackingStream : public QObject
    * @brief The ball tracker; we give it frames, it gives us ball predictions
    */
   KFBallTracker mTracker;
-  bool mDisplayVideo; /**< Whether we should display video or not */
+  bool mDisplayVideo = true; /**< Whether we should display video or not */
 
   QPolygonF mProjScreen; /**< Region to crop to if mClipTrack is on */
-  bool mClipTrack; /**< Whether we should clip tracking to the proj screen */
+  bool mClipTrack = false; /**< Whether we should clip tracking to the proj screen */
 
 signals:
   // Signals for emitting frames for display

@@ -24,7 +24,7 @@ class FrameConverter : public QObject
   /** The current ColorSpace of the frame we are processing */
   ColorSpace currentCS;
   /** Whether we should process all frames, or drop some to keep framerate */
-  bool processAll;
+  bool processAll = true;
   /** The resolution of the frames that we are processing */
   QSize frameSize;
 

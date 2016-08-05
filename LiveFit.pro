@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     KalmanFilterPlus.cpp \
     BallTrackingFilter.cpp \
     TrackingFilter.cpp \
-    PersonTrackingFilter.cpp
+    PersonTrackingFilter.cpp \
+    ColorComboWidget.cpp
 SOURCES += LiveFitWindow.cpp
 
 HEADERS += LiveFitWindow.hpp \
@@ -29,7 +30,8 @@ HEADERS += LiveFitWindow.hpp \
     KalmanFilterPlus.hpp \
     BallTrackingFilter.hpp \
     TrackingFilter.hpp \
-    PersonTrackingFilter.hpp
+    PersonTrackingFilter.hpp \
+    ColorComboWidget.hpp
 
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
 
@@ -42,7 +44,8 @@ QT += \
 
 FORMS += \
     LiveFitWindow.ui \
-    TrackVideoWidget.ui
+    TrackVideoWidget.ui \
+    ColorComboWidget.ui
 
 QT_CONFIG -= no-pkg-config
 unix: CONFIG += link_pkgconfig

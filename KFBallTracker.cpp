@@ -12,13 +12,13 @@
 
 KFBallTracker::KFBallTracker(QObject *parent) : QObject(parent)
 {
-    mBlurSize = 5;
-    mThreshVal = 30;
+    mBlurSize = SETT_DEF_BLOB_BLUR;
+    mThreshVal = SETT_DEF_BLOB_THRESH;
 
-    mMinRadius = 5;
-    mMaxRadius = 10;
+    mMinRadius = SETT_DEF_BLOB_MINRAD;
+    mMaxRadius = SETT_DEF_BLOB_MAXRAD;
 
-    mBallFilter.setGravConstant(390);
+    mBallFilter.setGravConstant(SETT_DEF_BLOB_GRAV);
 }
 
 QMap<double, TrackingBall> KFBallTracker::processNextFrame(cv::Mat &frame, int t)
