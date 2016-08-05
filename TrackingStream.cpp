@@ -278,8 +278,8 @@ void TrackingStream::predictionBall(KFPrediction pred)
     // Convert the prediction to projector coordinates
     KFPrediction projPred = KFPrediction(pred);
     //projPred.setCenter(imageToProjector(pred.bbox().center()));
-    projPred.setTopLeft(imageToProjector(pred.bbox().topLeft(), 0));
-    projPred.setBottomRight(imageToProjector(pred.bbox().bottomRight(), 0));
+    projPred.setTopLeft(imageToProjector(pred.bbox().topLeft(), mBallZ));
+    projPred.setBottomRight(imageToProjector(pred.bbox().bottomRight(), mBallZ));
     emit ballProjPredicted(projPred);
 }
 

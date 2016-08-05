@@ -221,6 +221,7 @@ void LiveFitWindow::writeSettings()
     settings.setValue("projPointRadius", ui.projPointRadius->value());
     settings.setValue("pointThickness", ui.pointThickness->value());
     settings.setValue("fitThickness", ui.fitThickness->value());
+    settings.setValue("projFontSize", ui.fontSizeSpinBox->value());
     settings.endGroup();
 
     settings.beginGroup("Tracking");
@@ -270,6 +271,7 @@ void LiveFitWindow::readSettings()
     ui.projPointRadius->setValue(settings.value("projPointRadius", 30).toInt());
     ui.pointThickness->setValue(settings.value("pointThickness", 0.0).toDouble());
     ui.fitThickness->setValue(settings.value("fitThickness", 0.0).toDouble());
+    ui.fontSizeSpinBox->setValue(settings.value("projFontSize", 12).toInt());
     settings.endGroup();
 
     settings.beginGroup("Tracking");
