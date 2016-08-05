@@ -132,6 +132,7 @@ void TrackingStream::refreshProjectorMatrices() {
     // Change rotation vector rvec to 3x3 mat rMatrix
     cv::Rodrigues(rvec, mRMatrix);
 
+    // Create the "ball plane" in image coordinates
     mBallPlane.clear();
     mBallPlane.push_back(
                 projectorToImage(cv::Point3d(0,0,mBallZ)));
@@ -142,6 +143,14 @@ void TrackingStream::refreshProjectorMatrices() {
                     cv::Point3d(mProjSize.width(),mProjSize.height(),mBallZ)));
     mBallPlane.push_back(
                 projectorToImage(cv::Point3d(mProjSize.width(),0,mBallZ)));
+
+    mProjScreen = QPolygonF(mBallPlane.size());
+    for (unsigned int corner_i = 0; corner_i < mBallPlane.size(); corner_i++) {
+        mProjScreen << QPointF(
+                           mBallPlane.at(corner_i).x, mBallPlane.at(corner_i).y);
+    }
+
+    mTracker.setClipShape(mProjScreen);
 }
 
 cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)

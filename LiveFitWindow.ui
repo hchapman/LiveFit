@@ -110,7 +110,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="dataTab">
         <attribute name="title">
@@ -832,6 +832,8 @@
     <slot>toggleLockFit(bool)</slot>
     <slot>clearTrack()</slot>
     <slot>setColorFitLock(QString)</slot>
+    <slot>setProjW(int)</slot>
+    <slot>setProjH(int)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -844,12 +846,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>356</y>
+     <x>873</x>
+     <y>336</y>
     </hint>
     <hint type="destinationlabel">
-     <x>746</x>
-     <y>379</y>
+     <x>864</x>
+     <y>360</y>
     </hint>
    </hints>
   </connection>
@@ -860,12 +862,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>356</y>
+     <x>873</x>
+     <y>336</y>
     </hint>
     <hint type="destinationlabel">
-     <x>614</x>
-     <y>379</y>
+     <x>771</x>
+     <y>360</y>
     </hint>
    </hints>
   </connection>
@@ -876,12 +878,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>424</y>
+     <x>873</x>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
-     <x>616</x>
-     <y>447</y>
+     <x>771</x>
+     <y>426</y>
     </hint>
    </hints>
   </connection>
@@ -892,12 +894,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>424</y>
+     <x>873</x>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
-     <x>746</x>
-     <y>447</y>
+     <x>864</x>
+     <y>426</y>
     </hint>
    </hints>
   </connection>
@@ -908,12 +910,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>469</y>
+     <x>873</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
-     <x>746</x>
-     <y>492</y>
+     <x>864</x>
+     <y>467</y>
     </hint>
    </hints>
   </connection>
@@ -924,8 +926,8 @@
    <slot>toggleShowParabola(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>424</y>
+     <x>873</x>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
      <x>356</x>
@@ -940,8 +942,8 @@
    <slot>setPointThickness(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>402</y>
+     <x>864</x>
+     <y>385</y>
     </hint>
     <hint type="destinationlabel">
      <x>272</x>
@@ -956,8 +958,8 @@
    <slot>toggleWaitTilFall(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>469</y>
+     <x>873</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
      <x>93</x>
@@ -972,8 +974,8 @@
    <slot>setMinFallSpeed(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>492</y>
+     <x>864</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>74</x>
@@ -988,8 +990,8 @@
    <slot>setPointRadius(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>379</y>
+     <x>864</x>
+     <y>360</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -1004,8 +1006,8 @@
    <slot>setFitThickness(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>447</y>
+     <x>864</x>
+     <y>426</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -1020,12 +1022,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>469</y>
+     <x>873</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
-     <x>624</x>
-     <y>492</y>
+     <x>771</x>
+     <y>467</y>
     </hint>
    </hints>
   </connection>
@@ -1036,8 +1038,8 @@
    <slot>setFontSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>515</y>
+     <x>864</x>
+     <y>492</y>
     </hint>
     <hint type="destinationlabel">
      <x>321</x>
@@ -1068,8 +1070,8 @@
    <slot>toggleLockFit(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>577</x>
-     <y>93</y>
+     <x>873</x>
+     <y>119</y>
     </hint>
     <hint type="destinationlabel">
      <x>310</x>
@@ -1100,12 +1102,44 @@
    <slot>setColorFitLock(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>640</x>
-     <y>90</y>
+     <x>879</x>
+     <y>108</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
      <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>projWSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setProjW(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>99</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>projHSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setProjH(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>709</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>326</x>
+     <y>137</y>
     </hint>
    </hints>
   </connection>

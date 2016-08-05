@@ -96,6 +96,7 @@ void LiveFitWindow::setupSignalConnections()
   mTrackingStream.connect(ui.xYCovarianceDoubleSpinBox,
                           SIGNAL(valueChanged(double)),
                           SLOT(changeXYCovariance(double)));
+
   mTrackingStream.connect(ui.projWSpinBox,
                           SIGNAL(valueChanged(int)),
                           SLOT(changeProjWidth(int)));

@@ -183,6 +183,12 @@ public slots:
   {
     mWaitTilFall = waitTilFall;
   }
+
+  /** @brief set the projector width (in inches) */
+  void setProjW(int w) { mProjSize.setWidth(w); }
+  /** @brief set the projector height (in inches) */
+  void setProjH(int h) { mProjSize.setHeight(h); }
+
 protected:
   /**
    * @brief Draw the data on the projector screen widget
