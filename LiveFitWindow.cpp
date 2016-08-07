@@ -133,11 +133,13 @@ void LiveFitWindow::populateCameraMenu()
 
     //ui.menu_Camera->clear();
     for (i = 0; i < MAX_CAMERA_INDEX; i++) {
-      tempCamAction = new QAction(
-                        QString::number(i),
-                        ui.menu_Camera);
-      tempCamAction->setData(QVariant(i));
-      ui.menu_Camera->addAction(tempCamAction);
+      if (mTrackingStream.cameraValid(i)) {
+        tempCamAction = new QAction(
+                          QString::number(i),
+                          ui.menu_Camera);
+        tempCamAction->setData(QVariant(i));
+        ui.menu_Camera->addAction(tempCamAction);
+      }
     }
   }
 }

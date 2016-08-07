@@ -64,4 +64,5 @@ win32 {
 }
 
 DISTFILES += \
-    Doxyfile
+    Doxyfile \
+    README.md

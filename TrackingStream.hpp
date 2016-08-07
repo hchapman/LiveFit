@@ -294,6 +294,15 @@ public:
   void refreshCameraMatrix();
   /** @brief Update the projector transformation matrices */
   void refreshProjectorMatrices();
+
+  /** @brief Check if a camera index is valid.
+  *
+  * Presently this does nothing... V4L detection on Linux seems a bit finicky
+  * and making this cross platform is an interesting problem. For now, it would
+  * seem reasonable if the program just be restarted in order to fix
+  * any issues here.
+  */
+  bool cameraValid(int idx);
 private:
   /** Process a timer event: Read the next frame, process it, emit it. */
   void timerEvent(QTimerEvent *);

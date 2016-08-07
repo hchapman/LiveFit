@@ -94,7 +94,7 @@ Set program to hide fit curves, and not show any parametrization information.
 4. Ask students what they recall the various coefficients of x(t), y(t) mean.
    + x(t) = t\*[initial x velocity] + [initial x position]:
    + y(t) = t<sup>2</sup>g/2 + t\*[initial y velocity] + [initial y position]
-   
+
    What does the t<sup>2</sup> coefficient of y(t) mean (half of "acceleration
    due to gravity")? *Q* Do you think it will be different for different throws?
 5. Turn off "lock fit until reset" and throw more in front of the projector.
@@ -130,13 +130,13 @@ Set program to hide fit curves, and not show any parametrization information.
   smaller if balls are being ignored. Possible suggestion: 30px.
 - **GravConstant**: An *a priori* guess of the gravitational constant *g* in
   image coordinates, px/sec^2. This is used in tracking to help predict how
-  balls will fall. Suggested value: 480px/s^2. 
+  balls will fall. Suggested value: 480px/s^2.
 - **Frame**: What type of frame to display. Default is "Video," which displays
   video with blobs present after the diff/blur/thresh steps. "Video" is probably
   best here.
 - **XYCovariance**: Covariance between the X and Y coordinates of a ball in
   motion for the tracker. Probably best to leave this at exp(1.00)
-  
+
 ## Data ##
 
 - **Lock fit until clear**: Once the camera has detected a fit (the fit curve is
@@ -144,10 +144,6 @@ Set program to hide fit curves, and not show any parametrization information.
   change any display information. **When this is enabled, use "Drop Tracking
   Points" to clear the lock and enable tracking again**. Suggested to use this
   while working examples on the board, so that data is not dropped unexpectedly.
-- **Fit after**: Minimum number of points which must be detected before the
-  program will consider fitting a parametric equation to the trajectory.
-- **3 point fit**: Whether to use a "3 points=Quadratic" type fit or a full on
-  regression when creating the parametric fits.
 - **Clip track to projector**: Whether or not to ignore blobs which are not in
   front of the projector screen. Suggested if you will be in the camera's frame
   so that the camera can ignore you entirely and focus on the balls.

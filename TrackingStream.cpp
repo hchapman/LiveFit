@@ -153,6 +153,11 @@ void TrackingStream::refreshProjectorMatrices() {
     mTracker.setClipShape(mProjScreen);
 }
 
+bool TrackingStream::cameraValid(int idx)
+{
+  return true;
+}
+
 cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)
 {
     double s, x, y;
