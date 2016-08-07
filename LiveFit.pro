@@ -1,3 +1,6 @@
+TEMPLATE = app
+VERSION = 1.0.0
+
 SOURCES += main.cpp \
     TrackVideoWidget.cpp \
     TrackingStream.cpp \
