@@ -111,8 +111,11 @@
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
       <widget class="QTabWidget" name="tabWidget">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="dataTab">
         <attribute name="title">
@@ -377,23 +380,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="colorTab">
-        <attribute name="title">
-         <string>Color</string>
-        </attribute>
-        <layout class="QFormLayout" name="formLayout_4">
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Fit Curve</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </widget>
@@ -1066,22 +1052,6 @@
     <hint type="destinationlabel">
      <x>373</x>
      <y>527</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineEdit</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>projectorWindow</receiver>
-   <slot>setColorFitLock(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>894</x>
-     <y>96</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>326</x>
-     <y>90</y>
     </hint>
    </hints>
   </connection>
