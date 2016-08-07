@@ -17,9 +17,9 @@
 TrackingStream::TrackingStream(QObject* parent) :
     QObject(parent)
 {
-    setFov(56);
-    setProjSize(QSize(50, 50));
-    mBallZ = -0;
+    setFov(SETT_DEF_FOV);
+    setProjSize(QSize(SETT_DEF_PROJW, SETT_DEF_PROJH));
+    mBallZ = SETT_DEF_BALLZ;
 
     connect(&mTracker,
             SIGNAL(ballPredicted(KFPrediction)),
@@ -37,7 +37,7 @@ TrackingStream::TrackingStream(QObject* parent) :
             SIGNAL(ballLost()),
             SIGNAL(ballLost()));
 
-    mDisplayVideo = false;
+    mDisplayVideo = true;
     mProjReady = false;
     mEmitFrameType = DF_THRESH;
 }
@@ -76,12 +76,6 @@ void TrackingStream::updateProjectorCoordinates(
     mTVector = cv::Mat(3,1,CV_64F);
     mCorners = corners;
 
-    mProjScreen = QPolygonF(mCorners.size());
-    for (int corner_i = 0; corner_i < mCorners.size(); corner_i++) {
-        mProjScreen << QPointF(mCorners.at(corner_i).x, mCorners.at(corner_i).y);
-    }
-    mTracker.setClipShape(mProjScreen);
-
     mProjCornersCamera = cv::Mat::zeros(4, 3, CV_64F);
     mProjCornersCamera.at<double>(3,0) = mProjSize.width();
     mProjCornersCamera.at<double>(1,1) = mProjSize.height();
@@ -93,14 +87,26 @@ void TrackingStream::updateProjectorCoordinates(
     cv::Rodrigues(rvec, mRMatrix);
 
     mBallPlane.clear();
-    mBallPlane.push_back(projectorToImage(cv::Point3d(0,0,mBallZ)));
-    mBallPlane.push_back(projectorToImage(cv::Point3d(0,mProjSize.height(),mBallZ)));
-    mBallPlane.push_back(projectorToImage(cv::Point3d(mProjSize.width(),mProjSize.height(),mBallZ)));
-    mBallPlane.push_back(projectorToImage(cv::Point3d(mProjSize.width(),0,mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(
+                    cv::Point3d(0,0,mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(
+                    cv::Point3d(0,mProjSize.height(),mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(
+                    cv::Point3d(mProjSize.width(),mProjSize.height(),mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(
+                    cv::Point3d(mProjSize.width(),0,mBallZ)));
 
-    //std::cout << mBallZ;
-    //std::cout << imageToProjector(corners[0]) << corners[0] << mBallPlane[0] << " ";
-    //std::cout << imageToProjector(corners[2]) << corners[2] << mBallPlane[2] << "\n";
+    mProjScreen = QPolygonF(mBallPlane.size());
+    for (unsigned int corner_i = 0; corner_i < mBallPlane.size(); corner_i++) {
+        mProjScreen << QPointF(
+                           mBallPlane.at(corner_i).x, mBallPlane.at(corner_i).y);
+    }
+
+    mTracker.setClipShape(mProjScreen);
 
     mProjReady = true;
 }
@@ -126,15 +132,25 @@ void TrackingStream::refreshProjectorMatrices() {
     // Change rotation vector rvec to 3x3 mat rMatrix
     cv::Rodrigues(rvec, mRMatrix);
 
+    // Create the "ball plane" in image coordinates
     mBallPlane.clear();
-    mBallPlane.push_back(projectorToImage(cv::Point3d(0,0,mBallZ)));
-    mBallPlane.push_back(projectorToImage(cv::Point3d(0,mProjSize.height(),mBallZ)));
-    mBallPlane.push_back(projectorToImage(cv::Point3d(mProjSize.width(),mProjSize.height(),mBallZ)));
-    mBallPlane.push_back(projectorToImage(cv::Point3d(mProjSize.width(),0,mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(cv::Point3d(0,0,mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(cv::Point3d(0,mProjSize.height(),mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(
+                    cv::Point3d(mProjSize.width(),mProjSize.height(),mBallZ)));
+    mBallPlane.push_back(
+                projectorToImage(cv::Point3d(mProjSize.width(),0,mBallZ)));
 
-    std::cout << mBallZ;
-    std::cout << mBallPlane[0] << imageToProjector(mBallPlane[0], mBallZ) << " ";
-    std::cout << mBallPlane[2] << imageToProjector(mBallPlane[2], mBallZ) << "\n";
+    mProjScreen = QPolygonF(mBallPlane.size());
+    for (unsigned int corner_i = 0; corner_i < mBallPlane.size(); corner_i++) {
+        mProjScreen << QPointF(
+                           mBallPlane.at(corner_i).x, mBallPlane.at(corner_i).y);
+    }
+
+    mTracker.setClipShape(mProjScreen);
 }
 
 cv::Point2f TrackingStream::imageToProjector(cv::Point2f imP, double z)
@@ -262,8 +278,8 @@ void TrackingStream::predictionBall(KFPrediction pred)
     // Convert the prediction to projector coordinates
     KFPrediction projPred = KFPrediction(pred);
     //projPred.setCenter(imageToProjector(pred.bbox().center()));
-    projPred.setTopLeft(imageToProjector(pred.bbox().topLeft(), 0));
-    projPred.setBottomRight(imageToProjector(pred.bbox().bottomRight(), 0));
+    projPred.setTopLeft(imageToProjector(pred.bbox().topLeft(), mBallZ));
+    projPred.setBottomRight(imageToProjector(pred.bbox().bottomRight(), mBallZ));
     emit ballProjPredicted(projPred);
 }
 

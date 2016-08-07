@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>776</width>
+    <width>915</width>
     <height>575</height>
    </rect>
   </property>
@@ -32,6 +32,9 @@
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <item>
        <widget class="TrackVideoWidget" name="trackVideoWidget" native="true">
         <property name="sizePolicy">
@@ -68,8 +71,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>776</width>
-     <height>21</height>
+     <width>915</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -80,9 +83,6 @@
      <property name="title">
       <string>&amp;Camera</string>
      </property>
-     <addaction name="action0"/>
-     <addaction name="action1"/>
-     <addaction name="action2"/>
     </widget>
     <addaction name="action_Open"/>
     <addaction name="menu_Camera"/>
@@ -116,106 +116,117 @@
         <attribute name="title">
          <string>Data</string>
         </attribute>
-        <layout class="QFormLayout" name="formLayout_6">
-         <property name="rowWrapPolicy">
-          <enum>QFormLayout::WrapAllRows</enum>
-         </property>
-         <property name="labelAlignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="formAlignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-         </property>
-         <property name="verticalSpacing">
-          <number>3</number>
-         </property>
-         <item row="1" column="1">
-          <widget class="QCheckBox" name="lockFitBox">
-           <property name="text">
-            <string>Lock fit until clear</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="fitAfterLabel">
-           <property name="text">
-            <string>Fit after</string>
-           </property>
-           <property name="buddy">
-            <cstring>fitAfterSpin</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QSpinBox" name="fitAfterSpin">
-           <property name="suffix">
-            <string> points</string>
-           </property>
-           <property name="minimum">
-            <number>3</number>
-           </property>
-           <property name="maximum">
-            <number>20</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QCheckBox" name="pointFitBox">
-           <property name="text">
-            <string>3 point fit (off: regression)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QCheckBox" name="clipTrackBox">
-           <property name="text">
-            <string>Clip track to projector</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QCheckBox" name="showYtBox">
-           <property name="text">
-            <string>Show y(t), x(t)</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QCheckBox" name="showJetBox">
-           <property name="text">
-            <string>Show dx/dt, dy/dt</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="1">
-          <widget class="QGroupBox" name="groupBox">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
            <property name="title">
-            <string>Projector Tracking Display</string>
+            <string/>
            </property>
-           <layout class="QFormLayout" name="formLayout_3">
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <item row="0" column="0" colspan="2">
-             <widget class="QCheckBox" name="colorMissBox">
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QCheckBox" name="lockFitBox">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether or not to lock a successful fit until manually clearing the data by pressing the button under the video or clicking on the video.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
-               <string>Color track miss</string>
+               <string>Lock fit until clear</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="fitAfterLabel">
+              <property name="text">
+               <string>Fit after</string>
+              </property>
+              <property name="buddy">
+               <cstring>fitAfterSpin</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="fitAfterSpin">
+              <property name="suffix">
+               <string> points</string>
+              </property>
+              <property name="minimum">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="pointFitBox">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether or not to use the same 3-point quadratic fit that the students will, or a full-on quadratic regression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>3 point fit (off: regression)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="clipTrackBox">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether or not to only detect blobs which are in the 'projector' region indicated by the corner widgets and the &amp;quot;World W,H,Z&amp;quot; variables.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Clip track to projector</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="showYtBox">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether or not to show the parametrized projectile motion equations x(t) and y(t) fit by the software.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Show y(t), x(t)</string>
               </property>
               <property name="checked">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2">
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Projector Tracking Display</string>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <layout class="QFormLayout" name="formLayout_3">
+            <property name="verticalSpacing">
+             <number>1</number>
+            </property>
+            <item row="0" column="0" colspan="2">
+             <widget class="QCheckBox" name="colorMissBox">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether or not to color tracked blobs a different color if they are based purely on KF prediction data, and not on any visual cue from the video image.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Color track misses</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" colspan="2">
              <widget class="QCheckBox" name="verboseKFBox">
               <property name="text">
                <string>Verbose KF track points</string>
@@ -225,20 +236,23 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
+            <item row="4" column="0">
              <widget class="QLabel" name="projPointRadiusLabel">
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The radius (in px) of the predicted location of a ball, as located on the projector screen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
-               <string>Poi&amp;nt radius</string>
+               <string>Point &amp;radius</string>
               </property>
               <property name="buddy">
                <cstring>projPointRadius</cstring>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="4" column="1">
              <widget class="QSpinBox" name="projPointRadius">
               <property name="enabled">
                <bool>true</bool>
@@ -254,7 +268,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
+            <item row="5" column="0">
              <widget class="QLabel" name="pointThicknessLabel">
               <property name="text">
                <string>Point thic&amp;kness</string>
@@ -264,7 +278,7 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
+            <item row="7" column="0">
              <widget class="QLabel" name="fitThicknessLabel">
               <property name="enabled">
                <bool>false</bool>
@@ -277,7 +291,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="5" column="1">
              <widget class="QDoubleSpinBox" name="pointThickness">
               <property name="prefix">
                <string/>
@@ -290,7 +304,7 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="7" column="1">
              <widget class="QDoubleSpinBox" name="fitThickness">
               <property name="enabled">
                <bool>false</bool>
@@ -303,21 +317,21 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="0" colspan="2">
+            <item row="6" column="0" colspan="2">
              <widget class="QCheckBox" name="showFit">
               <property name="text">
                <string>Show fit parabola</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="0" colspan="2">
+            <item row="8" column="0" colspan="2">
              <widget class="QCheckBox" name="fallLockBox">
               <property name="text">
                <string>Only lock after falling?</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="0">
+            <item row="9" column="0">
              <widget class="QLabel" name="minFallSpeedLabel">
               <property name="text">
                <string>&amp;Min fall speed</string>
@@ -327,7 +341,7 @@
               </property>
              </widget>
             </item>
-            <item row="7" column="1">
+            <item row="9" column="1">
              <widget class="QSpinBox" name="minFallSpeed">
               <property name="suffix">
                <string> px/s</string>
@@ -337,7 +351,7 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="0">
+            <item row="10" column="0">
              <widget class="QLabel" name="fontSizeLabel">
               <property name="text">
                <string>Font Si&amp;ze</string>
@@ -347,7 +361,7 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="1">
+            <item row="10" column="1">
              <widget class="QSpinBox" name="fontSizeSpinBox">
               <property name="suffix">
                <string> pt</string>
@@ -366,7 +380,50 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="showJetBox">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether or not to show the [dx/dt, dy/dt] displacement vector on the projector screen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Show dx/dt, dy/dt</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
            </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>0</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="colorTab">
+        <attribute name="title">
+         <string>Color</string>
+        </attribute>
+        <layout class="QFormLayout" name="formLayout_4">
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEdit"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Fit Curve</string>
+           </property>
           </widget>
          </item>
         </layout>
@@ -643,7 +700,7 @@
             <number>1</number>
            </property>
            <property name="value">
-            <number>40</number>
+            <number>50</number>
            </property>
           </widget>
          </item>
@@ -659,7 +716,7 @@
             <number>1</number>
            </property>
            <property name="value">
-            <number>30</number>
+            <number>50</number>
            </property>
           </widget>
          </item>
@@ -772,6 +829,11 @@
     <slot>toggleWaitTilFall(bool)</slot>
     <slot>setMinFallSpeed(int)</slot>
     <slot>setFontSize(int)</slot>
+    <slot>toggleLockFit(bool)</slot>
+    <slot>clearTrack()</slot>
+    <slot>setColorFitLock(QString)</slot>
+    <slot>setProjW(int)</slot>
+    <slot>setProjH(int)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -784,12 +846,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>374</y>
+     <x>873</x>
+     <y>336</y>
     </hint>
     <hint type="destinationlabel">
-     <x>743</x>
-     <y>399</y>
+     <x>864</x>
+     <y>360</y>
     </hint>
    </hints>
   </connection>
@@ -800,12 +862,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>374</y>
+     <x>873</x>
+     <y>336</y>
     </hint>
     <hint type="destinationlabel">
-     <x>634</x>
-     <y>399</y>
+     <x>771</x>
+     <y>360</y>
     </hint>
    </hints>
   </connection>
@@ -816,12 +878,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>446</y>
+     <x>873</x>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
-     <x>636</x>
-     <y>471</y>
+     <x>771</x>
+     <y>426</y>
     </hint>
    </hints>
   </connection>
@@ -832,12 +894,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>446</y>
+     <x>873</x>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
-     <x>743</x>
-     <y>471</y>
+     <x>864</x>
+     <y>426</y>
     </hint>
    </hints>
   </connection>
@@ -848,12 +910,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>493</y>
+     <x>873</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
-     <x>743</x>
-     <y>518</y>
+     <x>864</x>
+     <y>467</y>
     </hint>
    </hints>
   </connection>
@@ -864,8 +926,8 @@
    <slot>toggleShowParabola(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>446</y>
+     <x>873</x>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
      <x>356</x>
@@ -880,8 +942,8 @@
    <slot>setPointThickness(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>424</y>
+     <x>864</x>
+     <y>385</y>
     </hint>
     <hint type="destinationlabel">
      <x>272</x>
@@ -896,8 +958,8 @@
    <slot>toggleWaitTilFall(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>493</y>
+     <x>873</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
      <x>93</x>
@@ -912,8 +974,8 @@
    <slot>setMinFallSpeed(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>518</y>
+     <x>864</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>74</x>
@@ -928,8 +990,8 @@
    <slot>setPointRadius(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>399</y>
+     <x>864</x>
+     <y>360</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -944,8 +1006,8 @@
    <slot>setFitThickness(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>471</y>
+     <x>864</x>
+     <y>426</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -960,60 +1022,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>493</y>
+     <x>873</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
-     <x>646</x>
-     <y>518</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action0</sender>
-   <signal>triggered()</signal>
-   <receiver>liveFitWindow</receiver>
-   <slot>startCamera0()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>387</x>
-     <y>287</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action1</sender>
-   <signal>triggered()</signal>
-   <receiver>liveFitWindow</receiver>
-   <slot>startCamera1()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>387</x>
-     <y>287</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action2</sender>
-   <signal>triggered()</signal>
-   <receiver>liveFitWindow</receiver>
-   <slot>startCamera2()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>387</x>
-     <y>287</y>
+     <x>771</x>
+     <y>467</y>
     </hint>
    </hints>
   </connection>
@@ -1024,12 +1038,108 @@
    <slot>setFontSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>671</x>
-     <y>534</y>
+     <x>864</x>
+     <y>492</y>
     </hint>
     <hint type="destinationlabel">
      <x>321</x>
      <y>540</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Quit</sender>
+   <signal>triggered()</signal>
+   <receiver>liveFitWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lockFitBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>toggleLockFit(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>873</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>untrackButton</sender>
+   <signal>clicked()</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>clearTrack()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>531</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>527</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setColorFitLock(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>879</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>326</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>projWSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setProjW(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>99</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>projHSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>projectorWindow</receiver>
+   <slot>setProjH(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>709</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>326</x>
+     <y>137</y>
     </hint>
    </hints>
   </connection>
@@ -1039,5 +1149,6 @@
   <slot>startCamera0()</slot>
   <slot>startCamera1()</slot>
   <slot>startCamera2()</slot>
+  <slot>sendCameraAction(QAction*)</slot>
  </slots>
 </ui>

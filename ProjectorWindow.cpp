@@ -7,46 +7,6 @@
 
 #include "Util.hpp"
 
-void ProjectorWindow::toggleShowParabola(bool showParabola)
-{
-    mShowParabola = showParabola;
-    update();
-}
-
-void ProjectorWindow::setPointRadius(int pointRadius)
-{
-    mPointRadius = pointRadius;
-    update();
-}
-
-void ProjectorWindow::setPointThickness(double pointThickness)
-{
-    mPointThickness = pointThickness;
-    update();
-}
-
-void ProjectorWindow::setFitThickness(double fitThickness)
-{
-    mFitThickness = fitThickness;
-    update();
-}
-
-void ProjectorWindow::setMinFallSpeed(int minFallSpeed)
-{
-    mMinFallSpeed = minFallSpeed;
-}
-
-void ProjectorWindow::toggleWaitTilFall(bool waitTilFall)
-{
-    mWaitTilFall = waitTilFall;
-}
-
-void ProjectorWindow::setFontSize(int fontSize)
-{
-    mFontSize = fontSize;
-    update();
-}
-
 ProjectorWindow::ProjectorWindow(QWidget* parent)
     : QOpenGLWidget(parent)
 {
@@ -69,6 +29,8 @@ ProjectorWindow::ProjectorWindow(QWidget* parent)
 
     mWaitTilFall = true;
     mMinFallSpeed = 5;
+
+    mColorFitLock = QColor(255, 255, 255);
 }
 
 void ProjectorWindow::pushBall(TrackingBall ball)
@@ -94,7 +56,6 @@ static bool comparePredY(KFPrediction a, KFPrediction b) {
  * @param f An array of 3 doubles; <C,B,A> */
 void fitYTPoints(QList<KFPrediction> pts, double f[3]) {
     double t,y1,t1,y2,t2,y3,t3;
-    double a,b,c;
     t = pts.at(0).t();
     t1 = 0;
     y1 = pts.at(0).bbox().center().y();
@@ -113,12 +74,12 @@ void fitYTPoints(QList<KFPrediction> pts, double f[3]) {
     f[0] = y2 - f[2]*t2*t2 - f[1]*t2;
 }
 
-/** Solve 3 points (x,t) [really first, last] for a linear equation x(t) = mt + b
+/** Solve 3 points (x,t) [really first, last] for a linear equation
+ * x(t) = mt + b
  * @param pts A list of 3 points
  * @param f An array of 2 doubles; <b, m> */
 void fitXTPoints(QList<KFPrediction> pts, double f[2]) {
-    double t,y1,t1,y2,t2,y3,t3;
-    double a,b,c;
+    double t,y1,t1,y3,t3;
     t = pts.at(0).t();
     t1 = 0;
     y1 = pts.at(0).bbox().center().x();
@@ -131,96 +92,76 @@ void fitXTPoints(QList<KFPrediction> pts, double f[2]) {
 
 void ProjectorWindow::pushPred(KFPrediction pred)
 {
-    if(mDataStale) {
-        mPreds.clear();
-        mFitPreds.clear();
-        mDataStale = false;
-        mMarkedPoints.clear();
-        mFitLocked = false;
+  if (mFitLocked && mLockFit) {
+    // If we are locked, and we have "lock until manual clear" checked
+
+  } else {
+    if (mDataStale) {
+      clearTrack();
     }
+
     // Add the prediction to the list of predictions
     mPreds.append(KFPrediction(pred));
 
     // Trim the viewer points if it's too long
     if (mPreds.size() > 20) {
-        mPreds.removeFirst();
+      mPreds.removeFirst();
     }
 
     if (!mNumPointFit) {
-        // We fit to all predictions...
-        mFitPreds.append(KFPrediction(pred));
+      // We fit to all predictions...
+      mFitPreds.append(KFPrediction(pred));
 
-        // If the history is too large, remove old predictions
-        if (mPreds.size() > 20) {
-            mFitPreds.removeFirst();
-        }
+      // If the history is too large, remove old predictions
+      if (mPreds.size() > 20) {
+        mFitPreds.removeFirst();
+      }
 
     } else {
 
-        if ((mWaitTilFall && pred.jet().y()*pred.dt() < mMinFallSpeed) ||
-                (mFitPreds.size() < mNumPointFit)) {
-            mFitPreds.append(KFPrediction(pred));
-            mFitLocked = false;
-        }
+      if ((mWaitTilFall && pred.jet().y()*pred.dt() < mMinFallSpeed) ||
+          (mFitPreds.size() < mNumPointFit)) {
+        mFitPreds.append(KFPrediction(pred));
+        mFitLocked = false;
+      }
 
-        if ((!mWaitTilFall || pred.jet().y()*pred.dt() >= mMinFallSpeed) &&
-                (mFitPreds.size() >= mNumPointFit)){
-            mFitLocked = true;
-        }
+      if ((!mWaitTilFall || pred.jet().y()*pred.dt() >= mMinFallSpeed) &&
+          (mFitPreds.size() >= mNumPointFit)){
+        mFitLocked = true;
+      }
 
     }
 
     // We fit our parabola to the predictions
     if (!mFitPoints) {
-        polynomialFitKFX(2, mFitPreds.at(0).t(), mFitPreds, mFitLineX);
-        polynomialFitKFY(3, mFitPreds.at(0).t(), mFitPreds, mFitParabolaY);
+      polynomialFitKFX(2, mFitPreds.at(0).t(), mFitPreds, mFitLineX);
+      polynomialFitKFY(3, mFitPreds.at(0).t(), mFitPreds, mFitParabolaY);
     } else if (mFitLocked && mFitPreds.size() > 3 && mMarkedPoints.empty()) {
-        mMarkedPoints.append(mFitPreds.at(0));
-        mMarkedPoints.append(*std::min_element(++mFitPreds.begin(), --mFitPreds.end(),
-                                               comparePredY));
-        mMarkedPoints.append(mFitPreds.at(mFitPreds.size()-1));
-        fitYTPoints(mMarkedPoints, mFitParabolaY);
-        fitXTPoints(mMarkedPoints, mFitLineX);
+      mMarkedPoints.append(mFitPreds.at(0));
+      mMarkedPoints.append(*std::min_element(
+                             ++mFitPreds.begin(), --mFitPreds.end(),
+                             comparePredY));
+      mMarkedPoints.append(mFitPreds.at(mFitPreds.size()-1));
+      fitYTPoints(mMarkedPoints, mFitParabolaY);
+      fitXTPoints(mMarkedPoints, mFitLineX);
     }
 
 
     // Update the window. Hopefully, we can make this more efficient...
     update();//(pred.bbox());
+
+  }
 }
 
-void ProjectorWindow::markDataStale() {
-    // Indicate that the data we have is stale, and to be dropped.
-    mDataStale = true;
-}
-
-void ProjectorWindow::toggleShowFit(bool showFit)
+void ProjectorWindow::clearTrack()
 {
-    mShowFit = showFit;
-    update();
-}
+  mPreds.clear();
+  mFitPreds.clear();
+  mDataStale = false;
+  mMarkedPoints.clear();
+  mFitLocked = false;
 
-void ProjectorWindow::toggleShowParam(bool showParam)
-{
-    mShowParam = showParam;
-    update();
-}
-
-void ProjectorWindow::toggleShowJet(bool showJet)
-{
-    mShowJet = showJet;
-    update();
-}
-
-void ProjectorWindow::toggleColorMiss(bool colorMiss)
-{
-    mColorMiss = colorMiss;
-    update();
-}
-
-void ProjectorWindow::toggleVerboseKF(bool verboseKF)
-{
-    mVerboseKF = verboseKF;
-    update();
+  update();
 }
 
 QRectF ProjectorWindow::relRectToWindow(QRectF rect) {
@@ -251,9 +192,8 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
     // List of data HTMLs
     QStringList dataHtml;
 
-    double size = 10;
-
     // Pens (i.e. line drawing settings for the painter)
+
     QPen ballPen = QPen((QColor(0, 0, 255)));
     ballPen.setWidthF(mPointThickness);
     QPen kfSeenPen = QPen((QColor(255,0,0)));
@@ -266,14 +206,15 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
 
     QPen fitPen = QPen((QColor(255,0,255)));
     fitPen.setWidthF(mFitThickness);
-    QPen fitLockPen = QPen((QColor(255,255,255)));
+    QPen fitLockPen = QPen(mColorFitLock);
     fitLockPen.setWidthF(mFitThickness);
 
     // We have to begin painting. Remember to end.
     painter.begin(this);
     normalBrush = painter.brush();
 
-    // This brush is the background color of the widget. Fill the window in case.
+    // This brush is the background color of the widget.
+    // Fill the window in case.
     QBrush background = QBrush(QColor(0,0,0));
     painter.fillRect(ev->rect(), background);
 
@@ -291,7 +232,8 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
     QList<KFPrediction>::const_iterator predsIter;
     for (predsIter = mPreds.begin(); predsIter != mPreds.end(); ++predsIter) {
 
-        // The color of the indicator depends on if the ball was actually seen on this frame or not
+        // The color of the indicator depends on if the ball was actually
+        // seen on this frame or not
         if (((*predsIter).seen() || !mColorMiss)) {
             painter.setPen(kfSeenPen);
         } else {
@@ -303,7 +245,8 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
             painter.drawRect(relRectToWindow((*predsIter).bbox()));
         } else {
             painter.drawEllipse(QRectF(relPointToWindow(
-                                    (*predsIter).bbox().center())-QPointF(mPointRadius/2,mPointRadius/2),
+                                         (*predsIter).bbox().center()) -
+                                       QPointF(mPointRadius/2,mPointRadius/2),
                                 QSizeF(mPointRadius,mPointRadius)));
         }
 
@@ -311,12 +254,12 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
             // Draw the predicted velocities of the predicted ball
             painter.drawLine(relPointToWindow((*predsIter).bbox().center()),
                              relPointToWindow(
-                                 (*predsIter).bbox().center()+
-                                 (QPointF)(*predsIter).jet()*(*predsIter).dt()));
+                                 (*predsIter).bbox().center() +
+                                 ((QPointF)(*predsIter).jet() *
+                                  (*predsIter).dt())));
         }
     }
 
-    int PX, PY;
     int j; double t0;
     j = 0;
 
@@ -391,8 +334,9 @@ void ProjectorWindow::paintEvent(QPaintEvent* ev)
                     .arg(predsIter->bbox().center().x(), 0, 'f', 3)
                     .arg(predsIter->bbox().center().y(), 0, 'f', 3);
 
-        markRect = QRectF(relPointToWindow(
-                              (*predsIter).bbox().center())-QPointF(mMarkRadius/2,mMarkRadius/2),
+        markRect = QRectF((relPointToWindow(
+                             (*predsIter).bbox().center()) -
+                           QPointF(mMarkRadius/2,mMarkRadius/2)),
                           QSizeF(mMarkRadius,mMarkRadius));
 
         painter.setBrush(background);

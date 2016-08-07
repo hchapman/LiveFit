@@ -38,9 +38,9 @@ private:
   /** Where this drag was initiated */
   QPoint dragStartPos;
   /** Whether this corner is selected */
-  bool selected;
+  bool selected = false;
   /** Whether this corner is being dragged */
-  bool dragging;
+  bool dragging = false;
   /** Display/click radius of this widget */
   int radius;
 };
