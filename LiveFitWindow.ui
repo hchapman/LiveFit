@@ -72,7 +72,7 @@
      <x>0</x>
      <y>0</y>
      <width>915</width>
-     <height>22</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -86,6 +86,8 @@
     </widget>
     <addaction name="action_Open"/>
     <addaction name="menu_Camera"/>
+    <addaction name="separator"/>
+    <addaction name="actionFind_Projector_Window"/>
     <addaction name="separator"/>
     <addaction name="action_Quit"/>
    </widget>
@@ -133,39 +135,6 @@
               </property>
               <property name="text">
                <string>Lock fit until clear</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="fitAfterLabel">
-              <property name="text">
-               <string>Fit after</string>
-              </property>
-              <property name="buddy">
-               <cstring>fitAfterSpin</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="fitAfterSpin">
-              <property name="suffix">
-               <string> points</string>
-              </property>
-              <property name="minimum">
-               <number>3</number>
-              </property>
-              <property name="maximum">
-               <number>20</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="pointFitBox">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether or not to use the same 3-point quadratic fit that the students will, or a full-on quadratic regression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>3 point fit (off: regression)</string>
               </property>
              </widget>
             </item>
@@ -808,6 +777,11 @@
     <string>6</string>
    </property>
   </action>
+  <action name="actionFind_Projector_Window">
+   <property name="text">
+    <string>Find Projector Window</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -846,12 +820,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>336</y>
+     <x>883</x>
+     <y>250</y>
     </hint>
     <hint type="destinationlabel">
-     <x>864</x>
-     <y>360</y>
+     <x>883</x>
+     <y>272</y>
     </hint>
    </hints>
   </connection>
@@ -862,12 +836,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>336</y>
+     <x>883</x>
+     <y>250</y>
     </hint>
     <hint type="destinationlabel">
-     <x>771</x>
-     <y>360</y>
+     <x>616</x>
+     <y>272</y>
     </hint>
    </hints>
   </connection>
@@ -878,12 +852,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>403</y>
+     <x>883</x>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
-     <x>771</x>
-     <y>426</y>
+     <x>619</x>
+     <y>333</y>
     </hint>
    </hints>
   </connection>
@@ -894,12 +868,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>403</y>
+     <x>883</x>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
-     <x>864</x>
-     <y>426</y>
+     <x>883</x>
+     <y>333</y>
     </hint>
    </hints>
   </connection>
@@ -910,12 +884,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>444</y>
+     <x>883</x>
+     <y>352</y>
     </hint>
     <hint type="destinationlabel">
-     <x>864</x>
-     <y>467</y>
+     <x>883</x>
+     <y>373</y>
     </hint>
    </hints>
   </connection>
@@ -926,8 +900,8 @@
    <slot>toggleShowParabola(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>403</y>
+     <x>883</x>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
      <x>356</x>
@@ -942,8 +916,8 @@
    <slot>setPointThickness(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>864</x>
-     <y>385</y>
+     <x>883</x>
+     <y>293</y>
     </hint>
     <hint type="destinationlabel">
      <x>272</x>
@@ -958,8 +932,8 @@
    <slot>toggleWaitTilFall(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>444</y>
+     <x>883</x>
+     <y>352</y>
     </hint>
     <hint type="destinationlabel">
      <x>93</x>
@@ -974,8 +948,8 @@
    <slot>setMinFallSpeed(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>864</x>
-     <y>467</y>
+     <x>883</x>
+     <y>373</y>
     </hint>
     <hint type="destinationlabel">
      <x>74</x>
@@ -990,8 +964,8 @@
    <slot>setPointRadius(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>864</x>
-     <y>360</y>
+     <x>883</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -1006,8 +980,8 @@
    <slot>setFitThickness(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>864</x>
-     <y>426</y>
+     <x>883</x>
+     <y>333</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -1022,12 +996,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>444</y>
+     <x>883</x>
+     <y>352</y>
     </hint>
     <hint type="destinationlabel">
-     <x>771</x>
-     <y>467</y>
+     <x>625</x>
+     <y>373</y>
     </hint>
    </hints>
   </connection>
@@ -1038,8 +1012,8 @@
    <slot>setFontSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>864</x>
-     <y>492</y>
+     <x>883</x>
+     <y>394</y>
     </hint>
     <hint type="destinationlabel">
      <x>321</x>
@@ -1070,8 +1044,8 @@
    <slot>toggleLockFit(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>119</y>
+     <x>883</x>
+     <y>105</y>
     </hint>
     <hint type="destinationlabel">
      <x>310</x>
@@ -1102,8 +1076,8 @@
    <slot>setColorFitLock(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>879</x>
-     <y>108</y>
+     <x>894</x>
+     <y>96</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
@@ -1118,8 +1092,8 @@
    <slot>setProjW(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>708</x>
-     <y>99</y>
+     <x>894</x>
+     <y>96</y>
     </hint>
     <hint type="destinationlabel">
      <x>339</x>
@@ -1134,8 +1108,8 @@
    <slot>setProjH(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>709</x>
-     <y>131</y>
+     <x>894</x>
+     <y>122</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>

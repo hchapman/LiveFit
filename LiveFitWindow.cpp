@@ -352,3 +352,8 @@ void LiveFitWindow::on_action_Open_triggered()
                                   Q_ARG(QString, fname));
     }
 }
+
+void LiveFitWindow::on_actionFind_Projector_Window_triggered()
+{
+    ui.projectorDock->setGeometry(50, 50, 400, 400);
+}

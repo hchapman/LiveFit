@@ -6,7 +6,16 @@
 
 #include "KFPrediction.hpp"
 
+#ifndef NO_GSL
+// GSL library is not available for VS2015, etc.
+// On Unix-based systems, we use GSL here for polynomial regression
+// On Windows, we don't necessarily have access to gsl without
+//  much stress. So, we just don't implement regression fittng
+//  for the time being (this is "ok" as in-class students will
+//  tentatively just use the 3-point fit algorithm)
 #include <gsl/gsl_multifit.h>
+#endif
+
 #include <stdbool.h>
 #include <math.h>
 #include <QList>

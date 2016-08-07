@@ -1,9 +1,14 @@
 #include "KFPrediction.hpp"
 #include "Util.hpp"
 
+
 bool polynomialFitKFX(int degree, double tStart,
            QList<KFPrediction> preds, double *store) /* n, p */
 {
+#ifdef NO_GSL
+  // GSL library is not available for VS2015, etc.
+  return false;
+#else
   gsl_multifit_linear_workspace *ws;
   gsl_matrix *cov, *X;
   gsl_vector *y, *c;
@@ -44,11 +49,16 @@ bool polynomialFitKFX(int degree, double tStart,
   gsl_vector_free(c);
   return true; /* we do not "analyse" the result (cov matrix mainly)
           to know if the fit is "good" */
+#endif
 }
 
 bool polynomialFitKFY(int degree, double tStart,
            QList<KFPrediction> preds, double *store) /* n, p */
 {
+#ifdef NO_GSL
+  // GSL library is not available for VS2015, etc.
+  return false;
+#else
   gsl_multifit_linear_workspace *ws;
   gsl_matrix *cov, *X;
   gsl_vector *y, *c;
@@ -89,4 +99,5 @@ bool polynomialFitKFY(int degree, double tStart,
   gsl_vector_free(c);
   return true; /* we do not "analyse" the result (cov matrix mainly)
           to know if the fit is "good" */
+#endif
 }

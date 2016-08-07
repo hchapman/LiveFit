@@ -51,7 +51,17 @@ QT_CONFIG -= no-pkg-config
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += opencv gsl
 
-LIBS += -lopencv_core300 -lopencv_calib3d300 -lopencv_highgui300 -lopencv_video300 -lopencv_videoio300 -lopencv_imgproc300
+win32 {
+  DEFINES += NO_GSL
+  CONFIG(debug, debug|release) {
+    LIBS += -lopencv_core300d -lopencv_calib3d300d -lopencv_highgui300d \
+            -lopencv_video300d -lopencv_videoio300d -lopencv_imgproc300d
+  }
+  else {
+    LIBS += -lopencv_core300 -lopencv_calib3d300 -lopencv_highgui300 \
+            -lopencv_video300 -lopencv_videoio300 -lopencv_imgproc300
+  }
+}
 
 DISTFILES += \
     Doxyfile

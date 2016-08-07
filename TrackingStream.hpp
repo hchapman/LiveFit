@@ -74,6 +74,7 @@ class TrackingStream : public QObject
    *
    * Order is important: expected NW, SW, SE, NE (counterclockwise)
    */
+  //cv::Mat mCorners;
   std::vector<cv::Point2f> mCorners;
 
   /**

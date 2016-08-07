@@ -94,6 +94,7 @@ QList<cv::Rect> KFBallTracker::findPeople(cv::Mat& nxtFrame)
 
 QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff, QList<cv::Rect> ignores) {
     std::vector<std::vector<cv::Point> > contours;
+    //std::vector<cv::Mat> contours;
     QMap<double, TrackingBall> balls;
 
     cv::findContours(threshDiff, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);

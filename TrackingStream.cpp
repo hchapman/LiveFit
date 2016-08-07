@@ -74,7 +74,7 @@ void TrackingStream::updateProjectorCoordinates(
     cv::Mat rvec(3,1,CV_64F);
     cv::Mat distCoeffs;
     mTVector = cv::Mat(3,1,CV_64F);
-    mCorners = corners;
+    mCorners = corners;//cv::Mat::zeros(4, 2, CV_64F);
 
     mProjCornersCamera = cv::Mat::zeros(4, 3, CV_64F);
     mProjCornersCamera.at<double>(3,0) = mProjSize.width();

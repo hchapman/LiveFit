@@ -80,6 +80,8 @@ private slots:
   /** Called when the Open action is triggered (ie file>open)*/
   void on_action_Open_triggered();
 
+  void on_actionFind_Projector_Window_triggered();
+
 private:
   /** This window's QDesigner ui, LiveFitWindow.ui */
   Ui::liveFitWindow ui;
