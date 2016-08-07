@@ -78,6 +78,7 @@ void BallTrackingFilter::updateTrackFailure()
     } else {
         mKf.statePost = mKfState;
     }
+
 }
 
 void BallTrackingFilter::updateTrackSuccess(TrackingBall ball)

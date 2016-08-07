@@ -126,11 +126,14 @@ QMap<double, TrackingBall> KFBallTracker::findMovementThresh(cv::Mat threshDiff,
                 break;
             }
         }
+
         if (ignoreBall) {
             continue;
         }
 
         double score = scoreContour(ball, threshDiff);
+
+        //qDebug() << score;
 
         if (score > 0.7) {
             balls[score] = ball;

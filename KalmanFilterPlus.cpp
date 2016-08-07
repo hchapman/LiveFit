@@ -30,8 +30,9 @@ const cv::Mat& KalmanFilterPlus::predict(const cv::Mat& control)
     // update error covariance matrices: temp1 = A*P(k)
     temp1 = mAlphaSq*transitionMatrix*errorCovPost;
 
+
     // P'(k) = temp1*At + Q
-    cv::gemm(temp1, transitionMatrix, 1, processNoiseCov, 1, errorCovPre, cv::GEMM_2_T);
+    cv::gemm(temp1, transitionMatrix, 1.0, processNoiseCov, 1.0, errorCovPre, cv::GEMM_2_T);
 
     // handle the case when there will be measurement before the next predict.
     statePre.copyTo(statePost);

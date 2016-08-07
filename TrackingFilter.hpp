@@ -90,9 +90,9 @@ protected:
   cv::Mat mKfMeas;
 
   /** Start time of this tick (the previous timestep's time) */
-  double mTstart;
+  double mTstart = 0;
   /** Stop time of this tick (the current timestate) */
-  double mTstop;
+  double mTstop = 0;
 
   /** The Kalman Filter object proper */
   KalmanFilterPlus mKf;
