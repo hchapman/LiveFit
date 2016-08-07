@@ -1,0 +1,9 @@
+<map id="LiveFitWindow" name="LiveFitWindow">
+<area shape="rect" id="node3" href="$classTrackingStream.html" title="An object which owns some sort of input video stream, manages running it (and any tracking..." alt="" coords="293,437,408,464"/>
+<area shape="rect" id="node5" href="$classKFBallTracker.html" title="Contains most of the logic for live&#45;tracking objects. " alt="" coords="298,336,403,363"/>
+<area shape="rect" id="node11" href="$classFrameConverter.html" title="Recieves frames (as cv::Mat), processes them (ideally asynchronously) and emits them as a QImage (i..." alt="" coords="107,387,223,413"/>
+<area shape="rect" id="node6" href="$classPersonTrackingFilter.html" title="A TrackingFilter which contains the necessary logic to find people in frames. " alt="" coords="279,247,422,273"/>
+<area shape="rect" id="node7" href="$classTrackingFilter.html" title="A wrapper around a KalmanFilter type object; additional logic can be provided through extension..." alt="" coords="393,171,495,197"/>
+<area shape="rect" id="node10" href="$classBallTrackingFilter.html" title="A TrackingFilter with some specifics for tracking a ball in flight. " alt="" coords="447,247,569,273"/>
+<area shape="rect" id="node8" href="$classKalmanFilterPlus.html" title="A cv::KalmanFilter which also supports some &#39;forgetful&#39; functionality. " alt="" coords="383,81,505,108"/>
+</map>

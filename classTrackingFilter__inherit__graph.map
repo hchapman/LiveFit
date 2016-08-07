@@ -1,0 +1,4 @@
+<map id="TrackingFilter" name="TrackingFilter">
+<area shape="rect" id="node2" href="$classBallTrackingFilter.html" title="A TrackingFilter with some specifics for tracking a ball in flight. " alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node3" href="$classPersonTrackingFilter.html" title="A TrackingFilter which contains the necessary logic to find people in frames. " alt="" coords="153,80,295,107"/>
+</map>

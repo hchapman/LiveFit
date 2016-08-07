@@ -1,0 +1,4 @@
+<map id="BallTrackingFilter" name="BallTrackingFilter">
+<area shape="rect" id="node2" href="$classTrackingFilter.html" title="A wrapper around a KalmanFilter type object; additional logic can be provided through extension..." alt="" coords="16,171,117,197"/>
+<area shape="rect" id="node3" href="$classKalmanFilterPlus.html" title="A cv::KalmanFilter which also supports some &#39;forgetful&#39; functionality. " alt="" coords="6,81,127,108"/>
+</map>
