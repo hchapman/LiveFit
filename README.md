@@ -79,11 +79,11 @@ Set program to hide fit curves, and not show any parametrization information.
    Throw a few balls in front of the screen slowly so they can see the marked
    trajectories. *Q*: What shape is the trajectory?
 2. Remind students of the model of standard projectile motion; that x(t) is a
-   linear equation and that y(t) is a quadratic equation. Turn on "mark 3
-   points", and "lock fit until reset". Throw a ball in front of the screen; if
-   the track is adequate (reset by clicking the button below the video and try
-   again if not). Points are displayed as (t, x, y). 3 points marked like this
-   are the first, highest, and most recent.
+   linear equation and that y(t) is a quadratic equation. Turn on "lock fit
+   until reset". Throw a ball in front of the screen; if the track is adequate
+   (reset by clicking the button below the video and try again if not). Points
+   are displayed as (t, x, y). 3 points marked like this are the first, highest,
+   and most recent.
 3. Use the first and last points to compute a linear x(t) function, then all 3
    points to compute a quadratic y(t) function. Turn on "show x(t) and y(t)".
    Equations displayed should be the same as worked out on the board. *Recall*
