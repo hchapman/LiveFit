@@ -1,0 +1,153 @@
+\hypertarget{classTrackingFilter}{}\section{Tracking\+Filter Class Reference}
+\label{classTrackingFilter}\index{Tracking\+Filter@{Tracking\+Filter}}
+
+
+A wrapper around a Kalman\+Filter type object; additional logic can be provided through extension.  
+
+
+
+
+{\ttfamily \#include $<$Tracking\+Filter.\+hpp$>$}
+
+
+
+Inheritance diagram for Tracking\+Filter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{classTrackingFilter__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Tracking\+Filter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classTrackingFilter__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTrackingFilter_a27439ec9b02d78bf1850ba74205989a4}{flush\+Kalman} ()\hypertarget{classTrackingFilter_a27439ec9b02d78bf1850ba74205989a4}{}\label{classTrackingFilter_a27439ec9b02d78bf1850ba74205989a4}
+
+\begin{DoxyCompactList}\small\item\em Reset KF state to initial values. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingFilter_a8dff413c938e6d139f079f0c10540647}{kalman\+Distance} (cv\+::\+Mat measurement)
+\begin{DoxyCompactList}\small\item\em Compute the Kalman distance to a measurement vector. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingFilter_a1116b384519eb6b05020e192dee500f7}{update\+Track\+Failure} ()\hypertarget{classTrackingFilter_a1116b384519eb6b05020e192dee500f7}{}\label{classTrackingFilter_a1116b384519eb6b05020e192dee500f7}
+
+\begin{DoxyCompactList}\small\item\em Alert the KF that we did not track a ball this frame. \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingFilter_a0bd9fd846ed2fd6255f2bcabc5bfa0fe}{prediction} ()\hypertarget{classTrackingFilter_a0bd9fd846ed2fd6255f2bcabc5bfa0fe}{}\label{classTrackingFilter_a0bd9fd846ed2fd6255f2bcabc5bfa0fe}
+
+\begin{DoxyCompactList}\small\item\em The KF prediction of the state. \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingFilter_a0088316527eca5efdd3deac5f9dcf061}{covariance} ()\hypertarget{classTrackingFilter_a0088316527eca5efdd3deac5f9dcf061}{}\label{classTrackingFilter_a0088316527eca5efdd3deac5f9dcf061}
+
+\begin{DoxyCompactList}\small\item\em The KF\textquotesingle{}s covariance matrix. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingFilter_aefd8f259d45dd728eb32addf48799026}{update\+Time\+State} (double t)\hypertarget{classTrackingFilter_aefd8f259d45dd728eb32addf48799026}{}\label{classTrackingFilter_aefd8f259d45dd728eb32addf48799026}
+
+\begin{DoxyCompactList}\small\item\em Update the time state of the tracker to the current time. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingFilter_a3902e37f8e8698cc4b8ad4105dc3de5f}{dT} ()\hypertarget{classTrackingFilter_a3902e37f8e8698cc4b8ad4105dc3de5f}{}\label{classTrackingFilter_a3902e37f8e8698cc4b8ad4105dc3de5f}
+
+\begin{DoxyCompactList}\small\item\em Change in time from prior state to this one. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingFilter_a5c0b07589ba5cb9ac89320aba61526e5}{time} ()\hypertarget{classTrackingFilter_a5c0b07589ba5cb9ac89320aba61526e5}{}\label{classTrackingFilter_a5c0b07589ba5cb9ac89320aba61526e5}
+
+\begin{DoxyCompactList}\small\item\em The current time state. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingFilter_adc38f62892d65e6b08b6f520f5a7df89}{is\+Found} ()\hypertarget{classTrackingFilter_adc38f62892d65e6b08b6f520f5a7df89}{}\label{classTrackingFilter_adc38f62892d65e6b08b6f520f5a7df89}
+
+\begin{DoxyCompactList}\small\item\em Whether we have found a object recently. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingFilter_a500b877bcc60b5f7ea669e3b19322533}{is\+Lost} ()\hypertarget{classTrackingFilter_a500b877bcc60b5f7ea669e3b19322533}{}\label{classTrackingFilter_a500b877bcc60b5f7ea669e3b19322533}
+
+\begin{DoxyCompactList}\small\item\em Whether the object is lost and we don\textquotesingle{}t know anything about it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classTrackingFilter_a7fbddfd9174b54f44599baa5eaa58664}{m\+Blob\+Rad}\hypertarget{classTrackingFilter_a7fbddfd9174b54f44599baa5eaa58664}{}\label{classTrackingFilter_a7fbddfd9174b54f44599baa5eaa58664}
+
+\begin{DoxyCompactList}\small\item\em Radius of the current state blob? \end{DoxyCompactList}\item 
+int \hyperlink{classTrackingFilter_a29f1de1c671a767948dd68e79313127b}{m\+Latency}\hypertarget{classTrackingFilter_a29f1de1c671a767948dd68e79313127b}{}\label{classTrackingFilter_a29f1de1c671a767948dd68e79313127b}
+
+\begin{DoxyCompactList}\small\item\em Unused? \end{DoxyCompactList}\item 
+int \hyperlink{classTrackingFilter_a224352476f9f4f23622debefe227e81e}{m\+Not\+Found\+Count}
+\begin{DoxyCompactList}\small\item\em Number of frames we have missed this object for. \end{DoxyCompactList}\item 
+int \hyperlink{classTrackingFilter_ac53ed48f8ead52c1e4732a6c3bd6ea71}{m\+Kf\+State\+Len}\hypertarget{classTrackingFilter_ac53ed48f8ead52c1e4732a6c3bd6ea71}{}\label{classTrackingFilter_ac53ed48f8ead52c1e4732a6c3bd6ea71}
+
+\begin{DoxyCompactList}\small\item\em Length of the state vector; 6 $<$x,y,dx,dy,w,h$>$ \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingFilter_a05bbc732f46c36af23f80d0d4eed2b71}{m\+Kf\+State}\hypertarget{classTrackingFilter_a05bbc732f46c36af23f80d0d4eed2b71}{}\label{classTrackingFilter_a05bbc732f46c36af23f80d0d4eed2b71}
+
+\begin{DoxyCompactList}\small\item\em State vector of most recent state. \end{DoxyCompactList}\item 
+int \hyperlink{classTrackingFilter_a179f8cb28f6dd803883a54203c058244}{m\+Found\+Count}\hypertarget{classTrackingFilter_a179f8cb28f6dd803883a54203c058244}{}\label{classTrackingFilter_a179f8cb28f6dd803883a54203c058244}
+
+\begin{DoxyCompactList}\small\item\em Number of frames we have tracked this object for. \end{DoxyCompactList}\item 
+int {\bfseries m\+Kf\+Control\+Len}\hypertarget{classTrackingFilter_a063a1ce0b4e9dd93f7d5d7bc184f8032}{}\label{classTrackingFilter_a063a1ce0b4e9dd93f7d5d7bc184f8032}
+
+\item 
+cv\+::\+Mat {\bfseries m\+Kf\+Control}\hypertarget{classTrackingFilter_a3e247787cfc92a4b44c61bb72d204e5b}{}\label{classTrackingFilter_a3e247787cfc92a4b44c61bb72d204e5b}
+
+\item 
+cv\+::\+Mat {\bfseries m\+Kf\+Control\+Vec}\hypertarget{classTrackingFilter_a55dc676fa1368732fdd96d0e9cba770a}{}\label{classTrackingFilter_a55dc676fa1368732fdd96d0e9cba770a}
+
+\item 
+int \hyperlink{classTrackingFilter_a62f51f323019f3aa0b5d405092f68da4}{m\+Kf\+Meas\+Len}\hypertarget{classTrackingFilter_a62f51f323019f3aa0b5d405092f68da4}{}\label{classTrackingFilter_a62f51f323019f3aa0b5d405092f68da4}
+
+\begin{DoxyCompactList}\small\item\em Length of the measurement vector; 4 $<$x,y,w,h$>$ \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingFilter_aa0d5d0cde0fec707074a75bfc1848700}{m\+Kf\+Meas}\hypertarget{classTrackingFilter_aa0d5d0cde0fec707074a75bfc1848700}{}\label{classTrackingFilter_aa0d5d0cde0fec707074a75bfc1848700}
+
+\begin{DoxyCompactList}\small\item\em Measurement vector of most recent state. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingFilter_af2cebac2ba07096f7488487e3d6f1a55}{m\+Tstart} = 0\hypertarget{classTrackingFilter_af2cebac2ba07096f7488487e3d6f1a55}{}\label{classTrackingFilter_af2cebac2ba07096f7488487e3d6f1a55}
+
+\begin{DoxyCompactList}\small\item\em Start time of this tick (the previous timestep\textquotesingle{}s time) \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingFilter_add279c6d213b92200de43faa6f3f8862}{m\+Tstop} = 0\hypertarget{classTrackingFilter_add279c6d213b92200de43faa6f3f8862}{}\label{classTrackingFilter_add279c6d213b92200de43faa6f3f8862}
+
+\begin{DoxyCompactList}\small\item\em Stop time of this tick (the current timestate) \end{DoxyCompactList}\item 
+\hyperlink{classKalmanFilterPlus}{Kalman\+Filter\+Plus} \hyperlink{classTrackingFilter_a6a19cd35982d72c6e8e29c88ce121949}{m\+Kf}\hypertarget{classTrackingFilter_a6a19cd35982d72c6e8e29c88ce121949}{}\label{classTrackingFilter_a6a19cd35982d72c6e8e29c88ce121949}
+
+\begin{DoxyCompactList}\small\item\em The Kalman Filter object proper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A wrapper around a Kalman\+Filter type object; additional logic can be provided through extension. 
+
+The idea is this is an \char`\"{}abstract\char`\"{} tracker which is object-\/agnostic; children should implement some methods with additional knowledge of the type of thing that they are trying to track. 
+
+\subsection{Member Function Documentation}
+\index{Tracking\+Filter@{Tracking\+Filter}!kalman\+Distance@{kalman\+Distance}}
+\index{kalman\+Distance@{kalman\+Distance}!Tracking\+Filter@{Tracking\+Filter}}
+\subsubsection[{\texorpdfstring{kalman\+Distance(cv\+::\+Mat measurement)}{kalmanDistance(cv::Mat measurement)}}]{\setlength{\rightskip}{0pt plus 5cm}double Tracking\+Filter\+::kalman\+Distance (
+\begin{DoxyParamCaption}
+\item[{cv\+::\+Mat}]{measurement}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrackingFilter_a8dff413c938e6d139f079f0c10540647}{}\label{classTrackingFilter_a8dff413c938e6d139f079f0c10540647}
+
+
+Compute the Kalman distance to a measurement vector. 
+
+The players...
+\begin{DoxyItemize}
+\item z = input measurement vector
+\item x = KF state pre
+\item H = KF measurement matrix
+\item P = KF error covariance matrix pre
+\item R = KF measurement noise covariance
+\end{DoxyItemize}
+
+With, \[\Sigma = HPH^T + R\]
+
+Kalman Distance is defined as\+: \[(z - Hx)^T * \Sigma^{-1} * (z - Hx) + \ln \det(\Sigma)\]
+
+Additional information at \href{http://www.mathworks.com/help/vision/ref/vision.kalmanfilter-class.html}{\tt http\+://www.\+mathworks.\+com/help/vision/ref/vision.\+kalmanfilter-\/class.\+html} 
+
+\subsection{Member Data Documentation}
+\index{Tracking\+Filter@{Tracking\+Filter}!m\+Not\+Found\+Count@{m\+Not\+Found\+Count}}
+\index{m\+Not\+Found\+Count@{m\+Not\+Found\+Count}!Tracking\+Filter@{Tracking\+Filter}}
+\subsubsection[{\texorpdfstring{m\+Not\+Found\+Count}{mNotFoundCount}}]{\setlength{\rightskip}{0pt plus 5cm}int Tracking\+Filter\+::m\+Not\+Found\+Count\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classTrackingFilter_a224352476f9f4f23622debefe227e81e}{}\label{classTrackingFilter_a224352476f9f4f23622debefe227e81e}
+
+
+Number of frames we have missed this object for. 
+
+If this number gets too large, we have lost the object 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Tracking\+Filter.\+hpp\item 
+Tracking\+Filter.\+cpp\end{DoxyCompactItemize}

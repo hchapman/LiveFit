@@ -1,0 +1,149 @@
+\hypertarget{classFrameConverter}{}\section{Frame\+Converter Class Reference}
+\label{classFrameConverter}\index{Frame\+Converter@{Frame\+Converter}}
+
+
+Recieves frames (as cv\+::\+Mat), processes them (ideally asynchronously) and emits them as a Q\+Image (i.\+e.  
+
+
+
+
+{\ttfamily \#include $<$Frame\+Converter.\+hpp$>$}
+
+
+
+Inheritance diagram for Frame\+Converter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{classFrameConverter__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Frame\+Converter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{classFrameConverter__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classFrameConverter_ac2c4933244f3a3e794d52263fb916e05}{process\+Frame} (const cv\+::\+Mat \&frame, enum Color\+Space)
+\begin{DoxyCompactList}\small\item\em Add a new frame to be processed; if not process\+All this frame may yet be dropped. \end{DoxyCompactList}\item 
+void \hyperlink{classFrameConverter_ab346b79624ba1934819ba0d0781b854b}{set\+Frame\+Size} (Q\+Size size)\hypertarget{classFrameConverter_ab346b79624ba1934819ba0d0781b854b}{}\label{classFrameConverter_ab346b79624ba1934819ba0d0781b854b}
+
+\begin{DoxyCompactList}\small\item\em Set the resolution of the frames we are processing. \end{DoxyCompactList}\item 
+void \hyperlink{classFrameConverter_aaac60c9659fba4420ebf481a12939ade}{stop} ()\hypertarget{classFrameConverter_aaac60c9659fba4420ebf481a12939ade}{}\label{classFrameConverter_aaac60c9659fba4420ebf481a12939ade}
+
+\begin{DoxyCompactList}\small\item\em Stop processing frames. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classFrameConverter_ac3c472e9e9cc04065283493b842b98c0}{image\+Ready} (const Q\+Image \&)\hypertarget{classFrameConverter_ac3c472e9e9cc04065283493b842b98c0}{}\label{classFrameConverter_ac3c472e9e9cc04065283493b842b98c0}
+
+\begin{DoxyCompactList}\small\item\em Emitted when we have a Q\+Image from processing ready for display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Frame\+Converter} (Q\+Object $\ast$parent=0)\hypertarget{classFrameConverter_a0595174e3dab848cb357564b66f28d88}{}\label{classFrameConverter_a0595174e3dab848cb357564b66f28d88}
+
+\item 
+void \hyperlink{classFrameConverter_a171ea454ecabf617e116fb0ed5263f2a}{set\+Process\+All} (bool all)\hypertarget{classFrameConverter_a171ea454ecabf617e116fb0ed5263f2a}{}\label{classFrameConverter_a171ea454ecabf617e116fb0ed5263f2a}
+
+\begin{DoxyCompactList}\small\item\em Set whether we should process all frames, or drop some. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classFrameConverter_a95b2b0e256b1122c62aa5efc2adc18cc}{queue} (const cv\+::\+Mat \&frame, Color\+Space cs)
+\begin{DoxyCompactList}\small\item\em Queue a new frame to be processed (depends on process\+All if it gets processed). \end{DoxyCompactList}\item 
+void \hyperlink{classFrameConverter_ae285bbb69f501ed42a0fbbd1be7d4951}{process} (cv\+::\+Mat frame, Color\+Space cs)
+\begin{DoxyCompactList}\small\item\em Actually process a frame. \end{DoxyCompactList}\item 
+void \hyperlink{classFrameConverter_a88ed7e731659ce5a05af923eba204ffd}{timer\+Event} (Q\+Timer\+Event $\ast$ev)
+\begin{DoxyCompactList}\small\item\em Called each time that m\+Timer ticks... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classFrameConverter_a5a01cf7c8672bbc0f90c2d02d47a9a0c}{mat\+Deleter} (void $\ast$mat)\hypertarget{classFrameConverter_a5a01cf7c8672bbc0f90c2d02d47a9a0c}{}\label{classFrameConverter_a5a01cf7c8672bbc0f90c2d02d47a9a0c}
+
+\begin{DoxyCompactList}\small\item\em Delete a cv\+::\+Mat object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Basic\+Timer \hyperlink{classFrameConverter_aaa171c70ddee27fad24d4414fce944d8}{m\+Timer}\hypertarget{classFrameConverter_aaa171c70ddee27fad24d4414fce944d8}{}\label{classFrameConverter_aaa171c70ddee27fad24d4414fce944d8}
+
+\begin{DoxyCompactList}\small\item\em Process a frame at each tick of this timer. \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classFrameConverter_ac0798133c92cf81ece25f35a2e60af3d}{current\+Frame}\hypertarget{classFrameConverter_ac0798133c92cf81ece25f35a2e60af3d}{}\label{classFrameConverter_ac0798133c92cf81ece25f35a2e60af3d}
+
+\begin{DoxyCompactList}\small\item\em The current frame to process into a Q\+Image. \end{DoxyCompactList}\item 
+Color\+Space \hyperlink{classFrameConverter_a022c0ee128a17a18d53949ce777675e4}{current\+CS}\hypertarget{classFrameConverter_a022c0ee128a17a18d53949ce777675e4}{}\label{classFrameConverter_a022c0ee128a17a18d53949ce777675e4}
+
+\begin{DoxyCompactList}\small\item\em The current Color\+Space of the frame we are processing. \end{DoxyCompactList}\item 
+bool \hyperlink{classFrameConverter_aa801f185eda944a3c942f1578d491e08}{process\+All} = true\hypertarget{classFrameConverter_aa801f185eda944a3c942f1578d491e08}{}\label{classFrameConverter_aa801f185eda944a3c942f1578d491e08}
+
+\begin{DoxyCompactList}\small\item\em Whether we should process all frames, or drop some to keep framerate. \end{DoxyCompactList}\item 
+Q\+Size \hyperlink{classFrameConverter_a061df5cf24591bdcfbdaa2dd74e993d7}{frame\+Size}\hypertarget{classFrameConverter_a061df5cf24591bdcfbdaa2dd74e993d7}{}\label{classFrameConverter_a061df5cf24591bdcfbdaa2dd74e993d7}
+
+\begin{DoxyCompactList}\small\item\em The resolution of the frames that we are processing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Recieves frames (as cv\+::\+Mat), processes them (ideally asynchronously) and emits them as a Q\+Image (i.\+e. 
+
+for use in a Q\+Widget) 
+
+\subsection{Member Function Documentation}
+\index{Frame\+Converter@{Frame\+Converter}!process@{process}}
+\index{process@{process}!Frame\+Converter@{Frame\+Converter}}
+\subsubsection[{\texorpdfstring{process(cv\+::\+Mat frame, Color\+Space cs)}{process(cv::Mat frame, ColorSpace cs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Frame\+Converter\+::process (
+\begin{DoxyParamCaption}
+\item[{cv\+::\+Mat}]{frame, }
+\item[{Color\+Space}]{cs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFrameConverter_ae285bbb69f501ed42a0fbbd1be7d4951}{}\label{classFrameConverter_ae285bbb69f501ed42a0fbbd1be7d4951}
+
+
+Actually process a frame. 
+
+Resultant Q\+Image gets emitted by \hyperlink{classFrameConverter_ac3c472e9e9cc04065283493b842b98c0}{image\+Ready()} \index{Frame\+Converter@{Frame\+Converter}!process\+Frame@{process\+Frame}}
+\index{process\+Frame@{process\+Frame}!Frame\+Converter@{Frame\+Converter}}
+\subsubsection[{\texorpdfstring{process\+Frame}{processFrame}}]{\setlength{\rightskip}{0pt plus 5cm}void Frame\+Converter\+::process\+Frame (
+\begin{DoxyParamCaption}
+\item[{const cv\+::\+Mat \&}]{frame, }
+\item[{enum}]{Color\+Space}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classFrameConverter_ac2c4933244f3a3e794d52263fb916e05}{}\label{classFrameConverter_ac2c4933244f3a3e794d52263fb916e05}
+
+
+Add a new frame to be processed; if not process\+All this frame may yet be dropped. 
+
+\index{Frame\+Converter@{Frame\+Converter}!queue@{queue}}
+\index{queue@{queue}!Frame\+Converter@{Frame\+Converter}}
+\subsubsection[{\texorpdfstring{queue(const cv\+::\+Mat \&frame, Color\+Space cs)}{queue(const cv::Mat &frame, ColorSpace cs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Frame\+Converter\+::queue (
+\begin{DoxyParamCaption}
+\item[{const cv\+::\+Mat \&}]{frame, }
+\item[{Color\+Space}]{cs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFrameConverter_a95b2b0e256b1122c62aa5efc2adc18cc}{}\label{classFrameConverter_a95b2b0e256b1122c62aa5efc2adc18cc}
+
+
+Queue a new frame to be processed (depends on process\+All if it gets processed). 
+
+\index{Frame\+Converter@{Frame\+Converter}!timer\+Event@{timer\+Event}}
+\index{timer\+Event@{timer\+Event}!Frame\+Converter@{Frame\+Converter}}
+\subsubsection[{\texorpdfstring{timer\+Event(\+Q\+Timer\+Event $\ast$ev)}{timerEvent(QTimerEvent *ev)}}]{\setlength{\rightskip}{0pt plus 5cm}void Frame\+Converter\+::timer\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Timer\+Event $\ast$}]{ev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFrameConverter_a88ed7e731659ce5a05af923eba204ffd}{}\label{classFrameConverter_a88ed7e731659ce5a05af923eba204ffd}
+
+
+Called each time that m\+Timer ticks... 
+
+we call process on the queue in here. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Frame\+Converter.\+hpp\item 
+Frame\+Converter.\+cpp\end{DoxyCompactItemize}

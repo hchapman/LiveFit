@@ -1,0 +1,112 @@
+\hypertarget{classTrackVideoWidget}{}\section{Track\+Video\+Widget Class Reference}
+\label{classTrackVideoWidget}\index{Track\+Video\+Widget@{Track\+Video\+Widget}}
+
+
+Displays a video stream and tracking data.  
+
+
+
+
+{\ttfamily \#include $<$Track\+Video\+Widget.\+hpp$>$}
+
+
+
+Inheritance diagram for Track\+Video\+Widget\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=177pt]{classTrackVideoWidget__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Track\+Video\+Widget\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=177pt]{classTrackVideoWidget__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTrackVideoWidget_a11ea118c76dfa1a9d68e94e808c34d1a}{set\+Image} (const Q\+Image \&image)\hypertarget{classTrackVideoWidget_a11ea118c76dfa1a9d68e94e808c34d1a}{}\label{classTrackVideoWidget_a11ea118c76dfa1a9d68e94e808c34d1a}
+
+\begin{DoxyCompactList}\small\item\em Set the current display image of the widget to image. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_acb2f0df1f0857e71e68df3748fb968fa}{set\+Corners} (Q\+List$<$ Q\+Point $>$ corners)\hypertarget{classTrackVideoWidget_acb2f0df1f0857e71e68df3748fb968fa}{}\label{classTrackVideoWidget_acb2f0df1f0857e71e68df3748fb968fa}
+
+\begin{DoxyCompactList}\small\item\em Set all 4 corners of the projector screen (in-\/frame coordinates) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_a856730ade1ab79a2e1ff0e2570fa35db}{ul\+Corner\+Dropped} (Q\+Point point)\hypertarget{classTrackVideoWidget_a856730ade1ab79a2e1ff0e2570fa35db}{}\label{classTrackVideoWidget_a856730ade1ab79a2e1ff0e2570fa35db}
+
+\begin{DoxyCompactList}\small\item\em Called when the UL corner widget is dropped at point. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_af2e2b70e9d7057352a01f3fc4cf1af1c}{bl\+Corner\+Dropped} (Q\+Point point)\hypertarget{classTrackVideoWidget_af2e2b70e9d7057352a01f3fc4cf1af1c}{}\label{classTrackVideoWidget_af2e2b70e9d7057352a01f3fc4cf1af1c}
+
+\begin{DoxyCompactList}\small\item\em Called when the BL corner widget is dropped at point. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_a29c78146cdbe1423e97a343db9697d36}{br\+Corner\+Dropped} (Q\+Point point)\hypertarget{classTrackVideoWidget_a29c78146cdbe1423e97a343db9697d36}{}\label{classTrackVideoWidget_a29c78146cdbe1423e97a343db9697d36}
+
+\begin{DoxyCompactList}\small\item\em Called when the BR corner widget is dropped at point. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_aa0ffe7455a1940941387f3bf8a8c81a0}{ur\+Corner\+Dropped} (Q\+Point point)\hypertarget{classTrackVideoWidget_aa0ffe7455a1940941387f3bf8a8c81a0}{}\label{classTrackVideoWidget_aa0ffe7455a1940941387f3bf8a8c81a0}
+
+\begin{DoxyCompactList}\small\item\em Called when the UR corner widget is dropped at point. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_a29f589a7716093ffe59af7e66eebf72a}{push\+Ball} (\hyperlink{classTrackingBall}{Tracking\+Ball} ball)\hypertarget{classTrackVideoWidget_a29f589a7716093ffe59af7e66eebf72a}{}\label{classTrackVideoWidget_a29f589a7716093ffe59af7e66eebf72a}
+
+\begin{DoxyCompactList}\small\item\em Push the \hyperlink{classTrackingBall}{Tracking\+Ball} ball to the list of balls. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_ae9e2d736b274c1601af5f8f1ca36586a}{push\+Pred} (\hyperlink{classKFPrediction}{K\+F\+Prediction} pred)\hypertarget{classTrackVideoWidget_ae9e2d736b274c1601af5f8f1ca36586a}{}\label{classTrackVideoWidget_ae9e2d736b274c1601af5f8f1ca36586a}
+
+\begin{DoxyCompactList}\small\item\em Push the \hyperlink{classKFPrediction}{K\+F\+Prediction} pred to the list of predictions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTrackVideoWidget_ac93883c02ed389d1d190f1206481a7f9}{resized} (Q\+Size size)\hypertarget{classTrackVideoWidget_ac93883c02ed389d1d190f1206481a7f9}{}\label{classTrackVideoWidget_ac93883c02ed389d1d190f1206481a7f9}
+
+\begin{DoxyCompactList}\small\item\em Signal sent whenever the widget is resized. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_a5ba54b89296e93fd746c5534dd5fd213}{corners\+Changed} (std\+::vector$<$ cv\+::\+Point2f $>$)\hypertarget{classTrackVideoWidget_a5ba54b89296e93fd746c5534dd5fd213}{}\label{classTrackVideoWidget_a5ba54b89296e93fd746c5534dd5fd213}
+
+\begin{DoxyCompactList}\small\item\em Signal sent whenever the corners of the projector in frame change. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Track\+Video\+Widget} (Q\+Widget $\ast$parent=0)\hypertarget{classTrackVideoWidget_aa0938998c151b1771b7129e58e45a58b}{}\label{classTrackVideoWidget_aa0938998c151b1771b7129e58e45a58b}
+
+\item 
+void \hyperlink{classTrackVideoWidget_a9b9957ce76ae84e79ed41eb7d6673d1a}{update\+Corners} ()\hypertarget{classTrackVideoWidget_a9b9957ce76ae84e79ed41eb7d6673d1a}{}\label{classTrackVideoWidget_a9b9957ce76ae84e79ed41eb7d6673d1a}
+
+\begin{DoxyCompactList}\small\item\em Refresh the corners (ie send signal that corners changed to listeners) \end{DoxyCompactList}\item 
+Q\+List$<$ Q\+Point $>$ \hyperlink{classTrackVideoWidget_a2944ab20069028c72b9baddee727e51b}{get\+Corners} ()\hypertarget{classTrackVideoWidget_a2944ab20069028c72b9baddee727e51b}{}\label{classTrackVideoWidget_a2944ab20069028c72b9baddee727e51b}
+
+\begin{DoxyCompactList}\small\item\em Return the list of projector corners in image coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTrackVideoWidget_adb4de30d1e73669059561a5362da1a1b}{paint\+Event} (Q\+Paint\+Event $\ast$event)\hypertarget{classTrackVideoWidget_adb4de30d1e73669059561a5362da1a1b}{}\label{classTrackVideoWidget_adb4de30d1e73669059561a5362da1a1b}
+
+\begin{DoxyCompactList}\small\item\em Called on paint event; drawing logic goes here (Draw frame, points, etc) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackVideoWidget_a5dba5d4a6290b6385920d977c93ddd6a}{resize\+Event} (Q\+Resize\+Event $\ast$event)\hypertarget{classTrackVideoWidget_a5dba5d4a6290b6385920d977c93ddd6a}{}\label{classTrackVideoWidget_a5dba5d4a6290b6385920d977c93ddd6a}
+
+\begin{DoxyCompactList}\small\item\em Called on resize event;. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+List$<$ \hyperlink{classTrackingBall}{Tracking\+Ball} $>$ \hyperlink{classTrackVideoWidget_add8a33b2399ca9b4c455941776ad9f09}{m\+Balls}\hypertarget{classTrackVideoWidget_add8a33b2399ca9b4c455941776ad9f09}{}\label{classTrackVideoWidget_add8a33b2399ca9b4c455941776ad9f09}
+
+\begin{DoxyCompactList}\small\item\em A list of raw ball contour data in the frame. \end{DoxyCompactList}\item 
+Q\+List$<$ \hyperlink{classKFPrediction}{K\+F\+Prediction} $>$ \hyperlink{classTrackVideoWidget_a9ec725863b7ffbffb143708157fe01ba}{m\+Preds}\hypertarget{classTrackVideoWidget_a9ec725863b7ffbffb143708157fe01ba}{}\label{classTrackVideoWidget_a9ec725863b7ffbffb143708157fe01ba}
+
+\begin{DoxyCompactList}\small\item\em A list of KF prediction data in the frame. \end{DoxyCompactList}\item 
+Ui\+::track\+Video\+Widget \hyperlink{classTrackVideoWidget_a0ad86a928b90b7a632bcd92796bb4053}{ui}\hypertarget{classTrackVideoWidget_a0ad86a928b90b7a632bcd92796bb4053}{}\label{classTrackVideoWidget_a0ad86a928b90b7a632bcd92796bb4053}
+
+\begin{DoxyCompactList}\small\item\em UI data edited in Q\+Designer; see \hyperlink{classTrackVideoWidget_a0ad86a928b90b7a632bcd92796bb4053}{Track\+Video\+Widget.\+ui}. \end{DoxyCompactList}\item 
+Q\+Image \hyperlink{classTrackVideoWidget_a9eff079e25047c24da7d3e20d4d99988}{current\+Frame}\hypertarget{classTrackVideoWidget_a9eff079e25047c24da7d3e20d4d99988}{}\label{classTrackVideoWidget_a9eff079e25047c24da7d3e20d4d99988}
+
+\begin{DoxyCompactList}\small\item\em Current video frame to be displayed by widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Displays a video stream and tracking data. 
+
+Allows manipulation of projector corners (where they should be in frame) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Track\+Video\+Widget.\+hpp\item 
+Track\+Video\+Widget.\+cpp\end{DoxyCompactItemize}

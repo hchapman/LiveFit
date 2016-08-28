@@ -1,0 +1,81 @@
+\hypertarget{Util_8hpp}{}\section{Util.\+hpp File Reference}
+\label{Util_8hpp}\index{Util.\+hpp@{Util.\+hpp}}
+{\ttfamily \#include \char`\"{}K\+F\+Prediction.\+hpp\char`\"{}}\\*
+{\ttfamily \#include $<$gsl/gsl\+\_\+multifit.\+h$>$}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$Q\+List$>$}\\*
+{\ttfamily \#include $<$Q\+Point$>$}\\*
+Include dependency graph for Util.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Util_8hpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{Util_8hpp_a82a0c037a691c6a97cd20a419bb7c54f}{polynomial\+Fit\+K\+FX} (int degree, double t\+Start, Q\+List$<$ \hyperlink{classKFPrediction}{K\+F\+Prediction} $>$ preds, double $\ast$store)
+\begin{DoxyCompactList}\small\item\em Fit a polynomial equation to (x,t) points. \end{DoxyCompactList}\item 
+bool \hyperlink{Util_8hpp_a9cbba285743d1610df9339cae6f86670}{polynomial\+Fit\+K\+FY} (int degree, double t\+Start, Q\+List$<$ \hyperlink{classKFPrediction}{K\+F\+Prediction} $>$ preds, double $\ast$store)
+\begin{DoxyCompactList}\small\item\em Fit a polynomial equation to (y,t) points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Util.\+hpp@{Util.\+hpp}!polynomial\+Fit\+K\+FX@{polynomial\+Fit\+K\+FX}}
+\index{polynomial\+Fit\+K\+FX@{polynomial\+Fit\+K\+FX}!Util.\+hpp@{Util.\+hpp}}
+\subsubsection[{\texorpdfstring{polynomial\+Fit\+K\+F\+X(int degree, double t\+Start, Q\+List$<$ K\+F\+Prediction $>$ preds, double $\ast$store)}{polynomialFitKFX(int degree, double tStart, QList< KFPrediction > preds, double *store)}}]{\setlength{\rightskip}{0pt plus 5cm}bool polynomial\+Fit\+K\+FX (
+\begin{DoxyParamCaption}
+\item[{int}]{degree, }
+\item[{double}]{t\+Start, }
+\item[{Q\+List$<$ {\bf K\+F\+Prediction} $>$}]{preds, }
+\item[{double $\ast$}]{store}
+\end{DoxyParamCaption}
+)}\hypertarget{Util_8hpp_a82a0c037a691c6a97cd20a419bb7c54f}{}\label{Util_8hpp_a82a0c037a691c6a97cd20a419bb7c54f}
+
+
+Fit a polynomial equation to (x,t) points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree of polynomial to fit (usu\+: 1) \\
+\hline
+{\em t\+Start} & Initial time value to fit from \\
+\hline
+{\em preds} & List of \hyperlink{classKFPrediction}{K\+F\+Prediction} with (x,y,t) data \\
+\hline
+{\em store} & Resultant array of degree components with the coefficients; $<$b,M$>$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool Whether the fit was successful 
+\end{DoxyReturn}
+\index{Util.\+hpp@{Util.\+hpp}!polynomial\+Fit\+K\+FY@{polynomial\+Fit\+K\+FY}}
+\index{polynomial\+Fit\+K\+FY@{polynomial\+Fit\+K\+FY}!Util.\+hpp@{Util.\+hpp}}
+\subsubsection[{\texorpdfstring{polynomial\+Fit\+K\+F\+Y(int degree, double t\+Start, Q\+List$<$ K\+F\+Prediction $>$ preds, double $\ast$store)}{polynomialFitKFY(int degree, double tStart, QList< KFPrediction > preds, double *store)}}]{\setlength{\rightskip}{0pt plus 5cm}bool polynomial\+Fit\+K\+FY (
+\begin{DoxyParamCaption}
+\item[{int}]{degree, }
+\item[{double}]{t\+Start, }
+\item[{Q\+List$<$ {\bf K\+F\+Prediction} $>$}]{preds, }
+\item[{double $\ast$}]{store}
+\end{DoxyParamCaption}
+)}\hypertarget{Util_8hpp_a9cbba285743d1610df9339cae6f86670}{}\label{Util_8hpp_a9cbba285743d1610df9339cae6f86670}
+
+
+Fit a polynomial equation to (y,t) points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree of polynomial to fit (usu\+: 2) \\
+\hline
+{\em t\+Start} & Initial time value to fit from \\
+\hline
+{\em preds} & List of \hyperlink{classKFPrediction}{K\+F\+Prediction} with (x,y,t) data \\
+\hline
+{\em store} & Resultant array of degree components with the coefficients; $<$C,B,A$>$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool Whether the fit was successful 
+\end{DoxyReturn}

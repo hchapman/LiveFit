@@ -1,0 +1,71 @@
+\hypertarget{classTrackingBall}{}\section{Tracking\+Ball Class Reference}
+\label{classTrackingBall}\index{Tracking\+Ball@{Tracking\+Ball}}
+
+
+A ball which has been tracked by the software.  
+
+
+
+
+{\ttfamily \#include $<$Tracking\+Ball.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTrackingBall_a6b355915eacf7476217573764ecee6b1}{Tracking\+Ball} ()\hypertarget{classTrackingBall_a6b355915eacf7476217573764ecee6b1}{}\label{classTrackingBall_a6b355915eacf7476217573764ecee6b1}
+
+\begin{DoxyCompactList}\small\item\em Construct an empty \hyperlink{classTrackingBall}{Tracking\+Ball}. \end{DoxyCompactList}\item 
+\hyperlink{classTrackingBall_a87b81fdf513c23d511109b7b927f60a5}{Tracking\+Ball} (std\+::vector$<$ cv\+::\+Point $>$ contour)\hypertarget{classTrackingBall_a87b81fdf513c23d511109b7b927f60a5}{}\label{classTrackingBall_a87b81fdf513c23d511109b7b927f60a5}
+
+\begin{DoxyCompactList}\small\item\em Construct a \hyperlink{classTrackingBall}{Tracking\+Ball} from a measurement vector (usual method) \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingBall_aa1fc6e253dbabd744d6e6c46ed497237}{get\+Meas} () const \hypertarget{classTrackingBall_aa1fc6e253dbabd744d6e6c46ed497237}{}\label{classTrackingBall_aa1fc6e253dbabd744d6e6c46ed497237}
+
+\begin{DoxyCompactList}\small\item\em Get the measurement vector. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingBall_afaca54e4337a6ca1ddd43c9c9879c59c}{x} () const \hypertarget{classTrackingBall_afaca54e4337a6ca1ddd43c9c9879c59c}{}\label{classTrackingBall_afaca54e4337a6ca1ddd43c9c9879c59c}
+
+\begin{DoxyCompactList}\small\item\em Get the x coordinate of the center. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingBall_a0f6ed80ff33407ee2988974e5e836a34}{y} () const \hypertarget{classTrackingBall_a0f6ed80ff33407ee2988974e5e836a34}{}\label{classTrackingBall_a0f6ed80ff33407ee2988974e5e836a34}
+
+\begin{DoxyCompactList}\small\item\em Get the y coordinate of the center. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingBall_a25deec27d67b7d94781733c7317b4523}{width} () const \hypertarget{classTrackingBall_a25deec27d67b7d94781733c7317b4523}{}\label{classTrackingBall_a25deec27d67b7d94781733c7317b4523}
+
+\begin{DoxyCompactList}\small\item\em Get the width of the bounding rect. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingBall_a90b04824914a82367f196ef36c8c9dc0}{height} () const \hypertarget{classTrackingBall_a90b04824914a82367f196ef36c8c9dc0}{}\label{classTrackingBall_a90b04824914a82367f196ef36c8c9dc0}
+
+\begin{DoxyCompactList}\small\item\em Get the height of the bounding rect. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingBall_a1b088352c3412289ebc6778038aa2805}{r} () const \hypertarget{classTrackingBall_a1b088352c3412289ebc6778038aa2805}{}\label{classTrackingBall_a1b088352c3412289ebc6778038aa2805}
+
+\begin{DoxyCompactList}\small\item\em Get the radius of the bounding circle. \end{DoxyCompactList}\item 
+Q\+Point \hyperlink{classTrackingBall_a07d75d858e8c42a6b44861f97744d8fe}{center} () const \hypertarget{classTrackingBall_a07d75d858e8c42a6b44861f97744d8fe}{}\label{classTrackingBall_a07d75d858e8c42a6b44861f97744d8fe}
+
+\begin{DoxyCompactList}\small\item\em Get the center of the ball mass. \end{DoxyCompactList}\item 
+Q\+Point \hyperlink{classTrackingBall_a609f6aa8048da49e596e8c09f1611e5f}{tl} () const \hypertarget{classTrackingBall_a609f6aa8048da49e596e8c09f1611e5f}{}\label{classTrackingBall_a609f6aa8048da49e596e8c09f1611e5f}
+
+\begin{DoxyCompactList}\small\item\em Top left corner of the bounding rect. \end{DoxyCompactList}\item 
+cv\+::\+Rect \hyperlink{classTrackingBall_a31cd306342da9739e85613eac24dec08}{rect} () const \hypertarget{classTrackingBall_a31cd306342da9739e85613eac24dec08}{}\label{classTrackingBall_a31cd306342da9739e85613eac24dec08}
+
+\begin{DoxyCompactList}\small\item\em Get the bounding rect for the ball. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+cv\+::\+Mat \hyperlink{classTrackingBall_ad4f745f4ca322a75c6963dbabd257437}{m\+Meas\+Vec}\hypertarget{classTrackingBall_ad4f745f4ca322a75c6963dbabd257437}{}\label{classTrackingBall_ad4f745f4ca322a75c6963dbabd257437}
+
+\begin{DoxyCompactList}\small\item\em The measurement vector (KF spotting input) \end{DoxyCompactList}\item 
+cv\+::\+Point2f \hyperlink{classTrackingBall_a8afc4e4b68a344e028b1f24722a002d4}{m\+Center}\hypertarget{classTrackingBall_a8afc4e4b68a344e028b1f24722a002d4}{}\label{classTrackingBall_a8afc4e4b68a344e028b1f24722a002d4}
+
+\begin{DoxyCompactList}\small\item\em The center of the ball mass. \end{DoxyCompactList}\item 
+float \hyperlink{classTrackingBall_a286b728922e750d4d89a927363ca12b2}{m\+Radius}\hypertarget{classTrackingBall_a286b728922e750d4d89a927363ca12b2}{}\label{classTrackingBall_a286b728922e750d4d89a927363ca12b2}
+
+\begin{DoxyCompactList}\small\item\em The radius of the ball mass. \end{DoxyCompactList}\item 
+cv\+::\+Rect \hyperlink{classTrackingBall_ae90649763c0f576331b28035fe6dea56}{m\+Rect}\hypertarget{classTrackingBall_ae90649763c0f576331b28035fe6dea56}{}\label{classTrackingBall_ae90649763c0f576331b28035fe6dea56}
+
+\begin{DoxyCompactList}\small\item\em A Rect which encompasses the ball mass. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A ball which has been tracked by the software. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Tracking\+Ball.\+hpp\item 
+Tracking\+Ball.\+cpp\end{DoxyCompactItemize}

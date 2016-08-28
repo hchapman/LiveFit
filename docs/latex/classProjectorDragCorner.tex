@@ -1,0 +1,83 @@
+\hypertarget{classProjectorDragCorner}{}\section{Projector\+Drag\+Corner Class Reference}
+\label{classProjectorDragCorner}\index{Projector\+Drag\+Corner@{Projector\+Drag\+Corner}}
+
+
+A draggable widget for managing where the projector corners lie in the video frame.  
+
+
+
+
+{\ttfamily \#include $<$Projector\+Drag\+Corner.\+hpp$>$}
+
+
+
+Inheritance diagram for Projector\+Drag\+Corner\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{classProjectorDragCorner__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Projector\+Drag\+Corner\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{classProjectorDragCorner__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classProjectorDragCorner_a35f4a1a9e69186e2f881fd0905ff03d1}{move\+Completed} (Q\+Point loc)\hypertarget{classProjectorDragCorner_a35f4a1a9e69186e2f881fd0905ff03d1}{}\label{classProjectorDragCorner_a35f4a1a9e69186e2f881fd0905ff03d1}
+
+\begin{DoxyCompactList}\small\item\em Sent when a \char`\"{}move\char`\"{} action of this drag corner is finished. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classProjectorDragCorner_ac0036538a75eed93c518d07c65a4a644}{Projector\+Drag\+Corner} (Q\+Widget $\ast$parent=0)\hypertarget{classProjectorDragCorner_ac0036538a75eed93c518d07c65a4a644}{}\label{classProjectorDragCorner_ac0036538a75eed93c518d07c65a4a644}
+
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classProjectorDragCorner_ae46fbe25f41c58ace7fc80e740844fea}{paint\+Event} (Q\+Paint\+Event $\ast$event)\hypertarget{classProjectorDragCorner_ae46fbe25f41c58ace7fc80e740844fea}{}\label{classProjectorDragCorner_ae46fbe25f41c58ace7fc80e740844fea}
+
+\begin{DoxyCompactList}\small\item\em Paint this drag corner. \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorDragCorner_a5880fbfba1b683f639aea5e316982ea2}{mouse\+Press\+Event} (Q\+Mouse\+Event $\ast$event)\hypertarget{classProjectorDragCorner_a5880fbfba1b683f639aea5e316982ea2}{}\label{classProjectorDragCorner_a5880fbfba1b683f639aea5e316982ea2}
+
+\begin{DoxyCompactList}\small\item\em Called when a mouse press happens; \char`\"{}select\char`\"{} and consider drag. \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorDragCorner_a445cbdf85c5ed49f0c14aec203533a80}{mouse\+Move\+Event} (Q\+Mouse\+Event $\ast$event)\hypertarget{classProjectorDragCorner_a445cbdf85c5ed49f0c14aec203533a80}{}\label{classProjectorDragCorner_a445cbdf85c5ed49f0c14aec203533a80}
+
+\begin{DoxyCompactList}\small\item\em Called when a mouse move happens; consider drag if selected and moved. \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorDragCorner_a6e29b9a308b04e87081d94176f682309}{mouse\+Release\+Event} (Q\+Mouse\+Event $\ast$event)\hypertarget{classProjectorDragCorner_a6e29b9a308b04e87081d94176f682309}{}\label{classProjectorDragCorner_a6e29b9a308b04e87081d94176f682309}
+
+\begin{DoxyCompactList}\small\item\em Called when a mouse release happens; consider drop after drag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classProjectorDragCorner_a62eb190294efff15202ceb0261858677}{corner\+Index}\hypertarget{classProjectorDragCorner_a62eb190294efff15202ceb0261858677}{}\label{classProjectorDragCorner_a62eb190294efff15202ceb0261858677}
+
+\begin{DoxyCompactList}\small\item\em The (extrinsic) index of this corner in \mbox{[}UL,BL,BR,UL\mbox{]}. \end{DoxyCompactList}\item 
+Q\+Point \hyperlink{classProjectorDragCorner_ab56bbeb8dfd2cc071555b19ca4c9fb69}{drag\+Start\+Pos}\hypertarget{classProjectorDragCorner_ab56bbeb8dfd2cc071555b19ca4c9fb69}{}\label{classProjectorDragCorner_ab56bbeb8dfd2cc071555b19ca4c9fb69}
+
+\begin{DoxyCompactList}\small\item\em Where this drag was initiated. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorDragCorner_aa17ecf70a2c928de33623bb5dc2917bd}{selected} = false\hypertarget{classProjectorDragCorner_aa17ecf70a2c928de33623bb5dc2917bd}{}\label{classProjectorDragCorner_aa17ecf70a2c928de33623bb5dc2917bd}
+
+\begin{DoxyCompactList}\small\item\em Whether this corner is selected. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorDragCorner_adee60507c43a09879a9ab9069f5b12ba}{dragging} = false\hypertarget{classProjectorDragCorner_adee60507c43a09879a9ab9069f5b12ba}{}\label{classProjectorDragCorner_adee60507c43a09879a9ab9069f5b12ba}
+
+\begin{DoxyCompactList}\small\item\em Whether this corner is being dragged. \end{DoxyCompactList}\item 
+int \hyperlink{classProjectorDragCorner_aa2a74030da538aba14d1712a0216b526}{radius}\hypertarget{classProjectorDragCorner_aa2a74030da538aba14d1712a0216b526}{}\label{classProjectorDragCorner_aa2a74030da538aba14d1712a0216b526}
+
+\begin{DoxyCompactList}\small\item\em Display/click radius of this widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A draggable widget for managing where the projector corners lie in the video frame. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Projector\+Drag\+Corner.\+hpp\item 
+Projector\+Drag\+Corner.\+cpp\end{DoxyCompactItemize}

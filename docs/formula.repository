@@ -1,0 +1,4 @@
+\form#0:\[\Sigma = HPH^T + R\]
+\form#1:\[(z - Hx)^T * \Sigma^{-1} * (z - Hx) + \ln \det(\Sigma)\]
+\form#2:\[s = (z + (R^{-1}T)_{2,0}) / (R^{-1}C^{-1}p)_{2,0}\]
+\form#3:\[q = R^{-1}(sC^{-1}p - T)\]

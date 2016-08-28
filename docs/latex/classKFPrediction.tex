@@ -1,0 +1,109 @@
+\hypertarget{classKFPrediction}{}\section{K\+F\+Prediction Class Reference}
+\label{classKFPrediction}\index{K\+F\+Prediction@{K\+F\+Prediction}}
+
+
+Object which represents a prediction from the Kalman filter.  
+
+
+
+
+{\ttfamily \#include $<$K\+F\+Prediction.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classKFPrediction_a5eb59d17d94568138d8e1e596b856372}{K\+F\+Prediction} (cv\+::\+Mat kf\+State\+Pre, cv\+::\+Mat kf\+Cov, double \hyperlink{classKFPrediction_a2580cd73915b169edf669c8cb2271d35}{t}, double \hyperlink{classKFPrediction_a60679b464a34bfad1c5d4875fd172357}{dt}, bool \hyperlink{classKFPrediction_af19dba9fa007ce21c0e36e4e96c3cb54}{seen})
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{classKFPrediction}{K\+F\+Prediction} from prediction data. \end{DoxyCompactList}\item 
+\hyperlink{classKFPrediction_af5d081b647f746516773bb6dcdee82aa}{K\+F\+Prediction} (const \hyperlink{classKFPrediction}{K\+F\+Prediction} \&k)\hypertarget{classKFPrediction_af5d081b647f746516773bb6dcdee82aa}{}\label{classKFPrediction_af5d081b647f746516773bb6dcdee82aa}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+Q\+RectF \hyperlink{classKFPrediction_a74b69fb51d374dc98e25011e02dbdef5}{bbox} () const \hypertarget{classKFPrediction_a74b69fb51d374dc98e25011e02dbdef5}{}\label{classKFPrediction_a74b69fb51d374dc98e25011e02dbdef5}
+
+\begin{DoxyCompactList}\small\item\em Get the bounding box. \end{DoxyCompactList}\item 
+Q\+PointF \hyperlink{classKFPrediction_a100c3ce6d353d7a1480bdf786212dedc}{jet} () const \hypertarget{classKFPrediction_a100c3ce6d353d7a1480bdf786212dedc}{}\label{classKFPrediction_a100c3ce6d353d7a1480bdf786212dedc}
+
+\begin{DoxyCompactList}\small\item\em Get the jet. \end{DoxyCompactList}\item 
+double \hyperlink{classKFPrediction_a60679b464a34bfad1c5d4875fd172357}{dt} () const \hypertarget{classKFPrediction_a60679b464a34bfad1c5d4875fd172357}{}\label{classKFPrediction_a60679b464a34bfad1c5d4875fd172357}
+
+\begin{DoxyCompactList}\small\item\em Get the timestep change. \end{DoxyCompactList}\item 
+double \hyperlink{classKFPrediction_a2580cd73915b169edf669c8cb2271d35}{t} () const \hypertarget{classKFPrediction_a2580cd73915b169edf669c8cb2271d35}{}\label{classKFPrediction_a2580cd73915b169edf669c8cb2271d35}
+
+\begin{DoxyCompactList}\small\item\em Get the time of prediction. \end{DoxyCompactList}\item 
+bool \hyperlink{classKFPrediction_af19dba9fa007ce21c0e36e4e96c3cb54}{seen} () const \hypertarget{classKFPrediction_af19dba9fa007ce21c0e36e4e96c3cb54}{}\label{classKFPrediction_af19dba9fa007ce21c0e36e4e96c3cb54}
+
+\begin{DoxyCompactList}\small\item\em Get whether the ball was seen. \end{DoxyCompactList}\item 
+double \hyperlink{classKFPrediction_a7bfaf85aebf53e164f222c41d55d231d}{confidence} () const \hypertarget{classKFPrediction_a7bfaf85aebf53e164f222c41d55d231d}{}\label{classKFPrediction_a7bfaf85aebf53e164f222c41d55d231d}
+
+\begin{DoxyCompactList}\small\item\em Get the confidence of this prediction. \end{DoxyCompactList}\item 
+void \hyperlink{classKFPrediction_abc4a59c2df74e58c988528e771b9fd17}{set\+Center} (Q\+PointF pos)\hypertarget{classKFPrediction_abc4a59c2df74e58c988528e771b9fd17}{}\label{classKFPrediction_abc4a59c2df74e58c988528e771b9fd17}
+
+\begin{DoxyCompactList}\small\item\em Set the center of the bounding box of this prediction. \end{DoxyCompactList}\item 
+void \hyperlink{classKFPrediction_aa9618a3405100db29a22da58277d2b7e}{set\+Top\+Left} (Q\+PointF pos)\hypertarget{classKFPrediction_aa9618a3405100db29a22da58277d2b7e}{}\label{classKFPrediction_aa9618a3405100db29a22da58277d2b7e}
+
+\begin{DoxyCompactList}\small\item\em Set the top left of the bounding box. \end{DoxyCompactList}\item 
+void \hyperlink{classKFPrediction_a25c7ec0647484098eb39df70bdb2e06c}{set\+Bottom\+Right} (Q\+PointF pos)\hypertarget{classKFPrediction_a25c7ec0647484098eb39df70bdb2e06c}{}\label{classKFPrediction_a25c7ec0647484098eb39df70bdb2e06c}
+
+\begin{DoxyCompactList}\small\item\em Set the bottom right of the bounding box. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+RectF \hyperlink{classKFPrediction_a907ddab43c91eb38026241768e2cecfb}{m\+Bbox}\hypertarget{classKFPrediction_a907ddab43c91eb38026241768e2cecfb}{}\label{classKFPrediction_a907ddab43c91eb38026241768e2cecfb}
+
+\begin{DoxyCompactList}\small\item\em Bounding box of this prediction. \end{DoxyCompactList}\item 
+Q\+PointF \hyperlink{classKFPrediction_a579b3b9841f90c3c60e043a72b1e044d}{m\+Jet}\hypertarget{classKFPrediction_a579b3b9841f90c3c60e043a72b1e044d}{}\label{classKFPrediction_a579b3b9841f90c3c60e043a72b1e044d}
+
+\begin{DoxyCompactList}\small\item\em $<$dx/dt, dy/dt$>$ vector \end{DoxyCompactList}\item 
+double \hyperlink{classKFPrediction_ae27b38e7b828f4e036945dc16c704148}{mT}\hypertarget{classKFPrediction_ae27b38e7b828f4e036945dc16c704148}{}\label{classKFPrediction_ae27b38e7b828f4e036945dc16c704148}
+
+\begin{DoxyCompactList}\small\item\em Time at which this prediction was recorded. \end{DoxyCompactList}\item 
+double \hyperlink{classKFPrediction_accd4aa38016d159c88ec6c8707fcbf99}{m\+Dt}\hypertarget{classKFPrediction_accd4aa38016d159c88ec6c8707fcbf99}{}\label{classKFPrediction_accd4aa38016d159c88ec6c8707fcbf99}
+
+\begin{DoxyCompactList}\small\item\em Change in time from step prior to detection. \end{DoxyCompactList}\item 
+bool \hyperlink{classKFPrediction_a28155f8684f2c0310f001a48050f5592}{m\+Seen}\hypertarget{classKFPrediction_a28155f8684f2c0310f001a48050f5592}{}\label{classKFPrediction_a28155f8684f2c0310f001a48050f5592}
+
+\begin{DoxyCompactList}\small\item\em Whether this prediction is based on a track or not. \end{DoxyCompactList}\item 
+double \hyperlink{classKFPrediction_aa6f433c4cf1e83fd2b07acbb97f71e0e}{m\+Confidence}\hypertarget{classKFPrediction_aa6f433c4cf1e83fd2b07acbb97f71e0e}{}\label{classKFPrediction_aa6f433c4cf1e83fd2b07acbb97f71e0e}
+
+\begin{DoxyCompactList}\small\item\em Measure of confidence; KF distance to expected location. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Object which represents a prediction from the Kalman filter. 
+
+Essentially decorates state data, but also holds onto the dT from the previous timestep 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{K\+F\+Prediction@{K\+F\+Prediction}!K\+F\+Prediction@{K\+F\+Prediction}}
+\index{K\+F\+Prediction@{K\+F\+Prediction}!K\+F\+Prediction@{K\+F\+Prediction}}
+\subsubsection[{\texorpdfstring{K\+F\+Prediction(cv\+::\+Mat kf\+State\+Pre, cv\+::\+Mat kf\+Cov, double t, double dt, bool seen)}{KFPrediction(cv::Mat kfStatePre, cv::Mat kfCov, double t, double dt, bool seen)}}]{\setlength{\rightskip}{0pt plus 5cm}K\+F\+Prediction\+::\+K\+F\+Prediction (
+\begin{DoxyParamCaption}
+\item[{cv\+::\+Mat}]{kf\+State\+Pre, }
+\item[{cv\+::\+Mat}]{kf\+Cov, }
+\item[{double}]{t, }
+\item[{double}]{dt, }
+\item[{bool}]{seen}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classKFPrediction_a5eb59d17d94568138d8e1e596b856372}{}\label{classKFPrediction_a5eb59d17d94568138d8e1e596b856372}
+
+
+Create a \hyperlink{classKFPrediction}{K\+F\+Prediction} from prediction data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kf\+State\+Pre} & KF Predicted state \\
+\hline
+{\em kf\+Cov} & KF Covariance matrix \\
+\hline
+{\em t} & Current time state at prediction \\
+\hline
+{\em dt} & Previous change in time between states \\
+\hline
+{\em seen} & Whether the ball was spotted or not \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+F\+Prediction.\+hpp\item 
+K\+F\+Prediction.\+cpp\end{DoxyCompactItemize}

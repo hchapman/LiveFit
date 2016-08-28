@@ -1,0 +1,103 @@
+\section*{Introduction}
+
+This is a live fitting demonstration application to run during classes in order to motivate discussion about standard projectile motion models.
+
+\section*{Preliminary Setup}
+
+Before using the demonstration, there is some setup.
+
+
+\begin{DoxyEnumerate}
+\item Connect the computer to the projector. Ideally, set the projector screen up as an extra screen (not screen mirroring).
+\item If using an external camera, connect it to the machine and install that all appropriate drivers are installed. For example, if on a Mac, test that Photo Booth works with the camera to be used.
+\item Note down the following measurements\+:
+\begin{DoxyItemize}
+\item The F\+OV of the camera. This is a value in degrees, which is probably mentioned in the specifications for your camera, whether in the manual or online. For example, the P\+S3 eye has two F\+OV settings\+: 56deg (blue) and 75deg (red). {\itshape If you cannot find this information, the default value of 56deg may suffice}.
+\item The {\bfseries width} and {\bfseries height} of the projection from the projector, in inches.
+\item The distance from the projector screen, in inches, which you plan to throw the ball across. This is a {\bfseries negative} number, as the negative direction points towards the camera.
+\end{DoxyItemize}
+\item Start the Live\+Fit application. Pop out the black projector docking widget on the left if it is not a floating window. Place the window on the projector screen and resize it so that it fills the entire projection.
+\item The application has started, and should be displaying a video feed. If your computer has an internal webcam, it should be displayed inside of the Live\+Fit application; if not, it should have your external camera displayed. If it is displaying your internal webcam but you wish to use an external camera, try selecting a different camera under File$>$Camera$>$1 (or 2, or 3, etc.).
+\item {\bfseries Point your camera so that the entire projector screen is in frame}. Move the corners (the green circles with wedges in the video feed) so that they sit on the corners of the projector screen. Make sure that the correct corners are placed on the correct corners! The small slice of the wedge should cover the projector screen, and the large slice should be outside.
+\item Click on the {\itshape World} tab on the settings panel on the right. Enter your measured projector width, height, distance of the ball-\/throwing plane (\char`\"{}ball
+   Z\char`\"{}), and camera F\+OV.
+\item Click on the {\itshape Video} tab. Stand out of the frame and test throwing some balls across the screen. You are checking that\+:
+\begin{DoxyItemize}
+\item The balls are being detected. There should be blue circles and red boxes in the application video frame that follow the same trajectory of the balls you have tossed. If they are not appearing, you may need to alter some settings.
+\item The projector display information is {\itshape not causing a feedback loop} and being detected as a phantom ball toss. If this happens, you may need to change the settings.
+\end{DoxyItemize}
+\item By this point, if you throw a ball across the screen, there should be information on the projector screen\+: Points should mark where the camera thinks the ball has passed, and after each toss a white parabola should indicate the predicted trajectory of the ball.
+\item Now alter settings in the {\itshape Data} tab so that\+:
+\begin{DoxyItemize}
+\item The appropriate amount of information is displayed for your demonstration, and
+\item The information is visible to students in your classroom (line thickness, font size, mark radius, etc).
+\end{DoxyItemize}
+\item As you step through the demonstration, you may turn on data options here. See the example demonstration procedure for ideas.
+\end{DoxyEnumerate}
+
+\section*{Example Live\+Fit demonstration procedure}
+
+When running the demonstration in your class, the procedure is of course up to you! Here is an example format for a typical-\/length calculus I class demonstration period. This example scenario comes at a period right after discussing solving a simultaneous system of a equations to find lines from 2 points and quadratic equations from 3, and immediately before starting a related lab assignment on fitting trajectories to spotted data from a video file.
+
+Setup camera, computer, projector, and settings before the class period starts. Set program to hide fit curves, and not show any parametrization information.
+
+
+\begin{DoxyEnumerate}
+\item Introduce the students to the program; demonstrate how it works\+: It sees balls in motion in front of the projector and identifies where they are. Throw a few balls in front of the screen slowly so they can see the marked trajectories. {\itshape Q}\+: What shape is the trajectory?
+\item Remind students of the model of standard projectile motion; that x(t) is a linear equation and that y(t) is a quadratic equation. Turn on \char`\"{}mark 3
+   points\char`\"{}, and \char`\"{}lock fit until reset\char`\"{}. Throw a ball in front of the screen; if the track is adequate (reset by clicking the button below the video and try again if not). Points are displayed as (t, x, y). 3 points marked like this are the first, highest, and most recent.
+\item Use the first and last points to compute a linear x(t) function, then all 3 points to compute a quadratic y(t) function. Turn on \char`\"{}show x(t) and y(t)\char`\"{}. Equations displayed should be the same as worked out on the board. {\itshape Recall} that points displayed are not in any normal units (unknown space or time units) and that to the computer software, {\itshape down is the positive y direction}. Ask if this makes sense with regards to y(t)\+: Does the parabola open towards the positive or the negative direction (it should towards the positive)?
+\item Ask students what they recall the various coefficients of x(t), y(t) mean.
+\begin{DoxyItemize}
+\item x(t) = t$\ast$\mbox{[}initial x velocity\mbox{]} + \mbox{[}initial x position\mbox{]}\+:
+\item y(t) = t\textsuperscript{2}g/2 + t$\ast$\mbox{[}initial y velocity\mbox{]} + \mbox{[}initial y position\mbox{]}
+\end{DoxyItemize}
+
+What does the t\textsuperscript{2} coefficient of y(t) mean (half of \char`\"{}acceleration
+   due to gravity\char`\"{})? {\itshape Q} Do you think it will be different for different throws?
+\item Turn off \char`\"{}lock fit until reset\char`\"{} and throw more in front of the projector. After each throw, ask students to record the coefficient of t\textsuperscript{2}. After a number of \char`\"{}good\char`\"{} throws/fits, ask the students whether they agree that the coefficient isn\textquotesingle{}t changing, and why? (The numbers should be more or less the same).
+\end{DoxyEnumerate}
+
+\section*{Settings pane descriptions}
+
+\subsection*{World}
+
+
+\begin{DoxyItemize}
+\item {\bfseries ProjW}\+: Measured width of the projector screen, in inches.
+\item {\bfseries ProjH}\+: Measured height of the projector screen, in inches.
+\item {\bfseries BallZ}\+: Distance from the projector screen plane to the ball toss plane, in inches (this should be a negative number).
+\item {\bfseries F\+OV}\+: The frame of view (F\+OV) of your particular camera, in degrees.
+\end{DoxyItemize}
+
+\subsection*{Video}
+
+
+\begin{DoxyItemize}
+\item {\bfseries Blur\+Size}\+: Strength of the gaussian blur during preprocessing. In general, a larger value here will reduce some sensitivity and cause some blobs to be connected rather than disconnected. Possible suggestion\+: 10px
+\item {\bfseries Thresh\+Val}\+: The minimum value for pixels to be considered during preprocessing. In general, a lower value will be {\itshape more noisy and more sensitive} while a higher value will be {\itshape less sensitive} but might miss important blobs if they are not clear enough. Possible suggestion\+: 7.\+00
+\item {\bfseries Min\+Radius}\+: Minimum radius of a blob to be considered a \char`\"{}ball\char`\"{}. Make higher if noise is being detected as ball, or smaller if balls are being ignored. Possible suggestion\+: 2px.
+\item {\bfseries Max\+Radius}\+: Maximum radius of a blob to be considered a \char`\"{}ball\char`\"{}. Make higher if large blobs are being detected as balls (e.\+g. a whole moving person), or smaller if balls are being ignored. Possible suggestion\+: 30px.
+\item {\bfseries Grav\+Constant}\+: An {\itshape a priori} guess of the gravitational constant {\itshape g} in image coordinates, px/sec$^\wedge$2. This is used in tracking to help predict how balls will fall. Suggested value\+: 480px/s$^\wedge$2.
+\item {\bfseries Frame}\+: What type of frame to display. Default is \char`\"{}\+Video,\char`\"{} which displays video with blobs present after the diff/blur/thresh steps. \char`\"{}\+Video\char`\"{} is probably best here.
+\item {\bfseries X\+Y\+Covariance}\+: Covariance between the X and Y coordinates of a ball in motion for the tracker. Probably best to leave this at exp(1.\+00)
+\end{DoxyItemize}
+
+\subsection*{Data}
+
+
+\begin{DoxyItemize}
+\item {\bfseries Lock fit until clear}\+: Once the camera has detected a fit (the fit curve is white and parametric equations are displayed), don\textquotesingle{}t track any new balls or change any display information. {\bfseries When this is enabled, use \char`\"{}\+Drop Tracking
+  Points\char`\"{} to clear the lock and enable tracking again}. Suggested to use this while working examples on the board, so that data is not dropped unexpectedly.
+\item {\bfseries Clip track to projector}\+: Whether or not to ignore blobs which are not in front of the projector screen. Suggested if you will be in the camera\textquotesingle{}s frame so that the camera can ignore you entirely and focus on the balls.
+\item {\bfseries Show x(t), y(t)}\+: Whether or not to show the parametric equations for the fit on the projector screen.
+\item {\bfseries Color track misses}\+: Whether or not to color points on the projector yellow if they are not based on visual data. Suggested to leave this off during demonstrations.
+\item {\bfseries Show dx/dt, dy/dt}\+: Whether or not to show the predicted velocity vector of the tracked balls on the projector.
+\item {\bfseries Verbose KF track points}\+: Whether or not to show the size of the seen blobs on the projector screen. Suggested\+: Off.
+\item {\bfseries Point radius}\+: Radius of the points for tracked balls on the projector.
+\item {\bfseries Point thickness}\+: Thickness of the lines for tracked balls on the projector.
+\item {\bfseries Show fit parabola}\+: Whether or not to show the fit curve defined by the parametric fit.
+\item {\bfseries Only lock after falling}\+: Whether to wait until the ball has a downward trajectory to fit an equation. Suggested\+: on, since the quadratic fit might not be good enough otherwise...
+\item {\bfseries Min fall speed}\+: Minimum speed in frame coordinates to be considered \char`\"{}falling\char`\"{}. The larger this is, the longer it might take for a fit curve, but the better the curve should be. Suggested\+: 5px/s
+\item {\bfseries Font size}\+: The font size of the display on the projector; equations, points, marked points. 
+\end{DoxyItemize}

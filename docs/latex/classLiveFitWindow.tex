@@ -1,0 +1,153 @@
+\hypertarget{classLiveFitWindow}{}\section{Live\+Fit\+Window Class Reference}
+\label{classLiveFitWindow}\index{Live\+Fit\+Window@{Live\+Fit\+Window}}
+
+
+The window which manages all logic for the Live\+Fit application.  
+
+
+
+
+{\ttfamily \#include $<$Live\+Fit\+Window.\+hpp$>$}
+
+
+
+Inheritance diagram for Live\+Fit\+Window\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=161pt]{classLiveFitWindow__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Live\+Fit\+Window\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLiveFitWindow__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLiveFitWindow_a91cf0faba83337bcf5588168440cdba4}{start\+Stream} (char $\ast$video\+File)\hypertarget{classLiveFitWindow_a91cf0faba83337bcf5588168440cdba4}{}\label{classLiveFitWindow_a91cf0faba83337bcf5588168440cdba4}
+
+\begin{DoxyCompactList}\small\item\em Start a new stream with video from video\+File. \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_a0b62438bf68461f6c2a5ae4a865482e5}{start\+Stream} (int camera\+Id)\hypertarget{classLiveFitWindow_a0b62438bf68461f6c2a5ae4a865482e5}{}\label{classLiveFitWindow_a0b62438bf68461f6c2a5ae4a865482e5}
+
+\begin{DoxyCompactList}\small\item\em Start a new stream with video from camera at index camera\+Id. \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_ad8adc384ed554f76dd29744a46c9a13c}{start\+Camera0} ()\hypertarget{classLiveFitWindow_ad8adc384ed554f76dd29744a46c9a13c}{}\label{classLiveFitWindow_ad8adc384ed554f76dd29744a46c9a13c}
+
+\begin{DoxyCompactList}\small\item\em Equivalent to start\+Stream(0) \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_af9e4798aa00fa1ffc3f0e23e41a3ca1d}{start\+Camera1} ()\hypertarget{classLiveFitWindow_af9e4798aa00fa1ffc3f0e23e41a3ca1d}{}\label{classLiveFitWindow_af9e4798aa00fa1ffc3f0e23e41a3ca1d}
+
+\begin{DoxyCompactList}\small\item\em Equivalent to start\+Stream(1) \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_a744f37125cf952f6720a6a41eca4dcf1}{start\+Camera2} ()\hypertarget{classLiveFitWindow_a744f37125cf952f6720a6a41eca4dcf1}{}\label{classLiveFitWindow_a744f37125cf952f6720a6a41eca4dcf1}
+
+\begin{DoxyCompactList}\small\item\em Equivalent to start\+Stream(2) \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_aa705a48360d8bfdfe539671c8b1fa1dc}{send\+Camera\+Action} (Q\+Action $\ast$)\hypertarget{classLiveFitWindow_aa705a48360d8bfdfe539671c8b1fa1dc}{}\label{classLiveFitWindow_aa705a48360d8bfdfe539671c8b1fa1dc}
+
+\begin{DoxyCompactList}\small\item\em Handle a camera-\/related Q\+Action, like those in file$>$camera. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLiveFitWindow_ab3c12b13b746248a2f0063298ac55ca0}{Live\+Fit\+Window} (Q\+Widget $\ast$parent=0)\hypertarget{classLiveFitWindow_ab3c12b13b746248a2f0063298ac55ca0}{}\label{classLiveFitWindow_ab3c12b13b746248a2f0063298ac55ca0}
+
+\begin{DoxyCompactList}\small\item\em Default constructor; default to webcam 0. \end{DoxyCompactList}\item 
+\hyperlink{classLiveFitWindow_a5bfe4989746c47ba2c17d7e834d95011}{Live\+Fit\+Window} (char $\ast$video\+File)\hypertarget{classLiveFitWindow_a5bfe4989746c47ba2c17d7e834d95011}{}\label{classLiveFitWindow_a5bfe4989746c47ba2c17d7e834d95011}
+
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{classLiveFitWindow}{Live\+Fit\+Window} with video stream at video\+File. \end{DoxyCompactList}\item 
+\hyperlink{classLiveFitWindow_a811abb5e301bd43d0930bc1330e0bf2a}{Live\+Fit\+Window} (int camera\+Id)\hypertarget{classLiveFitWindow_a811abb5e301bd43d0930bc1330e0bf2a}{}\label{classLiveFitWindow_a811abb5e301bd43d0930bc1330e0bf2a}
+
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{classLiveFitWindow}{Live\+Fit\+Window} with video stream from camera at index camera\+Id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLiveFitWindow_ab9da38cdc864bd7601ac769e162461e8}{write\+Settings} ()\hypertarget{classLiveFitWindow_ab9da38cdc864bd7601ac769e162461e8}{}\label{classLiveFitWindow_ab9da38cdc864bd7601ac769e162461e8}
+
+\begin{DoxyCompactList}\small\item\em Write this application\textquotesingle{}s Q\+Settings. \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_a7058672cfda9396b5ec8203c2777280b}{read\+Settings} ()\hypertarget{classLiveFitWindow_a7058672cfda9396b5ec8203c2777280b}{}\label{classLiveFitWindow_a7058672cfda9396b5ec8203c2777280b}
+
+\begin{DoxyCompactList}\small\item\em Read in this application\textquotesingle{}s Q\+Settings. \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_a0899373b045f23b4eafdbb303d91ff1a}{close\+Event} (Q\+Close\+Event $\ast$ev)\hypertarget{classLiveFitWindow_a0899373b045f23b4eafdbb303d91ff1a}{}\label{classLiveFitWindow_a0899373b045f23b4eafdbb303d91ff1a}
+
+\begin{DoxyCompactList}\small\item\em Called when this window is closed; destruct all necessary objects and close streams, etc cleanly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLiveFitWindow_a182a53b15eb77f80df48a0f09c4781f5}{on\+\_\+pause\+Button\+\_\+clicked} ()\hypertarget{classLiveFitWindow_a182a53b15eb77f80df48a0f09c4781f5}{}\label{classLiveFitWindow_a182a53b15eb77f80df48a0f09c4781f5}
+
+\begin{DoxyCompactList}\small\item\em Called when the pause\+Button is clicked. \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_a19ba7fcfb7be7bb1ff8723bc8b62fc9a}{on\+\_\+action\+\_\+\+Open\+\_\+triggered} ()\hypertarget{classLiveFitWindow_a19ba7fcfb7be7bb1ff8723bc8b62fc9a}{}\label{classLiveFitWindow_a19ba7fcfb7be7bb1ff8723bc8b62fc9a}
+
+\begin{DoxyCompactList}\small\item\em Called when the Open action is triggered (ie file$>$open) \end{DoxyCompactList}\item 
+void {\bfseries on\+\_\+action\+Find\+\_\+\+Projector\+\_\+\+Window\+\_\+triggered} ()\hypertarget{classLiveFitWindow_a6cb2a964d45ef142305ea88a2c6c2a9e}{}\label{classLiveFitWindow_a6cb2a964d45ef142305ea88a2c6c2a9e}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries create\+Menus} ()\hypertarget{classLiveFitWindow_a8b9195c43d88f5b0835fd0e94d9bfdc5}{}\label{classLiveFitWindow_a8b9195c43d88f5b0835fd0e94d9bfdc5}
+
+\item 
+void {\bfseries choose\+Video\+File} ()\hypertarget{classLiveFitWindow_a61eaa74b1c86d885823250ac704e9c56}{}\label{classLiveFitWindow_a61eaa74b1c86d885823250ac704e9c56}
+
+\item 
+void {\bfseries setup\+Ui} ()\hypertarget{classLiveFitWindow_ac67a35109b6462bc9919d874e92e73bb}{}\label{classLiveFitWindow_ac67a35109b6462bc9919d874e92e73bb}
+
+\item 
+void {\bfseries display\+Video\+Stream} ()\hypertarget{classLiveFitWindow_ac78798fbb8ddecd18eced9af51016cf7}{}\label{classLiveFitWindow_ac78798fbb8ddecd18eced9af51016cf7}
+
+\item 
+void \hyperlink{classLiveFitWindow_a3a3c6f4aee63ca59231649bfcc075d50}{setup\+Camera} ()
+\begin{DoxyCompactList}\small\item\em Set up the video stream and the converter, as well as requisite signals. \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_aec30ba8f93179f03d6414edd6334826f}{setup\+Signal\+Connections} ()\hypertarget{classLiveFitWindow_aec30ba8f93179f03d6414edd6334826f}{}\label{classLiveFitWindow_aec30ba8f93179f03d6414edd6334826f}
+
+\begin{DoxyCompactList}\small\item\em Set up the \hyperlink{classProjectorWindow}{Projector\+Window} which displays information to the class. \end{DoxyCompactList}\item 
+void \hyperlink{classLiveFitWindow_a7a9085bf6b03f1f804526a6e256d9efa}{populate\+Camera\+Menu} ()\hypertarget{classLiveFitWindow_a7a9085bf6b03f1f804526a6e256d9efa}{}\label{classLiveFitWindow_a7a9085bf6b03f1f804526a6e256d9efa}
+
+\begin{DoxyCompactList}\small\item\em Populate the file$>$camera menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Size \hyperlink{classLiveFitWindow_aaf25c0704549526c5312c29eb5db3feb}{m\+Video\+Size}\hypertarget{classLiveFitWindow_aaf25c0704549526c5312c29eb5db3feb}{}\label{classLiveFitWindow_aaf25c0704549526c5312c29eb5db3feb}
+
+\begin{DoxyCompactList}\small\item\em Pixel size of the video stream. \end{DoxyCompactList}\item 
+Ui\+::live\+Fit\+Window \hyperlink{classLiveFitWindow_a5e598fb19c7a2e513750052330843afc}{ui}\hypertarget{classLiveFitWindow_a5e598fb19c7a2e513750052330843afc}{}\label{classLiveFitWindow_a5e598fb19c7a2e513750052330843afc}
+
+\begin{DoxyCompactList}\small\item\em This window\textquotesingle{}s Q\+Designer ui, \hyperlink{classLiveFitWindow_a5e598fb19c7a2e513750052330843afc}{Live\+Fit\+Window.\+ui}. \end{DoxyCompactList}\item 
+\hyperlink{classTrackingStream}{Tracking\+Stream} \hyperlink{classLiveFitWindow_ab5bb92518073cbe806879092e322f165}{m\+Tracking\+Stream}\hypertarget{classLiveFitWindow_ab5bb92518073cbe806879092e322f165}{}\label{classLiveFitWindow_ab5bb92518073cbe806879092e322f165}
+
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classTrackingStream}{Tracking\+Stream} object which manages the current video stream and tracking. \end{DoxyCompactList}\item 
+\hyperlink{classFrameConverter}{Frame\+Converter} \hyperlink{classLiveFitWindow_aaeb5e21241e7ff1c4cb842cf5910b8c6}{m\+Frame\+Converter}\hypertarget{classLiveFitWindow_aaeb5e21241e7ff1c4cb842cf5910b8c6}{}\label{classLiveFitWindow_aaeb5e21241e7ff1c4cb842cf5910b8c6}
+
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classFrameConverter}{Frame\+Converter} which takes incoming frames from the stream and converts them into Q\+Images to be sent to appropriate display widgets. \end{DoxyCompactList}\item 
+Q\+Thread \hyperlink{classLiveFitWindow_ac9db28411775756d862564a1ec442d88}{m\+Stream\+Thread}\hypertarget{classLiveFitWindow_ac9db28411775756d862564a1ec442d88}{}\label{classLiveFitWindow_ac9db28411775756d862564a1ec442d88}
+
+\begin{DoxyCompactList}\small\item\em A Q\+Thread for the video stream. \end{DoxyCompactList}\item 
+Q\+Thread \hyperlink{classLiveFitWindow_a30b73b958b06b3664c2d2a0a1bdfa2b0}{m\+Converter\+Thread}\hypertarget{classLiveFitWindow_a30b73b958b06b3664c2d2a0a1bdfa2b0}{}\label{classLiveFitWindow_a30b73b958b06b3664c2d2a0a1bdfa2b0}
+
+\begin{DoxyCompactList}\small\item\em A Q\+Thread for the video converter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The window which manages all logic for the Live\+Fit application. 
+
+\subsection{Member Function Documentation}
+\index{Live\+Fit\+Window@{Live\+Fit\+Window}!setup\+Camera@{setup\+Camera}}
+\index{setup\+Camera@{setup\+Camera}!Live\+Fit\+Window@{Live\+Fit\+Window}}
+\subsubsection[{\texorpdfstring{setup\+Camera()}{setupCamera()}}]{\setlength{\rightskip}{0pt plus 5cm}void Live\+Fit\+Window\+::setup\+Camera (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLiveFitWindow_a3a3c6f4aee63ca59231649bfcc075d50}{}\label{classLiveFitWindow_a3a3c6f4aee63ca59231649bfcc075d50}
+
+
+Set up the video stream and the converter, as well as requisite signals. 
+
+We currently also set up a bunch of auxiliary signals here which should be moved out to their own respective method 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Live\+Fit\+Window.\+hpp\item 
+Live\+Fit\+Window.\+cpp\end{DoxyCompactItemize}

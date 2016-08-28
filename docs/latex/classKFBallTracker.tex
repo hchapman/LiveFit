@@ -1,0 +1,198 @@
+\hypertarget{classKFBallTracker}{}\section{K\+F\+Ball\+Tracker Class Reference}
+\label{classKFBallTracker}\index{K\+F\+Ball\+Tracker@{K\+F\+Ball\+Tracker}}
+
+
+Contains most of the logic for live-\/tracking objects.  
+
+
+
+
+{\ttfamily \#include $<$K\+F\+Ball\+Tracker.\+hpp$>$}
+
+
+
+Inheritance diagram for K\+F\+Ball\+Tracker\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{classKFBallTracker__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for K\+F\+Ball\+Tracker\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classKFBallTracker__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classKFBallTracker_aa875c61db5b740fe2d1a792377aa0933}{set\+Clip\+Shape} (Q\+PolygonF shape)\hypertarget{classKFBallTracker_aa875c61db5b740fe2d1a792377aa0933}{}\label{classKFBallTracker_aa875c61db5b740fe2d1a792377aa0933}
+
+\begin{DoxyCompactList}\small\item\em Set the clipping shape for tracking. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a3f3dc75689789297abb0292fdd438fc3}{toggle\+Clip} (bool clip)\hypertarget{classKFBallTracker_a3f3dc75689789297abb0292fdd438fc3}{}\label{classKFBallTracker_a3f3dc75689789297abb0292fdd438fc3}
+
+\begin{DoxyCompactList}\small\item\em Set whether we should clip tracking. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classKFBallTracker_a0a659913d1fea7bb0b3d259dada94a34}{ball\+Spotted} (\hyperlink{classTrackingBall}{Tracking\+Ball})\hypertarget{classKFBallTracker_a0a659913d1fea7bb0b3d259dada94a34}{}\label{classKFBallTracker_a0a659913d1fea7bb0b3d259dada94a34}
+
+\begin{DoxyCompactList}\small\item\em Emit a \hyperlink{classTrackingBall}{Tracking\+Ball} when a ball is spotted in the frame. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a839734e346533f4b8a2abd9896b6cffb}{ball\+Predicted} (\hyperlink{classKFPrediction}{K\+F\+Prediction})\hypertarget{classKFBallTracker_a839734e346533f4b8a2abd9896b6cffb}{}\label{classKFBallTracker_a839734e346533f4b8a2abd9896b6cffb}
+
+\begin{DoxyCompactList}\small\item\em Emit a \hyperlink{classKFPrediction}{K\+F\+Prediction} when the KF makes a prediction about the ball location. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a7279927e398fe5aa9557614f15d218aa}{ball\+Lost} ()\hypertarget{classKFBallTracker_a7279927e398fe5aa9557614f15d218aa}{}\label{classKFBallTracker_a7279927e398fe5aa9557614f15d218aa}
+
+\begin{DoxyCompactList}\small\item\em Emitted when the ball is lost. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a6d10b62b8dc9dd5b2d5a96f330acaa93}{person\+Spotted} (Q\+Rect)\hypertarget{classKFBallTracker_a6d10b62b8dc9dd5b2d5a96f330acaa93}{}\label{classKFBallTracker_a6d10b62b8dc9dd5b2d5a96f330acaa93}
+
+\begin{DoxyCompactList}\small\item\em Emitted when a person is spotted; unused. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a55de1a7379b9eed4c89ac6474ce7a4ac}{thresh\+Ready} (const cv\+::\+Mat \&, enum Color\+Space)\hypertarget{classKFBallTracker_a55de1a7379b9eed4c89ac6474ce7a4ac}{}\label{classKFBallTracker_a55de1a7379b9eed4c89ac6474ce7a4ac}
+
+\begin{DoxyCompactList}\small\item\em Emitted when a thresh image is ready to be converted. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a58317068463b0db8b6809e45e1b44728}{contour\+Ready} (const cv\+::\+Mat \&, enum Color\+Space)\hypertarget{classKFBallTracker_a58317068463b0db8b6809e45e1b44728}{}\label{classKFBallTracker_a58317068463b0db8b6809e45e1b44728}
+
+\begin{DoxyCompactList}\small\item\em Emitted when a contour image is ready to be converted. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_ac7b3230716e0f9a36852219b0bf7bad0}{blur\+Ready} (const cv\+::\+Mat \&, enum Color\+Space)\hypertarget{classKFBallTracker_ac7b3230716e0f9a36852219b0bf7bad0}{}\label{classKFBallTracker_ac7b3230716e0f9a36852219b0bf7bad0}
+
+\begin{DoxyCompactList}\small\item\em Emitted when a blur image is ready to be converted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classKFBallTracker_a40ded1e8adb3b0c059020261a525e2d9}{K\+F\+Ball\+Tracker} (Q\+Object $\ast$parent=0)\hypertarget{classKFBallTracker_a40ded1e8adb3b0c059020261a525e2d9}{}\label{classKFBallTracker_a40ded1e8adb3b0c059020261a525e2d9}
+
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+Q\+Map$<$ double, \hyperlink{classTrackingBall}{Tracking\+Ball} $>$ \hyperlink{classKFBallTracker_a05f0f8a1a585c78f3745d269627b7020}{process\+Next\+Frame} (cv\+::\+Mat \&frame, int t)\hypertarget{classKFBallTracker_a05f0f8a1a585c78f3745d269627b7020}{}\label{classKFBallTracker_a05f0f8a1a585c78f3745d269627b7020}
+
+\begin{DoxyCompactList}\small\item\em Process the next frame, possibly finding balls and updating state. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_ad8aa6f450a38ce33092e8afe7896615a}{update\+Time\+State} (double t)\hypertarget{classKFBallTracker_ad8aa6f450a38ce33092e8afe7896615a}{}\label{classKFBallTracker_ad8aa6f450a38ce33092e8afe7896615a}
+
+\begin{DoxyCompactList}\small\item\em Update the internal time state of the tracker. \end{DoxyCompactList}\item 
+double \hyperlink{classKFBallTracker_ad94490e1a5931e582a2325686d337d5d}{kalman\+Distance} (cv\+::\+Mat measurement)
+\begin{DoxyCompactList}\small\item\em Kalman distance; see Ball\+Filter.\+kalman\+Distance(); unused. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_af36c51fbe11211d3b843dc2454bdfdc8}{set\+Blur\+Size} (double blur\+Size)\hypertarget{classKFBallTracker_af36c51fbe11211d3b843dc2454bdfdc8}{}\label{classKFBallTracker_af36c51fbe11211d3b843dc2454bdfdc8}
+
+\begin{DoxyCompactList}\small\item\em Set m\+Blur\+Size. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a22cf9bcd219f0d1c94cc140da8a5334f}{set\+Thresh\+Val} (double thresh)\hypertarget{classKFBallTracker_a22cf9bcd219f0d1c94cc140da8a5334f}{}\label{classKFBallTracker_a22cf9bcd219f0d1c94cc140da8a5334f}
+
+\begin{DoxyCompactList}\small\item\em Set m\+Thresh\+Val. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a115216f4368f052b10c4b09e57bcf18f}{set\+Min\+Radius} (double radius)\hypertarget{classKFBallTracker_a115216f4368f052b10c4b09e57bcf18f}{}\label{classKFBallTracker_a115216f4368f052b10c4b09e57bcf18f}
+
+\begin{DoxyCompactList}\small\item\em Set m\+Min\+Radius. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a07779bbccfb84888cf42138c4ae05de5}{set\+Max\+Radius} (double radius)\hypertarget{classKFBallTracker_a07779bbccfb84888cf42138c4ae05de5}{}\label{classKFBallTracker_a07779bbccfb84888cf42138c4ae05de5}
+
+\begin{DoxyCompactList}\small\item\em Set m\+Max\+Radius. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_aa71931e508ef360436e2ef592d663b6e}{set\+X\+Y\+Covariance} (double sigma)\hypertarget{classKFBallTracker_aa71931e508ef360436e2ef592d663b6e}{}\label{classKFBallTracker_aa71931e508ef360436e2ef592d663b6e}
+
+\begin{DoxyCompactList}\small\item\em Set the covariance of x and y values of ball for KF. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_ae4f26105c8f6c434c3de007cf64cf5aa}{set\+Grav\+Constant} (double g)\hypertarget{classKFBallTracker_ae4f26105c8f6c434c3de007cf64cf5aa}{}\label{classKFBallTracker_ae4f26105c8f6c434c3de007cf64cf5aa}
+
+\begin{DoxyCompactList}\small\item\em Set the acceleration due to gravity of the m\+Ball\+Filter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+List$<$ cv\+::\+Rect $>$ \hyperlink{classKFBallTracker_a32cdf9c7048a549db1cd43ca112c7301}{find\+People} (cv\+::\+Mat \&frame)
+\begin{DoxyCompactList}\small\item\em Find people in a frame; unused. \end{DoxyCompactList}\item 
+Q\+Map$<$ double, \hyperlink{classTrackingBall}{Tracking\+Ball} $>$ \hyperlink{classKFBallTracker_ac252f0f096afd969a5632038bc5c57ca}{find\+Balls} (cv\+::\+Mat \&frame, Q\+List$<$ cv\+::\+Rect $>$ ignores)\hypertarget{classKFBallTracker_ac252f0f096afd969a5632038bc5c57ca}{}\label{classKFBallTracker_ac252f0f096afd969a5632038bc5c57ca}
+
+\begin{DoxyCompactList}\small\item\em Find balls in a frame, ignoring the region ignores. \end{DoxyCompactList}\item 
+Q\+Map$<$ double, \hyperlink{classTrackingBall}{Tracking\+Ball} $>$ \hyperlink{classKFBallTracker_a66ed39eb604f97965c6ea6b674c11e31}{find\+Movement\+Thresh} (cv\+::\+Mat thresh\+Diff, Q\+List$<$ cv\+::\+Rect $>$ ignores)\hypertarget{classKFBallTracker_a66ed39eb604f97965c6ea6b674c11e31}{}\label{classKFBallTracker_a66ed39eb604f97965c6ea6b674c11e31}
+
+\begin{DoxyCompactList}\small\item\em Find any movement in a thresholded image, ignoring the region ignores. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_ae9377353e8bee1d6384dcc41711c1fb5}{update\+Track\+Failure} ()\hypertarget{classKFBallTracker_ae9377353e8bee1d6384dcc41711c1fb5}{}\label{classKFBallTracker_ae9377353e8bee1d6384dcc41711c1fb5}
+
+\begin{DoxyCompactList}\small\item\em Called to alert that we did not find a ball in this frame. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a2a393926da9750572cc0c401f551e991}{update\+Track\+Success} (\hyperlink{classTrackingBall}{Tracking\+Ball} ball)\hypertarget{classKFBallTracker_a2a393926da9750572cc0c401f551e991}{}\label{classKFBallTracker_a2a393926da9750572cc0c401f551e991}
+
+\begin{DoxyCompactList}\small\item\em Called to alert that we found ball ball in this frame. \end{DoxyCompactList}\item 
+bool \hyperlink{classKFBallTracker_abd8292fdec76b8c8e2c28ce9bc538380}{ball\+Is\+Lost} ()\hypertarget{classKFBallTracker_abd8292fdec76b8c8e2c28ce9bc538380}{}\label{classKFBallTracker_abd8292fdec76b8c8e2c28ce9bc538380}
+
+\begin{DoxyCompactList}\small\item\em Whether the ball is currently lost. \end{DoxyCompactList}\item 
+bool \hyperlink{classKFBallTracker_a75a5a6cb4b91ff148796996faa6df1d7}{ball\+Found} ()\hypertarget{classKFBallTracker_a75a5a6cb4b91ff148796996faa6df1d7}{}\label{classKFBallTracker_a75a5a6cb4b91ff148796996faa6df1d7}
+
+\begin{DoxyCompactList}\small\item\em Whether we currently are tracking a found ball. \end{DoxyCompactList}\item 
+void \hyperlink{classKFBallTracker_a9466248684d97d13370375c2dde2b533}{update\+Frame\+State} (cv\+::\+Mat $\ast$frame)\hypertarget{classKFBallTracker_a9466248684d97d13370375c2dde2b533}{}\label{classKFBallTracker_a9466248684d97d13370375c2dde2b533}
+
+\begin{DoxyCompactList}\small\item\em Update the internal state of the frame. \end{DoxyCompactList}\item 
+double \hyperlink{classKFBallTracker_a31d9933e4c52362ffb1c4fb13af97703}{score\+Contour} (\hyperlink{classTrackingBall}{Tracking\+Ball} ball, cv\+::\+Mat \&thresh\+Diff)\hypertarget{classKFBallTracker_a31d9933e4c52362ffb1c4fb13af97703}{}\label{classKFBallTracker_a31d9933e4c52362ffb1c4fb13af97703}
+
+\begin{DoxyCompactList}\small\item\em Given a \hyperlink{classTrackingBall}{Tracking\+Ball} ball in thresh\+Diff, score its likelihood to be our tracking ball. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classKFBallTracker_a00fa3a5aeb1f630859a5612b8866fb81}{m\+Blob\+Rad}\hypertarget{classKFBallTracker_a00fa3a5aeb1f630859a5612b8866fb81}{}\label{classKFBallTracker_a00fa3a5aeb1f630859a5612b8866fb81}
+
+\begin{DoxyCompactList}\small\item\em Unused. \end{DoxyCompactList}\item 
+int \hyperlink{classKFBallTracker_afa1b1acd100b4ed38768b3287cf69be9}{m\+Latency}\hypertarget{classKFBallTracker_afa1b1acd100b4ed38768b3287cf69be9}{}\label{classKFBallTracker_afa1b1acd100b4ed38768b3287cf69be9}
+
+\begin{DoxyCompactList}\small\item\em Unused. \end{DoxyCompactList}\item 
+\hyperlink{classBallTrackingFilter}{Ball\+Tracking\+Filter} \hyperlink{classKFBallTracker_aa46af76938969046630293640f542648}{m\+Ball\+Filter}\hypertarget{classKFBallTracker_aa46af76938969046630293640f542648}{}\label{classKFBallTracker_aa46af76938969046630293640f542648}
+
+\begin{DoxyCompactList}\small\item\em Tracking filter for ball objects in the frame. \end{DoxyCompactList}\item 
+\hyperlink{classPersonTrackingFilter}{Person\+Tracking\+Filter} \hyperlink{classKFBallTracker_adeaffc37a8aa27b01984361bbe250ebd}{m\+Person\+Filter}\hypertarget{classKFBallTracker_adeaffc37a8aa27b01984361bbe250ebd}{}\label{classKFBallTracker_adeaffc37a8aa27b01984361bbe250ebd}
+
+\begin{DoxyCompactList}\small\item\em Tracking filter for people in the frame (to ignore!); unused. \end{DoxyCompactList}\item 
+Q\+Vector$<$ cv\+::\+Mat $>$ \hyperlink{classKFBallTracker_a6b6dd83a004647590a28c45b540b1cea}{m\+Frame\+History}\hypertarget{classKFBallTracker_a6b6dd83a004647590a28c45b540b1cea}{}\label{classKFBallTracker_a6b6dd83a004647590a28c45b540b1cea}
+
+\begin{DoxyCompactList}\small\item\em History of frames possibly used for tracking (eg 3-\/way-\/diff) \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classKFBallTracker_aaa0ce8592271b6afa5ed2010be79977c}{m\+Old\+Diff}\hypertarget{classKFBallTracker_aaa0ce8592271b6afa5ed2010be79977c}{}\label{classKFBallTracker_aaa0ce8592271b6afa5ed2010be79977c}
+
+\begin{DoxyCompactList}\small\item\em Previous frame diff of history (stored to avoid a duplicate diff) \end{DoxyCompactList}\item 
+double \hyperlink{classKFBallTracker_a4ec3deef6c8bef0a9ffb5053cfe26a8a}{m\+Blur\+Size}\hypertarget{classKFBallTracker_a4ec3deef6c8bef0a9ffb5053cfe26a8a}{}\label{classKFBallTracker_a4ec3deef6c8bef0a9ffb5053cfe26a8a}
+
+\begin{DoxyCompactList}\small\item\em Strength of the Gaussian blur in the blur step of preprocessing. \end{DoxyCompactList}\item 
+double \hyperlink{classKFBallTracker_a5f18bc9f4f114668dca68094dc55ff12}{m\+Thresh\+Val}\hypertarget{classKFBallTracker_a5f18bc9f4f114668dca68094dc55ff12}{}\label{classKFBallTracker_a5f18bc9f4f114668dca68094dc55ff12}
+
+\begin{DoxyCompactList}\small\item\em Minimum white value for the thresholding step. \end{DoxyCompactList}\item 
+double \hyperlink{classKFBallTracker_a20e8f2930d632ce8456a5d00d3b243a1}{m\+Min\+Radius}\hypertarget{classKFBallTracker_a20e8f2930d632ce8456a5d00d3b243a1}{}\label{classKFBallTracker_a20e8f2930d632ce8456a5d00d3b243a1}
+
+\begin{DoxyCompactList}\small\item\em Minimum radius of blobs to consider. \end{DoxyCompactList}\item 
+double \hyperlink{classKFBallTracker_a780f286882f1866fbcf0d64b7757449d}{m\+Max\+Radius}\hypertarget{classKFBallTracker_a780f286882f1866fbcf0d64b7757449d}{}\label{classKFBallTracker_a780f286882f1866fbcf0d64b7757449d}
+
+\begin{DoxyCompactList}\small\item\em Maximum radius of blobs to consider. \end{DoxyCompactList}\item 
+Q\+PolygonF \hyperlink{classKFBallTracker_ae227521e8aef62e455b37f2591dcf14e}{m\+Clip\+Shape}\hypertarget{classKFBallTracker_ae227521e8aef62e455b37f2591dcf14e}{}\label{classKFBallTracker_ae227521e8aef62e455b37f2591dcf14e}
+
+\begin{DoxyCompactList}\small\item\em If m\+Clip\+Track, only consider blobs within this polygon. \end{DoxyCompactList}\item 
+bool \hyperlink{classKFBallTracker_a26db95b2bb80ce1e82d14f3940a23aaa}{m\+Clip\+Track} = false\hypertarget{classKFBallTracker_a26db95b2bb80ce1e82d14f3940a23aaa}{}\label{classKFBallTracker_a26db95b2bb80ce1e82d14f3940a23aaa}
+
+\begin{DoxyCompactList}\small\item\em Whether to only consider blobs in m\+Clip\+Shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains most of the logic for live-\/tracking objects. 
+
+Recieves a frame (as cv\+::\+Mat) and uses it (and its own internal state) to identify a moving projectile ball and emit them (as \hyperlink{classTrackingBall}{Tracking\+Ball} and as \hyperlink{classKFPrediction}{K\+F\+Prediction}) 
+
+\subsection{Member Function Documentation}
+\index{K\+F\+Ball\+Tracker@{K\+F\+Ball\+Tracker}!find\+People@{find\+People}}
+\index{find\+People@{find\+People}!K\+F\+Ball\+Tracker@{K\+F\+Ball\+Tracker}}
+\subsubsection[{\texorpdfstring{find\+People(cv\+::\+Mat \&frame)}{findPeople(cv::Mat &frame)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+List$<$ cv\+::\+Rect $>$ K\+F\+Ball\+Tracker\+::find\+People (
+\begin{DoxyParamCaption}
+\item[{cv\+::\+Mat \&}]{frame}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classKFBallTracker_a32cdf9c7048a549db1cd43ca112c7301}{}\label{classKFBallTracker_a32cdf9c7048a549db1cd43ca112c7301}
+
+
+Find people in a frame; unused. 
+
+\index{K\+F\+Ball\+Tracker@{K\+F\+Ball\+Tracker}!kalman\+Distance@{kalman\+Distance}}
+\index{kalman\+Distance@{kalman\+Distance}!K\+F\+Ball\+Tracker@{K\+F\+Ball\+Tracker}}
+\subsubsection[{\texorpdfstring{kalman\+Distance(cv\+::\+Mat measurement)}{kalmanDistance(cv::Mat measurement)}}]{\setlength{\rightskip}{0pt plus 5cm}double K\+F\+Ball\+Tracker\+::kalman\+Distance (
+\begin{DoxyParamCaption}
+\item[{cv\+::\+Mat}]{measurement}
+\end{DoxyParamCaption}
+)}\hypertarget{classKFBallTracker_ad94490e1a5931e582a2325686d337d5d}{}\label{classKFBallTracker_ad94490e1a5931e582a2325686d337d5d}
+
+
+Kalman distance; see Ball\+Filter.\+kalman\+Distance(); unused. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+F\+Ball\+Tracker.\+hpp\item 
+K\+F\+Ball\+Tracker.\+cpp\end{DoxyCompactItemize}

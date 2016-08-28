@@ -1,0 +1,69 @@
+\hypertarget{classKalmanFilterPlus}{}\section{Kalman\+Filter\+Plus Class Reference}
+\label{classKalmanFilterPlus}\index{Kalman\+Filter\+Plus@{Kalman\+Filter\+Plus}}
+
+
+A cv\+::\+Kalman\+Filter which also supports some \textquotesingle{}forgetful\textquotesingle{} functionality.  
+
+
+
+
+{\ttfamily \#include $<$Kalman\+Filter\+Plus.\+hpp$>$}
+
+
+
+Inheritance diagram for Kalman\+Filter\+Plus\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classKalmanFilterPlus__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Kalman\+Filter\+Plus\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classKalmanFilterPlus__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Kalman\+Filter\+Plus} (int dynam\+Params, int measure\+Params, int control\+Params=0, int type=C\+V\+\_\+32F)\hypertarget{classKalmanFilterPlus_a943c6344c382749e66c36980dee85418}{}\label{classKalmanFilterPlus_a943c6344c382749e66c36980dee85418}
+
+\item 
+const cv\+::\+Mat \& \hyperlink{classKalmanFilterPlus_afa8ba977b56b84b7f7d5b026984d3d8d}{predict} (const cv\+::\+Mat \&control=cv\+::\+Mat())
+\begin{DoxyCompactList}\small\item\em Predict the location of the ball. \end{DoxyCompactList}\item 
+void {\bfseries set\+Alpha\+Sq} (double value)\hypertarget{classKalmanFilterPlus_a9eb481f82573dc5b26f1c41bf090cfc0}{}\label{classKalmanFilterPlus_a9eb481f82573dc5b26f1c41bf090cfc0}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bfseries m\+Alpha\+Sq}\hypertarget{classKalmanFilterPlus_a24eb52d124afc40a13e04f751f060b17}{}\label{classKalmanFilterPlus_a24eb52d124afc40a13e04f751f060b17}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A cv\+::\+Kalman\+Filter which also supports some \textquotesingle{}forgetful\textquotesingle{} functionality. 
+
+\subsection{Member Function Documentation}
+\index{Kalman\+Filter\+Plus@{Kalman\+Filter\+Plus}!predict@{predict}}
+\index{predict@{predict}!Kalman\+Filter\+Plus@{Kalman\+Filter\+Plus}}
+\subsubsection[{\texorpdfstring{predict(const cv\+::\+Mat \&control=cv\+::\+Mat())}{predict(const cv::Mat &control=cv::Mat())}}]{\setlength{\rightskip}{0pt plus 5cm}const cv\+::\+Mat \& Kalman\+Filter\+Plus\+::predict (
+\begin{DoxyParamCaption}
+\item[{const cv\+::\+Mat \&}]{control = {\ttfamily cv\+:\+:Mat()}}
+\end{DoxyParamCaption}
+)}\hypertarget{classKalmanFilterPlus_afa8ba977b56b84b7f7d5b026984d3d8d}{}\label{classKalmanFilterPlus_afa8ba977b56b84b7f7d5b026984d3d8d}
+
+
+Predict the location of the ball. 
+
+Overloaded in order to provide the alpha weight in order to give earlier predictions less significance 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Kalman\+Filter\+Plus.\+hpp\item 
+Kalman\+Filter\+Plus.\+cpp\end{DoxyCompactItemize}

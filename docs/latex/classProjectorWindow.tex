@@ -1,0 +1,230 @@
+\hypertarget{classProjectorWindow}{}\section{Projector\+Window Class Reference}
+\label{classProjectorWindow}\index{Projector\+Window@{Projector\+Window}}
+
+
+A display widget for projector coordinates on the projector.  
+
+
+
+
+{\ttfamily \#include $<$Projector\+Window.\+hpp$>$}
+
+
+
+Inheritance diagram for Projector\+Window\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classProjectorWindow__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Projector\+Window\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{classProjectorWindow__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classProjectorWindow_a8f638b18d4be3fe6a02403d5d078334f}{push\+Ball} (\hyperlink{classTrackingBall}{Tracking\+Ball} ball)\hypertarget{classProjectorWindow_a8f638b18d4be3fe6a02403d5d078334f}{}\label{classProjectorWindow_a8f638b18d4be3fe6a02403d5d078334f}
+
+\begin{DoxyCompactList}\small\item\em push a raw tracked ball to projector \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_ae28f1f23d78c5bcb59feb14746194e1f}{push\+Pred} (\hyperlink{classKFPrediction}{K\+F\+Prediction} pred)\hypertarget{classProjectorWindow_ae28f1f23d78c5bcb59feb14746194e1f}{}\label{classProjectorWindow_ae28f1f23d78c5bcb59feb14746194e1f}
+
+\begin{DoxyCompactList}\small\item\em push a predicted ball (ie a KF prediction) to projector \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a52c94c89533c41a5c73f95b6714407f1}{mark\+Data\+Stale} ()
+\begin{DoxyCompactList}\small\item\em mark data stale, ie ready to wipe on next track. \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a5a16a1f32bbe563d08c2bea8f4f8a487}{clear\+Track} ()\hypertarget{classProjectorWindow_a5a16a1f32bbe563d08c2bea8f4f8a487}{}\label{classProjectorWindow_a5a16a1f32bbe563d08c2bea8f4f8a487}
+
+\begin{DoxyCompactList}\small\item\em clear all data immediately \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a8ad0fc4fba0ddcbc8af2491b8020e290}{toggle\+Lock\+Fit} (bool lock\+Fit)\hypertarget{classProjectorWindow_a8ad0fc4fba0ddcbc8af2491b8020e290}{}\label{classProjectorWindow_a8ad0fc4fba0ddcbc8af2491b8020e290}
+
+\begin{DoxyCompactList}\small\item\em toggle whether to wait until manual clear for tracked ball \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a78200036bc00ffc3174f56b86cb579b6}{toggle\+Show\+Fit} (bool show\+Fit)\hypertarget{classProjectorWindow_a78200036bc00ffc3174f56b86cb579b6}{}\label{classProjectorWindow_a78200036bc00ffc3174f56b86cb579b6}
+
+\begin{DoxyCompactList}\small\item\em toggle whether to show fit information for tracked ball \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a2107db03354afdbe8067c58dc272379e}{toggle\+Show\+Param} (bool show\+Param)\hypertarget{classProjectorWindow_a2107db03354afdbe8067c58dc272379e}{}\label{classProjectorWindow_a2107db03354afdbe8067c58dc272379e}
+
+\begin{DoxyCompactList}\small\item\em toggle whether to show parametrized equations y(t), x(t) \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_ad8a865fc811bd79cea1e8b15922b1bd5}{toggle\+Show\+Jet} (bool show\+Jet)\hypertarget{classProjectorWindow_ad8a865fc811bd79cea1e8b15922b1bd5}{}\label{classProjectorWindow_ad8a865fc811bd79cea1e8b15922b1bd5}
+
+\begin{DoxyCompactList}\small\item\em toggle whether to show jet ((dx,dy)) of tracked ball \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a6ba6eddab7165b862195c35c60207e93}{toggle\+Color\+Miss} (bool color\+Miss)\hypertarget{classProjectorWindow_a6ba6eddab7165b862195c35c60207e93}{}\label{classProjectorWindow_a6ba6eddab7165b862195c35c60207e93}
+
+\begin{DoxyCompactList}\small\item\em toggle color difference between seen/unseen KF hits \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_ad8c1fa92c00d2541d2a85ac06e99b658}{toggle\+Verbose\+KF} (bool verbose\+KF)\hypertarget{classProjectorWindow_ad8c1fa92c00d2541d2a85ac06e99b658}{}\label{classProjectorWindow_ad8c1fa92c00d2541d2a85ac06e99b658}
+
+\begin{DoxyCompactList}\small\item\em toggle verbose display \mbox{[}size, etc\mbox{]} of track/predict info \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a651ec38c851034cc5c5ada4672decbcf}{toggle\+Show\+Parabola} (bool show\+Parabola)\hypertarget{classProjectorWindow_a651ec38c851034cc5c5ada4672decbcf}{}\label{classProjectorWindow_a651ec38c851034cc5c5ada4672decbcf}
+
+\begin{DoxyCompactList}\small\item\em set whether we should show the fit parabola \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_ae8bc9628b44960aea29159f254f8a154}{set\+Point\+Radius} (int point\+Radius)\hypertarget{classProjectorWindow_ae8bc9628b44960aea29159f254f8a154}{}\label{classProjectorWindow_ae8bc9628b44960aea29159f254f8a154}
+
+\begin{DoxyCompactList}\small\item\em set radius of ball track circles \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_adb3879abf4868d33289cb52463b31ee1}{set\+Point\+Thickness} (double point\+Thickness)\hypertarget{classProjectorWindow_adb3879abf4868d33289cb52463b31ee1}{}\label{classProjectorWindow_adb3879abf4868d33289cb52463b31ee1}
+
+\begin{DoxyCompactList}\small\item\em set thickness of ball track marks \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_af676564726fcbf902e3a1971a3b12099}{set\+Fit\+Thickness} (double fit\+Thickness)\hypertarget{classProjectorWindow_af676564726fcbf902e3a1971a3b12099}{}\label{classProjectorWindow_af676564726fcbf902e3a1971a3b12099}
+
+\begin{DoxyCompactList}\small\item\em set thickness of fit parabola \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a05bbf26094bb7e4389049e7314b95a88}{set\+Font\+Size} (int font\+Size)\hypertarget{classProjectorWindow_a05bbf26094bb7e4389049e7314b95a88}{}\label{classProjectorWindow_a05bbf26094bb7e4389049e7314b95a88}
+
+\begin{DoxyCompactList}\small\item\em set font size for data display \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a06c5d59ce16c5f7f06e715019bd02f51}{set\+Color\+Fit\+Lock} (Q\+String color)\hypertarget{classProjectorWindow_a06c5d59ce16c5f7f06e715019bd02f51}{}\label{classProjectorWindow_a06c5d59ce16c5f7f06e715019bd02f51}
+
+\begin{DoxyCompactList}\small\item\em Set the after-\/lock fit curve color. \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_af693987a6561ee2fadda60c222b52167}{set\+Min\+Fall\+Speed} (int min\+Fall\+Speed)\hypertarget{classProjectorWindow_af693987a6561ee2fadda60c222b52167}{}\label{classProjectorWindow_af693987a6561ee2fadda60c222b52167}
+
+\begin{DoxyCompactList}\small\item\em set minimum y-\/velocity for lock \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a2fe471f6224ce92225b71b1432d1f77b}{toggle\+Wait\+Til\+Fall} (bool wait\+Til\+Fall)\hypertarget{classProjectorWindow_a2fe471f6224ce92225b71b1432d1f77b}{}\label{classProjectorWindow_a2fe471f6224ce92225b71b1432d1f77b}
+
+\begin{DoxyCompactList}\small\item\em set whether we should wait until given y-\/velocity to lock \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a4d17ef03cbd25259f62f1bcbad2ab1da}{set\+ProjW} (int w)\hypertarget{classProjectorWindow_a4d17ef03cbd25259f62f1bcbad2ab1da}{}\label{classProjectorWindow_a4d17ef03cbd25259f62f1bcbad2ab1da}
+
+\begin{DoxyCompactList}\small\item\em set the projector width (in inches) \end{DoxyCompactList}\item 
+void \hyperlink{classProjectorWindow_a744bcacfd4e1cf0f22ab01648590bc79}{set\+ProjH} (int h)\hypertarget{classProjectorWindow_a744bcacfd4e1cf0f22ab01648590bc79}{}\label{classProjectorWindow_a744bcacfd4e1cf0f22ab01648590bc79}
+
+\begin{DoxyCompactList}\small\item\em set the projector height (in inches) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Projector\+Window} (Q\+Widget $\ast$parent=0)\hypertarget{classProjectorWindow_a35e759b05a4db4dd077f8b9255363a9c}{}\label{classProjectorWindow_a35e759b05a4db4dd077f8b9255363a9c}
+
+\item 
+Q\+RectF \hyperlink{classProjectorWindow_a87c0dc2e5b690d5832a22106a9f28ac7}{rel\+Rect\+To\+Window} (Q\+RectF rect)\hypertarget{classProjectorWindow_a87c0dc2e5b690d5832a22106a9f28ac7}{}\label{classProjectorWindow_a87c0dc2e5b690d5832a22106a9f28ac7}
+
+\begin{DoxyCompactList}\small\item\em convert a relative rect in projector to window coords \end{DoxyCompactList}\item 
+Q\+PointF \hyperlink{classProjectorWindow_a4f033d3ecd11f6afbc4c076402b9e628}{rel\+Point\+To\+Window} (Q\+PointF pt)\hypertarget{classProjectorWindow_a4f033d3ecd11f6afbc4c076402b9e628}{}\label{classProjectorWindow_a4f033d3ecd11f6afbc4c076402b9e628}
+
+\begin{DoxyCompactList}\small\item\em convert a relative point in the projector to window coords \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classProjectorWindow_ab0ddec0ab394bc4a987ac26522d065dd}{paint\+Event} (Q\+Paint\+Event $\ast$ev)
+\begin{DoxyCompactList}\small\item\em Draw the data on the projector screen widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Size \hyperlink{classProjectorWindow_a6efbf5e0c399c9afec2413b319da5524}{m\+Proj\+Size}\hypertarget{classProjectorWindow_a6efbf5e0c399c9afec2413b319da5524}{}\label{classProjectorWindow_a6efbf5e0c399c9afec2413b319da5524}
+
+\begin{DoxyCompactList}\small\item\em The size of the projector (in inches) \end{DoxyCompactList}\item 
+Q\+List$<$ \hyperlink{classTrackingBall}{Tracking\+Ball} $>$ \hyperlink{classProjectorWindow_ad6c57feadadd884eb119d1b9fea536ad}{m\+Balls}\hypertarget{classProjectorWindow_ad6c57feadadd884eb119d1b9fea536ad}{}\label{classProjectorWindow_ad6c57feadadd884eb119d1b9fea536ad}
+
+\begin{DoxyCompactList}\small\item\em A list of raw spotted balls in the projector. \end{DoxyCompactList}\item 
+Q\+List$<$ \hyperlink{classKFPrediction}{K\+F\+Prediction} $>$ \hyperlink{classProjectorWindow_a87c9f61abd49b0df3f636023665dce5d}{m\+Preds}\hypertarget{classProjectorWindow_a87c9f61abd49b0df3f636023665dce5d}{}\label{classProjectorWindow_a87c9f61abd49b0df3f636023665dce5d}
+
+\begin{DoxyCompactList}\small\item\em A list of predictions of ball location in the projector. \end{DoxyCompactList}\item 
+Q\+List$<$ \hyperlink{classKFPrediction}{K\+F\+Prediction} $>$ \hyperlink{classProjectorWindow_ae9a016128679fead0d12cc643655498a}{m\+Fit\+Preds}\hypertarget{classProjectorWindow_ae9a016128679fead0d12cc643655498a}{}\label{classProjectorWindow_ae9a016128679fead0d12cc643655498a}
+
+\begin{DoxyCompactList}\small\item\em A \mbox{[}sub\mbox{]}list of predictions which are used for the fit curve. \end{DoxyCompactList}\item 
+double \hyperlink{classProjectorWindow_af305927ad115e41a1a73aafcf1bac854}{m\+Fit\+LineX} \mbox{[}2\mbox{]}\hypertarget{classProjectorWindow_af305927ad115e41a1a73aafcf1bac854}{}\label{classProjectorWindow_af305927ad115e41a1a73aafcf1bac854}
+
+\begin{DoxyCompactList}\small\item\em linear coefficients of x(t) equation, (b,m) \end{DoxyCompactList}\item 
+double \hyperlink{classProjectorWindow_ac00d5ec253928b34c6d235359a442435}{m\+Fit\+ParabolaY} \mbox{[}3\mbox{]}\hypertarget{classProjectorWindow_ac00d5ec253928b34c6d235359a442435}{}\label{classProjectorWindow_ac00d5ec253928b34c6d235359a442435}
+
+\begin{DoxyCompactList}\small\item\em quadratic coefficients of y(t) equation, (C,B,A) \end{DoxyCompactList}\item 
+Q\+List$<$ \hyperlink{classKFPrediction}{K\+F\+Prediction} $>$ \hyperlink{classProjectorWindow_aeecd77891365fc2e73afa0daca12d7cf}{m\+Marked\+Points}\hypertarget{classProjectorWindow_aeecd77891365fc2e73afa0daca12d7cf}{}\label{classProjectorWindow_aeecd77891365fc2e73afa0daca12d7cf}
+
+\begin{DoxyCompactList}\small\item\em list of points marked and selected to be solved for x(t), y(t) \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_ab8347688431276a58bd9f59171e28ee7}{m\+Data\+Stale} = false\hypertarget{classProjectorWindow_ab8347688431276a58bd9f59171e28ee7}{}\label{classProjectorWindow_ab8347688431276a58bd9f59171e28ee7}
+
+\begin{DoxyCompactList}\small\item\em whether data should be cleared on next track \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_a45339f9bc9832f04a89358e9905c64a7}{m\+Lock\+Fit} = false\hypertarget{classProjectorWindow_a45339f9bc9832f04a89358e9905c64a7}{}\label{classProjectorWindow_a45339f9bc9832f04a89358e9905c64a7}
+
+\begin{DoxyCompactList}\small\item\em Whether to lock the fit curve and track until manual clear. \end{DoxyCompactList}\item 
+int \hyperlink{classProjectorWindow_a9e8bc338e04d434087d2edf1ccd5b8b5}{m\+Num\+Point\+Fit}\hypertarget{classProjectorWindow_a9e8bc338e04d434087d2edf1ccd5b8b5}{}\label{classProjectorWindow_a9e8bc338e04d434087d2edf1ccd5b8b5}
+
+\begin{DoxyCompactList}\small\item\em Number of tracked points to wait for until the curve is fit. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_abc8c3128d919b161a728fa397a748fbf}{m\+Fit\+Locked} = false\hypertarget{classProjectorWindow_abc8c3128d919b161a728fa397a748fbf}{}\label{classProjectorWindow_abc8c3128d919b161a728fa397a748fbf}
+
+\begin{DoxyCompactList}\small\item\em Whether the fit is \textquotesingle{}locked\textquotesingle{} for the time being, until reset either manually or after sufficient time and another track. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_a15399abf80db989f7dabdae97a277d75}{m\+Wait\+Til\+Fall} = false\hypertarget{classProjectorWindow_a15399abf80db989f7dabdae97a277d75}{}\label{classProjectorWindow_a15399abf80db989f7dabdae97a277d75}
+
+\begin{DoxyCompactList}\small\item\em Whether we should wait until the ball is falling to lock/fit a curve. \end{DoxyCompactList}\item 
+int \hyperlink{classProjectorWindow_aeeba3ddf38d4347a6ad98542836a6724}{m\+Min\+Fall\+Speed}\hypertarget{classProjectorWindow_aeeba3ddf38d4347a6ad98542836a6724}{}\label{classProjectorWindow_aeeba3ddf38d4347a6ad98542836a6724}
+
+\begin{DoxyCompactList}\small\item\em Minimum fall speed to determine that the ball is \char`\"{}falling\char`\"{}. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_ab7c213c8c2ac70cdd3d722df6f6eec9b}{m\+Fit\+Points} = true\hypertarget{classProjectorWindow_ab7c213c8c2ac70cdd3d722df6f6eec9b}{}\label{classProjectorWindow_ab7c213c8c2ac70cdd3d722df6f6eec9b}
+
+\begin{DoxyCompactList}\small\item\em Whether we fit a degree-\/d curve exactly to (d+1) points, or use a regression. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_a9a5fcabc9a6af3b45a8b8857aec73cfb}{m\+Show\+Fit} = false\hypertarget{classProjectorWindow_a9a5fcabc9a6af3b45a8b8857aec73cfb}{}\label{classProjectorWindow_a9a5fcabc9a6af3b45a8b8857aec73cfb}
+
+\begin{DoxyCompactList}\small\item\em Whether we show the fit or not. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_a945d28c6ad25e7ef3b707a4a92c7359a}{m\+Show\+Param} = false\hypertarget{classProjectorWindow_a945d28c6ad25e7ef3b707a4a92c7359a}{}\label{classProjectorWindow_a945d28c6ad25e7ef3b707a4a92c7359a}
+
+\begin{DoxyCompactList}\small\item\em Whether we show the parametrized equation for the fit or not. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_ada8648c5f69ce30da817aa2194912d95}{m\+Show\+Jet} = false\hypertarget{classProjectorWindow_ada8648c5f69ce30da817aa2194912d95}{}\label{classProjectorWindow_ada8648c5f69ce30da817aa2194912d95}
+
+\begin{DoxyCompactList}\small\item\em Whether we show (dx,dy) vectors on the display. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_a7d34a61487e207c2380007f38e6e2c44}{m\+Color\+Miss} = false\hypertarget{classProjectorWindow_a7d34a61487e207c2380007f38e6e2c44}{}\label{classProjectorWindow_a7d34a61487e207c2380007f38e6e2c44}
+
+\begin{DoxyCompactList}\small\item\em Whether we should color differently the predictions for unseen balls. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_afa70dd601f972eb8c839bc6e6c09d62d}{m\+Verbose\+KF} = false\hypertarget{classProjectorWindow_afa70dd601f972eb8c839bc6e6c09d62d}{}\label{classProjectorWindow_afa70dd601f972eb8c839bc6e6c09d62d}
+
+\begin{DoxyCompactList}\small\item\em Whether we should include width, height, etc from KF prediction data in display. \end{DoxyCompactList}\item 
+bool \hyperlink{classProjectorWindow_a1175df34d5b16a06d3ae1bc90f11accc}{m\+Show\+Parabola} = true\hypertarget{classProjectorWindow_a1175df34d5b16a06d3ae1bc90f11accc}{}\label{classProjectorWindow_a1175df34d5b16a06d3ae1bc90f11accc}
+
+\begin{DoxyCompactList}\small\item\em Whether we should show the fit parabola curve. \end{DoxyCompactList}\item 
+int \hyperlink{classProjectorWindow_a482d9dae424e09a66acb76f663ecd5bc}{m\+Font\+Size} = 12\hypertarget{classProjectorWindow_a482d9dae424e09a66acb76f663ecd5bc}{}\label{classProjectorWindow_a482d9dae424e09a66acb76f663ecd5bc}
+
+\begin{DoxyCompactList}\small\item\em Data display font size in pt. \end{DoxyCompactList}\item 
+Q\+Color \hyperlink{classProjectorWindow_a365d0971caa7390079d9fea7130dffd2}{m\+Color\+Fit\+No\+Lock}\hypertarget{classProjectorWindow_a365d0971caa7390079d9fea7130dffd2}{}\label{classProjectorWindow_a365d0971caa7390079d9fea7130dffd2}
+
+\begin{DoxyCompactList}\small\item\em The color of the fit curve projection, pre-\/lock. \end{DoxyCompactList}\item 
+Q\+Color \hyperlink{classProjectorWindow_aaed1551318462e0783051763e83f383d}{m\+Color\+Fit\+Lock}\hypertarget{classProjectorWindow_aaed1551318462e0783051763e83f383d}{}\label{classProjectorWindow_aaed1551318462e0783051763e83f383d}
+
+\begin{DoxyCompactList}\small\item\em The color of the fit curve projection, after lock. \end{DoxyCompactList}\item 
+int \hyperlink{classProjectorWindow_a49c0897416d0f7e4a889961eb345be1c}{m\+Point\+Radius}\hypertarget{classProjectorWindow_a49c0897416d0f7e4a889961eb345be1c}{}\label{classProjectorWindow_a49c0897416d0f7e4a889961eb345be1c}
+
+\begin{DoxyCompactList}\small\item\em Radius of circles denoting tracked ball. \end{DoxyCompactList}\item 
+double \hyperlink{classProjectorWindow_aa601b12af40890165f24a0e291365bf0}{m\+Point\+Thickness}\hypertarget{classProjectorWindow_aa601b12af40890165f24a0e291365bf0}{}\label{classProjectorWindow_aa601b12af40890165f24a0e291365bf0}
+
+\begin{DoxyCompactList}\small\item\em Thickness of circle lines for balls. \end{DoxyCompactList}\item 
+double \hyperlink{classProjectorWindow_a04abcec5314b4b5ca1ce5f0a38b4d807}{m\+Fit\+Thickness}\hypertarget{classProjectorWindow_a04abcec5314b4b5ca1ce5f0a38b4d807}{}\label{classProjectorWindow_a04abcec5314b4b5ca1ce5f0a38b4d807}
+
+\begin{DoxyCompactList}\small\item\em Thickness of the track fit parabola. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A display widget for projector coordinates on the projector. 
+
+The idea is that this displays full screen behind the demonstration and shows the ball \char`\"{}where it is\char`\"{} 
+
+\subsection{Member Function Documentation}
+\index{Projector\+Window@{Projector\+Window}!mark\+Data\+Stale@{mark\+Data\+Stale}}
+\index{mark\+Data\+Stale@{mark\+Data\+Stale}!Projector\+Window@{Projector\+Window}}
+\subsubsection[{\texorpdfstring{mark\+Data\+Stale}{markDataStale}}]{\setlength{\rightskip}{0pt plus 5cm}void Projector\+Window\+::mark\+Data\+Stale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [slot]}}\hypertarget{classProjectorWindow_a52c94c89533c41a5c73f95b6714407f1}{}\label{classProjectorWindow_a52c94c89533c41a5c73f95b6714407f1}
+
+
+mark data stale, ie ready to wipe on next track. 
+
+\index{Projector\+Window@{Projector\+Window}!paint\+Event@{paint\+Event}}
+\index{paint\+Event@{paint\+Event}!Projector\+Window@{Projector\+Window}}
+\subsubsection[{\texorpdfstring{paint\+Event(\+Q\+Paint\+Event $\ast$ev)}{paintEvent(QPaintEvent *ev)}}]{\setlength{\rightskip}{0pt plus 5cm}void Projector\+Window\+::paint\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Paint\+Event $\ast$}]{ev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classProjectorWindow_ab0ddec0ab394bc4a987ac26522d065dd}{}\label{classProjectorWindow_ab0ddec0ab394bc4a987ac26522d065dd}
+
+
+Draw the data on the projector screen widget. 
+
+All drawing logic for the widget goes in here! 
+\begin{DoxyParams}{Parameters}
+{\em ev} & The Q\+Paint\+Event for this paint \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Projector\+Window.\+hpp\item 
+Projector\+Window.\+cpp\end{DoxyCompactItemize}

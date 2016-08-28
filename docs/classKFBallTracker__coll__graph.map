@@ -1,0 +1,6 @@
+<map id="KFBallTracker" name="KFBallTracker">
+<area shape="rect" id="node3" href="$classPersonTrackingFilter.html" title="A TrackingFilter which contains the necessary logic to find people in frames. " alt="" coords="100,247,243,273"/>
+<area shape="rect" id="node4" href="$classTrackingFilter.html" title="A wrapper around a KalmanFilter type object; additional logic can be provided through extension..." alt="" coords="167,171,269,197"/>
+<area shape="rect" id="node7" href="$classBallTrackingFilter.html" title="A TrackingFilter with some specifics for tracking a ball in flight. " alt="" coords="267,247,390,273"/>
+<area shape="rect" id="node5" href="$classKalmanFilterPlus.html" title="A cv::KalmanFilter which also supports some &#39;forgetful&#39; functionality. " alt="" coords="157,81,279,108"/>
+</map>

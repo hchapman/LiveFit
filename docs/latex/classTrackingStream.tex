@@ -1,0 +1,511 @@
+\hypertarget{classTrackingStream}{}\section{Tracking\+Stream Class Reference}
+\label{classTrackingStream}\index{Tracking\+Stream@{Tracking\+Stream}}
+
+
+An object which owns some sort of input video stream, manages running it (and any tracking, etc) and emits cv\+::\+Mat frames and tracked objects.  
+
+
+
+
+{\ttfamily \#include $<$Tracking\+Stream.\+hpp$>$}
+
+
+
+Inheritance diagram for Tracking\+Stream\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classTrackingStream__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Tracking\+Stream\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTrackingStream__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTrackingStream_ab89c8ac2ef5ee1c6c8f31a99a95a8cfc}{start} (int cam=0)\hypertarget{classTrackingStream_ab89c8ac2ef5ee1c6c8f31a99a95a8cfc}{}\label{classTrackingStream_ab89c8ac2ef5ee1c6c8f31a99a95a8cfc}
+
+\begin{DoxyCompactList}\small\item\em Start a stream with a camera input. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a24e9c3468c90c9ccd14f217edaf8bd38}{start} (Q\+String fname)\hypertarget{classTrackingStream_a24e9c3468c90c9ccd14f217edaf8bd38}{}\label{classTrackingStream_a24e9c3468c90c9ccd14f217edaf8bd38}
+
+\begin{DoxyCompactList}\small\item\em Start a stream with a filename input. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_ad7d1aeaede96e94984f4a2e9b205076a}{stop} ()\hypertarget{classTrackingStream_ad7d1aeaede96e94984f4a2e9b205076a}{}\label{classTrackingStream_ad7d1aeaede96e94984f4a2e9b205076a}
+
+\begin{DoxyCompactList}\small\item\em Terminate the video stream. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a5a086300d68ae7e13fe17ba9ef49c52a}{pause\+Stream} ()\hypertarget{classTrackingStream_a5a086300d68ae7e13fe17ba9ef49c52a}{}\label{classTrackingStream_a5a086300d68ae7e13fe17ba9ef49c52a}
+
+\begin{DoxyCompactList}\small\item\em Pause the current video stream. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a198d532c89d9d740852fb3a083347ca8}{change\+Projector\+Corners} (std\+::vector$<$ cv\+::\+Point2f $>$ corners)\hypertarget{classTrackingStream_a198d532c89d9d740852fb3a083347ca8}{}\label{classTrackingStream_a198d532c89d9d740852fb3a083347ca8}
+
+\begin{DoxyCompactList}\small\item\em Set the location of projector corners in the image. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a8adcb753d8000d41f0f4b94247fc6241}{change\+Clip\+Track} (bool checked)\hypertarget{classTrackingStream_a8adcb753d8000d41f0f4b94247fc6241}{}\label{classTrackingStream_a8adcb753d8000d41f0f4b94247fc6241}
+
+\begin{DoxyCompactList}\small\item\em Set whether or not tracking is clipped to projector. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_ab87b740965236179e79e3b6c139102a1}{prediction\+Ball} (\hyperlink{classKFPrediction}{K\+F\+Prediction} pred)\hypertarget{classTrackingStream_ab87b740965236179e79e3b6c139102a1}{}\label{classTrackingStream_ab87b740965236179e79e3b6c139102a1}
+
+\begin{DoxyCompactList}\small\item\em Alert the stream to a predicted ball. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a4292499a860849bd5c80a8b3f182b0bd}{set\+Fov} (int fov)\hypertarget{classTrackingStream_a4292499a860849bd5c80a8b3f182b0bd}{}\label{classTrackingStream_a4292499a860849bd5c80a8b3f182b0bd}
+
+\begin{DoxyCompactList}\small\item\em Set the camera F\+OV. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a679b2d4db152cc3e4f1699179d84724f}{change\+Proj\+Width} (int width)
+\begin{DoxyCompactList}\small\item\em change\+Proj\+Width sets the width of the projector screen (in inches) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a74d1683447659a6d85d5818ee3ee7515}{change\+Proj\+Height} (int height)
+\begin{DoxyCompactList}\small\item\em change\+Proj\+Height sets the height of the projector screen (in inches) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_aab0b2d4efe5723d8d71e072013d33ad9}{change\+BallZ} (double z)
+\begin{DoxyCompactList}\small\item\em change\+BallZ sets the z-\/plane that the ball is thrown in (in inches) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a13c95186d09320e6a56b0e072e268728}{change\+Blur\+Size} (double blur\+Size)
+\begin{DoxyCompactList}\small\item\em Set the strength of blur in preprocessing step. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_ac8ebcc20a79d5172594a58a623b69fec}{change\+Thresh\+Val} (double thresh)
+\begin{DoxyCompactList}\small\item\em Set the threshold in preprocessing step. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a6f10a83e710693e7100ebaaece3feed3}{change\+Min\+Radius} (double radius)
+\begin{DoxyCompactList}\small\item\em Set the min viable radius of a ball blob. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a4fd621edf60cb02bca056853ff2f9984}{change\+Max\+Radius} (double radius)
+\begin{DoxyCompactList}\small\item\em Set the max viable radius of a ball blob. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a1be9d5219a50b43f019de7ce2dcc1898}{change\+Grav\+Constant} (double g)
+\begin{DoxyCompactList}\small\item\em Set the accel due to gravity g. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_ae32a3ab93ae95a448ed82e7142687cdc}{change\+X\+Y\+Covariance} (double sigma)
+\begin{DoxyCompactList}\small\item\em Set the covariance in predicted X, Y (a KF parameter) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_affeb1596b199492467965aa556c5d933}{process\+Thresh} (const cv\+::\+Mat \&, enum Color\+Space=T\+S\+\_\+\+G\+R\+AY)\hypertarget{classTrackingStream_affeb1596b199492467965aa556c5d933}{}\label{classTrackingStream_affeb1596b199492467965aa556c5d933}
+
+\begin{DoxyCompactList}\small\item\em Process a \char`\"{}thresholded\char`\"{} frame, with white blobs. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a7b790a7d4ef7265dfb2ab0a97ee73228}{process\+Blur} (const cv\+::\+Mat \&, enum Color\+Space=T\+S\+\_\+\+B\+GR)\hypertarget{classTrackingStream_a7b790a7d4ef7265dfb2ab0a97ee73228}{}\label{classTrackingStream_a7b790a7d4ef7265dfb2ab0a97ee73228}
+
+\begin{DoxyCompactList}\small\item\em Process a \char`\"{}blurred\char`\"{} frame. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_acd9337e639bb763b1bab7c717eaabcc8}{process\+Contour} (const cv\+::\+Mat \&, enum Color\+Space=T\+S\+\_\+\+G\+R\+AY)\hypertarget{classTrackingStream_acd9337e639bb763b1bab7c717eaabcc8}{}\label{classTrackingStream_acd9337e639bb763b1bab7c717eaabcc8}
+
+\begin{DoxyCompactList}\small\item\em Process a \char`\"{}contour\char`\"{} frame, which marks contours. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a4b855ad6d3134cd120fd258cb2923858}{process\+Video\+Frame} (const cv\+::\+Mat \&mat, Color\+Space=T\+S\+\_\+\+B\+GR)\hypertarget{classTrackingStream_a4b855ad6d3134cd120fd258cb2923858}{}\label{classTrackingStream_a4b855ad6d3134cd120fd258cb2923858}
+
+\begin{DoxyCompactList}\small\item\em Process a \char`\"{}video\char`\"{} frame, which is raw video input. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a5208b5276288c0f47689906999d82841}{change\+Display\+Frame\+Type} (Q\+String s)\hypertarget{classTrackingStream_a5208b5276288c0f47689906999d82841}{}\label{classTrackingStream_a5208b5276288c0f47689906999d82841}
+
+\begin{DoxyCompactList}\small\item\em Set the type of video frame to actually be emitted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTrackingStream_a65642f47a391090432e3ea401520cf6d}{frame\+Ready} (const cv\+::\+Mat \&, enum Color\+Space=T\+S\+\_\+\+B\+GR)\hypertarget{classTrackingStream_a65642f47a391090432e3ea401520cf6d}{}\label{classTrackingStream_a65642f47a391090432e3ea401520cf6d}
+
+\begin{DoxyCompactList}\small\item\em frame\+Ready emits a cv\+::\+Mat of specified color space for processing \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a4c2e42cf2387b718661be00e52c71f2a}{ball\+Spotted} (\hyperlink{classTrackingBall}{Tracking\+Ball} ball)\hypertarget{classTrackingStream_a4c2e42cf2387b718661be00e52c71f2a}{}\label{classTrackingStream_a4c2e42cf2387b718661be00e52c71f2a}
+
+\begin{DoxyCompactList}\small\item\em A ball has been spotted (image coordinates) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a5cab9ddbec00add97b763b0f111dc12c}{ball\+Predicted} (\hyperlink{classKFPrediction}{K\+F\+Prediction} pred)\hypertarget{classTrackingStream_a5cab9ddbec00add97b763b0f111dc12c}{}\label{classTrackingStream_a5cab9ddbec00add97b763b0f111dc12c}
+
+\begin{DoxyCompactList}\small\item\em A ball has been predicted (image coordinates) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a87c0ea6d617a86b32de3df996d6f33c2}{ball\+Proj\+Spotted} (\hyperlink{classTrackingBall}{Tracking\+Ball} ball)\hypertarget{classTrackingStream_a87c0ea6d617a86b32de3df996d6f33c2}{}\label{classTrackingStream_a87c0ea6d617a86b32de3df996d6f33c2}
+
+\begin{DoxyCompactList}\small\item\em A ball has been spotted (proj coordinates) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_aff6ad1d1f81b64ebcbf6235cd87fdecd}{ball\+Proj\+Predicted} (\hyperlink{classKFPrediction}{K\+F\+Prediction} pred)\hypertarget{classTrackingStream_aff6ad1d1f81b64ebcbf6235cd87fdecd}{}\label{classTrackingStream_aff6ad1d1f81b64ebcbf6235cd87fdecd}
+
+\begin{DoxyCompactList}\small\item\em A ball has been predicted (proj coordinates) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_aa9420d28c57b65c325f796bb89d5e511}{ball\+Lost} ()\hypertarget{classTrackingStream_aa9420d28c57b65c325f796bb89d5e511}{}\label{classTrackingStream_aa9420d28c57b65c325f796bb89d5e511}
+
+\begin{DoxyCompactList}\small\item\em We have lost track of the ball entirely. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_ac03f4afb930c3fd81d6d67f94e9a59a0}{started} ()\hypertarget{classTrackingStream_ac03f4afb930c3fd81d6d67f94e9a59a0}{}\label{classTrackingStream_ac03f4afb930c3fd81d6d67f94e9a59a0}
+
+\begin{DoxyCompactList}\small\item\em Signal emitted when stream starts processing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Tracking\+Stream} (Q\+Object $\ast$parent=0)\hypertarget{classTrackingStream_a6d7ef7c7fc262d4e0bc65315c266dd29}{}\label{classTrackingStream_a6d7ef7c7fc262d4e0bc65315c266dd29}
+
+\item 
+void \hyperlink{classTrackingStream_ad349c1e30fb253d5f0df097d16ccb665}{start\+Process} ()\hypertarget{classTrackingStream_ad349c1e30fb253d5f0df097d16ccb665}{}\label{classTrackingStream_ad349c1e30fb253d5f0df097d16ccb665}
+
+\begin{DoxyCompactList}\small\item\em Start the tracking process. \end{DoxyCompactList}\item 
+cv\+::\+Point2f \hyperlink{classTrackingStream_afca5f3b76819d9195ada29e0d7d2697b}{image\+To\+Projector} (cv\+::\+Point2f imP, double z=0)
+\begin{DoxyCompactList}\small\item\em Convert image coordinates to projector coordinates. \end{DoxyCompactList}\item 
+Q\+PointF \hyperlink{classTrackingStream_acf2d0509a86137709afca937984a0287}{image\+To\+Projector} (Q\+PointF imP, double z=0)
+\begin{DoxyCompactList}\small\item\em Convert image coordinates to projector coordinates (qt) \end{DoxyCompactList}\item 
+cv\+::\+Point2f \hyperlink{classTrackingStream_a1ba5b7036c99fb6da85d57c0db9b10dd}{projector\+To\+Image} (cv\+::\+Point3d prP)
+\begin{DoxyCompactList}\small\item\em projector\+To\+Image converts projector (world) coords to image coords \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a6416cf962ab5f3726016504c59c2363a}{update\+Projector\+Coordinates} (std\+::vector$<$ cv\+::\+Point2f $>$ corners)\hypertarget{classTrackingStream_a6416cf962ab5f3726016504c59c2363a}{}\label{classTrackingStream_a6416cf962ab5f3726016504c59c2363a}
+
+\begin{DoxyCompactList}\small\item\em Set the in-\/image coordinates of the projector corners. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_a99326e76a6b511cdd6f49fdff67db235}{set\+Proj\+Size} (const Q\+Size \&proj\+Size)\hypertarget{classTrackingStream_a99326e76a6b511cdd6f49fdff67db235}{}\label{classTrackingStream_a99326e76a6b511cdd6f49fdff67db235}
+
+\begin{DoxyCompactList}\small\item\em Set the size of the projector (in real units) \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_aac16a6fcb195581434fbd049944524a3}{refresh\+Camera\+Matrix} ()\hypertarget{classTrackingStream_aac16a6fcb195581434fbd049944524a3}{}\label{classTrackingStream_aac16a6fcb195581434fbd049944524a3}
+
+\begin{DoxyCompactList}\small\item\em Update the camera matrices. \end{DoxyCompactList}\item 
+void \hyperlink{classTrackingStream_adadff3452ad54ec239cbdeaf687863a0}{refresh\+Projector\+Matrices} ()\hypertarget{classTrackingStream_adadff3452ad54ec239cbdeaf687863a0}{}\label{classTrackingStream_adadff3452ad54ec239cbdeaf687863a0}
+
+\begin{DoxyCompactList}\small\item\em Update the projector transformation matrices. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingStream_a7579ead32eb9110b84f8665c9eb6f72d}{camera\+Valid} (int idx)
+\begin{DoxyCompactList}\small\item\em Check if a camera index is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTrackingStream_abf01ea9fb604e3d748c28827562b3a6e}{timer\+Event} (Q\+Timer\+Event $\ast$)
+\begin{DoxyCompactList}\small\item\em Process a timer event\+: Read the next frame, process it, emit it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Basic\+Timer \hyperlink{classTrackingStream_a969e6746e625d491b4355ff210a0f39a}{m\+Timer}\hypertarget{classTrackingStream_a969e6746e625d491b4355ff210a0f39a}{}\label{classTrackingStream_a969e6746e625d491b4355ff210a0f39a}
+
+\begin{DoxyCompactList}\small\item\em Timer for processing frames. \end{DoxyCompactList}\item 
+Q\+Scoped\+Pointer$<$ cv\+::\+Video\+Capture $>$ \hyperlink{classTrackingStream_ae805e55788c3e8770879568002e84e49}{m\+Video\+Handle}\hypertarget{classTrackingStream_ae805e55788c3e8770879568002e84e49}{}\label{classTrackingStream_ae805e55788c3e8770879568002e84e49}
+
+\begin{DoxyCompactList}\small\item\em The handler for the input video stream. \end{DoxyCompactList}\item 
+int \hyperlink{classTrackingStream_a34d7229ae0abe3f2f2d41e7e1ba6db7f}{m\+Fov}
+\begin{DoxyCompactList}\small\item\em The F\+OV of the camera. \end{DoxyCompactList}\item 
+Q\+Size \hyperlink{classTrackingStream_ae30570269be03e984c7db9e6b36163d3}{m\+Video\+Size}\hypertarget{classTrackingStream_ae30570269be03e984c7db9e6b36163d3}{}\label{classTrackingStream_ae30570269be03e984c7db9e6b36163d3}
+
+\begin{DoxyCompactList}\small\item\em The dimensions of the video stream. \end{DoxyCompactList}\item 
+Q\+Size \hyperlink{classTrackingStream_a194f58319495ea58686c142a18b65476}{m\+Proj\+Size}\hypertarget{classTrackingStream_a194f58319495ea58686c142a18b65476}{}\label{classTrackingStream_a194f58319495ea58686c142a18b65476}
+
+\begin{DoxyCompactList}\small\item\em The dimensions (in real world units) of the projector screen. \end{DoxyCompactList}\item 
+double \hyperlink{classTrackingStream_a82524ed8f3fa752684a2796c10994c4e}{m\+BallZ}\hypertarget{classTrackingStream_a82524ed8f3fa752684a2796c10994c4e}{}\label{classTrackingStream_a82524ed8f3fa752684a2796c10994c4e}
+
+\begin{DoxyCompactList}\small\item\em The distance of the ball plane from the projector plane (in real world units) \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingStream_a7c4a1620f5b3ad8ee91cc40aa586c7bb}{m\+Proj\+Corners\+Camera}
+\begin{DoxyCompactList}\small\item\em The location of projector coordinates in world (real units) \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Point2f $>$ \hyperlink{classTrackingStream_a74a9669165a38a0e3027d4fd9f8c60ca}{m\+Corners}
+\begin{DoxyCompactList}\small\item\em The location of projector coordinates in the image. \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Point2f $>$ \hyperlink{classTrackingStream_ab7c019129608f23628c5d24b5dc9c384}{m\+Ball\+Plane}\hypertarget{classTrackingStream_ab7c019129608f23628c5d24b5dc9c384}{}\label{classTrackingStream_ab7c019129608f23628c5d24b5dc9c384}
+
+\begin{DoxyCompactList}\small\item\em The bounding polygon of image coordinates which project to ball coordinates that live in the projector screen. \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingStream_a8b4a91278c9dc671d43e8284c2fa92a6}{m\+Camera\+Matrix}\hypertarget{classTrackingStream_a8b4a91278c9dc671d43e8284c2fa92a6}{}\label{classTrackingStream_a8b4a91278c9dc671d43e8284c2fa92a6}
+
+\begin{DoxyCompactList}\small\item\em The intrinsic camera matrix. \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingStream_ada535422209fba660899dc3f7d41ddef}{m\+R\+Matrix}\hypertarget{classTrackingStream_ada535422209fba660899dc3f7d41ddef}{}\label{classTrackingStream_ada535422209fba660899dc3f7d41ddef}
+
+\begin{DoxyCompactList}\small\item\em The camera\textquotesingle{}s extrinsic(?) rotation matrix. \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingStream_a8ab5b4cedd560ec7a6e10ed58c9a07a4}{m\+T\+Vector}\hypertarget{classTrackingStream_a8ab5b4cedd560ec7a6e10ed58c9a07a4}{}\label{classTrackingStream_a8ab5b4cedd560ec7a6e10ed58c9a07a4}
+
+\begin{DoxyCompactList}\small\item\em The camera\textquotesingle{}s extrinsic(?) translation vector. \end{DoxyCompactList}\item 
+cv\+::\+Mat \hyperlink{classTrackingStream_ab20d8ac03883d092c20c77dcbea3b71c}{m\+Frame}\hypertarget{classTrackingStream_ab20d8ac03883d092c20c77dcbea3b71c}{}\label{classTrackingStream_ab20d8ac03883d092c20c77dcbea3b71c}
+
+\begin{DoxyCompactList}\small\item\em The present frame received from the video stream. \end{DoxyCompactList}\item 
+Display\+Frame\+Type \hyperlink{classTrackingStream_ac9116756f01fbf7939da2f898d943dca}{m\+Emit\+Frame\+Type}
+\begin{DoxyCompactList}\small\item\em The type (e.\+g. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingStream_a45ee0e595bf16621e254870f04626f62}{m\+Started} = false\hypertarget{classTrackingStream_a45ee0e595bf16621e254870f04626f62}{}\label{classTrackingStream_a45ee0e595bf16621e254870f04626f62}
+
+\begin{DoxyCompactList}\small\item\em Whether the video stream is started. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingStream_a93a3ab3b1ca5f47616ac994daf33e217}{m\+Proj\+Ready} = false\hypertarget{classTrackingStream_a93a3ab3b1ca5f47616ac994daf33e217}{}\label{classTrackingStream_a93a3ab3b1ca5f47616ac994daf33e217}
+
+\begin{DoxyCompactList}\small\item\em Whether there is enough projector data for transform. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingStream_a0232a7a768a35361f7df331e957a8dc0}{m\+Stream\+Paused} = false\hypertarget{classTrackingStream_a0232a7a768a35361f7df331e957a8dc0}{}\label{classTrackingStream_a0232a7a768a35361f7df331e957a8dc0}
+
+\begin{DoxyCompactList}\small\item\em Whether the stream is currently paused. \end{DoxyCompactList}\item 
+int \hyperlink{classTrackingStream_a684530788cdc39f33758ec2590392429}{m\+Fps}\hypertarget{classTrackingStream_a684530788cdc39f33758ec2590392429}{}\label{classTrackingStream_a684530788cdc39f33758ec2590392429}
+
+\begin{DoxyCompactList}\small\item\em The F\+PS of the video stream (=0 for webcam stream) \end{DoxyCompactList}\item 
+\hyperlink{classKFBallTracker}{K\+F\+Ball\+Tracker} \hyperlink{classTrackingStream_a8688b11aff0a2c013694288f2a38f760}{m\+Tracker}\hypertarget{classTrackingStream_a8688b11aff0a2c013694288f2a38f760}{}\label{classTrackingStream_a8688b11aff0a2c013694288f2a38f760}
+
+\begin{DoxyCompactList}\small\item\em The ball tracker; we give it frames, it gives us ball predictions. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingStream_acd94132ac50274a2fbab74bdc2c0f074}{m\+Display\+Video} = true\hypertarget{classTrackingStream_acd94132ac50274a2fbab74bdc2c0f074}{}\label{classTrackingStream_acd94132ac50274a2fbab74bdc2c0f074}
+
+\begin{DoxyCompactList}\small\item\em Whether we should display video or not. \end{DoxyCompactList}\item 
+Q\+PolygonF \hyperlink{classTrackingStream_a727e9ad460936eed4b4c2c56500bdf2a}{m\+Proj\+Screen}\hypertarget{classTrackingStream_a727e9ad460936eed4b4c2c56500bdf2a}{}\label{classTrackingStream_a727e9ad460936eed4b4c2c56500bdf2a}
+
+\begin{DoxyCompactList}\small\item\em Region to crop to if m\+Clip\+Track is on. \end{DoxyCompactList}\item 
+bool \hyperlink{classTrackingStream_ab44ee1ddda70629e3de216ad8f735166}{m\+Clip\+Track} = false\hypertarget{classTrackingStream_ab44ee1ddda70629e3de216ad8f735166}{}\label{classTrackingStream_ab44ee1ddda70629e3de216ad8f735166}
+
+\begin{DoxyCompactList}\small\item\em Whether we should clip tracking to the proj screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An object which owns some sort of input video stream, manages running it (and any tracking, etc) and emits cv\+::\+Mat frames and tracked objects. 
+
+\subsection{Member Function Documentation}
+\index{Tracking\+Stream@{Tracking\+Stream}!camera\+Valid@{camera\+Valid}}
+\index{camera\+Valid@{camera\+Valid}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{camera\+Valid(int idx)}{cameraValid(int idx)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Tracking\+Stream\+::camera\+Valid (
+\begin{DoxyParamCaption}
+\item[{int}]{idx}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrackingStream_a7579ead32eb9110b84f8665c9eb6f72d}{}\label{classTrackingStream_a7579ead32eb9110b84f8665c9eb6f72d}
+
+
+Check if a camera index is valid. 
+
+Presently this does nothing... V4L detection on Linux seems a bit finicky and making this cross platform is an interesting problem. For now, it would seem reasonable if the program just be restarted in order to fix any issues here. \index{Tracking\+Stream@{Tracking\+Stream}!change\+BallZ@{change\+BallZ}}
+\index{change\+BallZ@{change\+BallZ}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+BallZ}{changeBallZ}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+BallZ (
+\begin{DoxyParamCaption}
+\item[{double}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_aab0b2d4efe5723d8d71e072013d33ad9}{}\label{classTrackingStream_aab0b2d4efe5723d8d71e072013d33ad9}
+
+
+change\+BallZ sets the z-\/plane that the ball is thrown in (in inches) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em z} & the z-\/distance from the projector plane in which the ball lies \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+Blur\+Size@{change\+Blur\+Size}}
+\index{change\+Blur\+Size@{change\+Blur\+Size}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+Blur\+Size}{changeBlurSize}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+Blur\+Size (
+\begin{DoxyParamCaption}
+\item[{double}]{blur\+Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_a13c95186d09320e6a56b0e072e268728}{}\label{classTrackingStream_a13c95186d09320e6a56b0e072e268728}
+
+
+Set the strength of blur in preprocessing step. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blur\+Size} & \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+Grav\+Constant@{change\+Grav\+Constant}}
+\index{change\+Grav\+Constant@{change\+Grav\+Constant}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+Grav\+Constant}{changeGravConstant}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+Grav\+Constant (
+\begin{DoxyParamCaption}
+\item[{double}]{g}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_a1be9d5219a50b43f019de7ce2dcc1898}{}\label{classTrackingStream_a1be9d5219a50b43f019de7ce2dcc1898}
+
+
+Set the accel due to gravity g. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+Max\+Radius@{change\+Max\+Radius}}
+\index{change\+Max\+Radius@{change\+Max\+Radius}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+Max\+Radius}{changeMaxRadius}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+Max\+Radius (
+\begin{DoxyParamCaption}
+\item[{double}]{radius}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_a4fd621edf60cb02bca056853ff2f9984}{}\label{classTrackingStream_a4fd621edf60cb02bca056853ff2f9984}
+
+
+Set the max viable radius of a ball blob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+Min\+Radius@{change\+Min\+Radius}}
+\index{change\+Min\+Radius@{change\+Min\+Radius}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+Min\+Radius}{changeMinRadius}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+Min\+Radius (
+\begin{DoxyParamCaption}
+\item[{double}]{radius}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_a6f10a83e710693e7100ebaaece3feed3}{}\label{classTrackingStream_a6f10a83e710693e7100ebaaece3feed3}
+
+
+Set the min viable radius of a ball blob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+Proj\+Height@{change\+Proj\+Height}}
+\index{change\+Proj\+Height@{change\+Proj\+Height}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+Proj\+Height}{changeProjHeight}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+Proj\+Height (
+\begin{DoxyParamCaption}
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_a74d1683447659a6d85d5818ee3ee7515}{}\label{classTrackingStream_a74d1683447659a6d85d5818ee3ee7515}
+
+
+change\+Proj\+Height sets the height of the projector screen (in inches) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & the height of the projector screen \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+Proj\+Width@{change\+Proj\+Width}}
+\index{change\+Proj\+Width@{change\+Proj\+Width}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+Proj\+Width}{changeProjWidth}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+Proj\+Width (
+\begin{DoxyParamCaption}
+\item[{int}]{width}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_a679b2d4db152cc3e4f1699179d84724f}{}\label{classTrackingStream_a679b2d4db152cc3e4f1699179d84724f}
+
+
+change\+Proj\+Width sets the width of the projector screen (in inches) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & the width of the projector screen \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+Thresh\+Val@{change\+Thresh\+Val}}
+\index{change\+Thresh\+Val@{change\+Thresh\+Val}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+Thresh\+Val}{changeThreshVal}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+Thresh\+Val (
+\begin{DoxyParamCaption}
+\item[{double}]{thresh}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_ac8ebcc20a79d5172594a58a623b69fec}{}\label{classTrackingStream_ac8ebcc20a79d5172594a58a623b69fec}
+
+
+Set the threshold in preprocessing step. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thresh} & \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!change\+X\+Y\+Covariance@{change\+X\+Y\+Covariance}}
+\index{change\+X\+Y\+Covariance@{change\+X\+Y\+Covariance}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{change\+X\+Y\+Covariance}{changeXYCovariance}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::change\+X\+Y\+Covariance (
+\begin{DoxyParamCaption}
+\item[{double}]{sigma}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classTrackingStream_ae32a3ab93ae95a448ed82e7142687cdc}{}\label{classTrackingStream_ae32a3ab93ae95a448ed82e7142687cdc}
+
+
+Set the covariance in predicted X, Y (a KF parameter) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sigma} & \\
+\hline
+\end{DoxyParams}
+\index{Tracking\+Stream@{Tracking\+Stream}!image\+To\+Projector@{image\+To\+Projector}}
+\index{image\+To\+Projector@{image\+To\+Projector}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{image\+To\+Projector(cv\+::\+Point2f im\+P, double z=0)}{imageToProjector(cv::Point2f imP, double z=0)}}]{\setlength{\rightskip}{0pt plus 5cm}cv\+::\+Point2f Tracking\+Stream\+::image\+To\+Projector (
+\begin{DoxyParamCaption}
+\item[{cv\+::\+Point2f}]{imP, }
+\item[{double}]{z = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrackingStream_afca5f3b76819d9195ada29e0d7d2697b}{}\label{classTrackingStream_afca5f3b76819d9195ada29e0d7d2697b}
+
+
+Convert image coordinates to projector coordinates. 
+
+Like most things, converting image coordinates (i.\+e. what the camera sees) to projector coordinates (world coordinates, where the top left corner of the projector is the origin) is just linear algebra.
+
+This is the inverse of projector\+To\+Image
+
+The players\+:
+\begin{DoxyItemize}
+\item R = \hyperlink{classTrackingStream_ada535422209fba660899dc3f7d41ddef}{m\+R\+Matrix}, the camera rotation matrix
+\item C = \hyperlink{classTrackingStream_a8b4a91278c9dc671d43e8284c2fa92a6}{m\+Camera\+Matrix}, the intrinsic camera matrix
+\item T = \hyperlink{classTrackingStream_a8ab5b4cedd560ec7a6e10ed58c9a07a4}{m\+T\+Vector}, the camera translation vector
+\item p = \mbox{[}{\ttfamily imP}, 1\mbox{]}, the image point in homogeneous coordinates
+\item z = the (a priori known) z-\/coordinate of the point in world coords
+\item q = \mbox{[}X, Y, z\mbox{]} the world coordinates of the point p
+\item s = Scaling factor that comes from transformation... picks appropriate point on the line projecting to p with the input z coordinate
+
+\[s = (z + (R^{-1}T)_{2,0}) / (R^{-1}C^{-1}p)_{2,0}\]
+
+\[q = R^{-1}(sC^{-1}p - T)\]
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em imP} & image point (x,y) to translate to world coordinates \\
+\hline
+{\em z} & a priori known world z-\/coordinate of the point to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Tracking\+Stream@{Tracking\+Stream}!image\+To\+Projector@{image\+To\+Projector}}
+\index{image\+To\+Projector@{image\+To\+Projector}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{image\+To\+Projector(\+Q\+Point\+F im\+P, double z=0)}{imageToProjector(QPointF imP, double z=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+PointF Tracking\+Stream\+::image\+To\+Projector (
+\begin{DoxyParamCaption}
+\item[{Q\+PointF}]{imP, }
+\item[{double}]{z = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrackingStream_acf2d0509a86137709afca937984a0287}{}\label{classTrackingStream_acf2d0509a86137709afca937984a0287}
+
+
+Convert image coordinates to projector coordinates (qt) 
+
+A wrapper that works with Qt objects instead of opencv objects
+
+
+\begin{DoxyParams}{Parameters}
+{\em imP} & image point (x,y) to translate to world coordinates \\
+\hline
+{\em z} & a priori known world z-\/coordinate of the point to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Tracking\+Stream@{Tracking\+Stream}!projector\+To\+Image@{projector\+To\+Image}}
+\index{projector\+To\+Image@{projector\+To\+Image}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{projector\+To\+Image(cv\+::\+Point3d pr\+P)}{projectorToImage(cv::Point3d prP)}}]{\setlength{\rightskip}{0pt plus 5cm}cv\+::\+Point2f Tracking\+Stream\+::projector\+To\+Image (
+\begin{DoxyParamCaption}
+\item[{cv\+::\+Point3d}]{prP}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrackingStream_a1ba5b7036c99fb6da85d57c0db9b10dd}{}\label{classTrackingStream_a1ba5b7036c99fb6da85d57c0db9b10dd}
+
+
+projector\+To\+Image converts projector (world) coords to image coords 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prP} & the point in world coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the image pixel corresponding to prP 
+\end{DoxyReturn}
+\index{Tracking\+Stream@{Tracking\+Stream}!timer\+Event@{timer\+Event}}
+\index{timer\+Event@{timer\+Event}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{timer\+Event(\+Q\+Timer\+Event $\ast$)}{timerEvent(QTimerEvent *)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tracking\+Stream\+::timer\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Timer\+Event $\ast$}]{ev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTrackingStream_abf01ea9fb604e3d748c28827562b3a6e}{}\label{classTrackingStream_abf01ea9fb604e3d748c28827562b3a6e}
+
+
+Process a timer event\+: Read the next frame, process it, emit it. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Tracking\+Stream@{Tracking\+Stream}!m\+Corners@{m\+Corners}}
+\index{m\+Corners@{m\+Corners}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{m\+Corners}{mCorners}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$cv\+::\+Point2f$>$ Tracking\+Stream\+::m\+Corners\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTrackingStream_a74a9669165a38a0e3027d4fd9f8c60ca}{}\label{classTrackingStream_a74a9669165a38a0e3027d4fd9f8c60ca}
+
+
+The location of projector coordinates in the image. 
+
+Order is important\+: expected NW, SW, SE, NE (counterclockwise) \index{Tracking\+Stream@{Tracking\+Stream}!m\+Emit\+Frame\+Type@{m\+Emit\+Frame\+Type}}
+\index{m\+Emit\+Frame\+Type@{m\+Emit\+Frame\+Type}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{m\+Emit\+Frame\+Type}{mEmitFrameType}}]{\setlength{\rightskip}{0pt plus 5cm}Display\+Frame\+Type Tracking\+Stream\+::m\+Emit\+Frame\+Type\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTrackingStream_ac9116756f01fbf7939da2f898d943dca}{}\label{classTrackingStream_ac9116756f01fbf7939da2f898d943dca}
+
+
+The type (e.\+g. 
+
+video, thresh...) of frame to emit \index{Tracking\+Stream@{Tracking\+Stream}!m\+Fov@{m\+Fov}}
+\index{m\+Fov@{m\+Fov}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{m\+Fov}{mFov}}]{\setlength{\rightskip}{0pt plus 5cm}int Tracking\+Stream\+::m\+Fov\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTrackingStream_a34d7229ae0abe3f2f2d41e7e1ba6db7f}{}\label{classTrackingStream_a34d7229ae0abe3f2f2d41e7e1ba6db7f}
+
+
+The F\+OV of the camera. 
+
+A P\+S2 Eye has two settings\+:
+\begin{DoxyItemize}
+\item Red dot\+: 56deg, close up
+\item Blue dot\+: 75deg, wide view
+\end{DoxyItemize}
+
+The smaller F\+OV is expected to cause less distortion, although it is likely to have less in the frame. \index{Tracking\+Stream@{Tracking\+Stream}!m\+Proj\+Corners\+Camera@{m\+Proj\+Corners\+Camera}}
+\index{m\+Proj\+Corners\+Camera@{m\+Proj\+Corners\+Camera}!Tracking\+Stream@{Tracking\+Stream}}
+\subsubsection[{\texorpdfstring{m\+Proj\+Corners\+Camera}{mProjCornersCamera}}]{\setlength{\rightskip}{0pt plus 5cm}cv\+::\+Mat Tracking\+Stream\+::m\+Proj\+Corners\+Camera\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTrackingStream_a7c4a1620f5b3ad8ee91cc40aa586c7bb}{}\label{classTrackingStream_a7c4a1620f5b3ad8ee91cc40aa586c7bb}
+
+
+The location of projector coordinates in world (real units) 
+
+Order is important\+: expected NW, SW, SE, NE (counterclockwise) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Tracking\+Stream.\+hpp\item 
+Tracking\+Stream.\+cpp\end{DoxyCompactItemize}

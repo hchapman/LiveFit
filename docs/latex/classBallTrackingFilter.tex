@@ -1,0 +1,75 @@
+\hypertarget{classBallTrackingFilter}{}\section{Ball\+Tracking\+Filter Class Reference}
+\label{classBallTrackingFilter}\index{Ball\+Tracking\+Filter@{Ball\+Tracking\+Filter}}
+
+
+A \hyperlink{classTrackingFilter}{Tracking\+Filter} with some specifics for tracking a ball in flight.  
+
+
+
+
+{\ttfamily \#include $<$Ball\+Tracking\+Filter.\+hpp$>$}
+
+
+
+Inheritance diagram for Ball\+Tracking\+Filter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classBallTrackingFilter__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Ball\+Tracking\+Filter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classBallTrackingFilter__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classBallTrackingFilter_a3b79dc230092e91b79b667eb2907b892}{flush\+Kalman} ()\hypertarget{classBallTrackingFilter_a3b79dc230092e91b79b667eb2907b892}{}\label{classBallTrackingFilter_a3b79dc230092e91b79b667eb2907b892}
+
+\begin{DoxyCompactList}\small\item\em Reset the status of the KF to initial. \end{DoxyCompactList}\item 
+void \hyperlink{classBallTrackingFilter_a1f7a9079bbbf4f78645da2271cead68c}{set\+X\+Y\+Covariance} (double sigma)\hypertarget{classBallTrackingFilter_a1f7a9079bbbf4f78645da2271cead68c}{}\label{classBallTrackingFilter_a1f7a9079bbbf4f78645da2271cead68c}
+
+\begin{DoxyCompactList}\small\item\em Set the covariance for the x and y measurements in the KF. \end{DoxyCompactList}\item 
+void \hyperlink{classBallTrackingFilter_a3e6a931411e704397da39f331eaacd9a}{update\+Track\+Failure} ()\hypertarget{classBallTrackingFilter_a3e6a931411e704397da39f331eaacd9a}{}\label{classBallTrackingFilter_a3e6a931411e704397da39f331eaacd9a}
+
+\begin{DoxyCompactList}\small\item\em Tell the KF that we failed to track a ball. \end{DoxyCompactList}\item 
+void \hyperlink{classBallTrackingFilter_a560b9fc3368535ef2a3f86a338dbe814}{update\+Track\+Success} (\hyperlink{classTrackingBall}{Tracking\+Ball} ball)\hypertarget{classBallTrackingFilter_a560b9fc3368535ef2a3f86a338dbe814}{}\label{classBallTrackingFilter_a560b9fc3368535ef2a3f86a338dbe814}
+
+\begin{DoxyCompactList}\small\item\em Tell the KF about a new tracked ball. \end{DoxyCompactList}\item 
+void \hyperlink{classBallTrackingFilter_ac51def54184a6b5064cda7336d6c7b59}{update\+Time\+State} (double t)\hypertarget{classBallTrackingFilter_ac51def54184a6b5064cda7336d6c7b59}{}\label{classBallTrackingFilter_ac51def54184a6b5064cda7336d6c7b59}
+
+\begin{DoxyCompactList}\small\item\em Change the current internal time state of the tracker (eg at a new tick) \end{DoxyCompactList}\item 
+void \hyperlink{classBallTrackingFilter_a2191f6b71ad99e6b42ab5ad27d77da0b}{set\+Grav\+Constant} (double grav\+Constant)\hypertarget{classBallTrackingFilter_a2191f6b71ad99e6b42ab5ad27d77da0b}{}\label{classBallTrackingFilter_a2191f6b71ad99e6b42ab5ad27d77da0b}
+
+\begin{DoxyCompactList}\small\item\em Set the acceleration due to gravity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classBallTrackingFilter_a1c72b8147427133ec277217f299c830c}{m\+Grav\+Constant}
+\begin{DoxyCompactList}\small\item\em A priori known acceleration due to gravity g (positive direction) is towards center of earth. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A \hyperlink{classTrackingFilter}{Tracking\+Filter} with some specifics for tracking a ball in flight. 
+
+\subsection{Member Data Documentation}
+\index{Ball\+Tracking\+Filter@{Ball\+Tracking\+Filter}!m\+Grav\+Constant@{m\+Grav\+Constant}}
+\index{m\+Grav\+Constant@{m\+Grav\+Constant}!Ball\+Tracking\+Filter@{Ball\+Tracking\+Filter}}
+\subsubsection[{\texorpdfstring{m\+Grav\+Constant}{mGravConstant}}]{\setlength{\rightskip}{0pt plus 5cm}double Ball\+Tracking\+Filter\+::m\+Grav\+Constant\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBallTrackingFilter_a1c72b8147427133ec277217f299c830c}{}\label{classBallTrackingFilter_a1c72b8147427133ec277217f299c830c}
+
+
+A priori known acceleration due to gravity g (positive direction) is towards center of earth. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Ball\+Tracking\+Filter.\+hpp\item 
+Ball\+Tracking\+Filter.\+cpp\end{DoxyCompactItemize}
